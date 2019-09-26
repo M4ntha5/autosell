@@ -16,3 +16,10 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+// ad routes
+Route::get('ads', 'AdController@index');
+Route::get('ads/{ad}', 'AdController@show');
+Route::post('ads', 'AdController@store');
+Route::put('ads/{ad}', 'AdController@update');
+Route::delete('ads/{ad}', 'AdController@destroy');
