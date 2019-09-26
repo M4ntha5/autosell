@@ -10,28 +10,26 @@ class CreateFailedJobsTable extends Migration {
 	 *
 	 * @return void
 	 */
-	public function up()
-	{
-		Schema::create('failed_jobs', function(Blueprint $table)
-		{
-			$table->bigInteger('id', true)->unsigned();
-			$table->text('connection', 65535);
-			$table->text('queue', 65535);
-			$table->text('payload');
-			$table->text('exception');
-			$table->timestamp('failed_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-		});
-	}
+	 public function up()
+     {
+         Schema::create('failed_jobs', function (Blueprint $table) {
+             $table->bigIncrements('id');
+             $table->text('connection');
+             $table->text('queue');
+             $table->longText('payload');
+             $table->longText('exception');
+             $table->timestamp('failed_at')->useCurrent();
+         });
+     }
 
-
-	/**
-	 * Reverse the migrations.
-	 *
-	 * @return void
-	 */
-	public function down()
-	{
-		Schema::drop('failed_jobs');
-	}
+     /**
+      * Reverse the migrations.
+      *
+      * @return void
+      */
+     public function down()
+     {
+         Schema::dropIfExists('failed_jobs');
+     }
 
 }
