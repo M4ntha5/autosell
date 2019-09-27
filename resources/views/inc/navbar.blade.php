@@ -2,11 +2,11 @@
     <div class="container">
       @guest
         <a class="navbar-brand" href="{{ url('/') }}">
-            {{ config('app.name', 'Catalog') }}
+            {{ config('app.name', 'AutoSell') }}
         </a>
       @else
         <a class="navbar-brand" href="{{ url('/home') }}">
-            {{ config('app.name', 'Catalog') }}
+            {{ config('app.name', 'AutoSell') }}
         </a>
       @endguest
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -18,10 +18,10 @@
 
             <ul class="navbar-nav mr-auto">
               <li class="nav-item">
-                <a class="nav-link" href="/about">About</a>
+                <a class="nav-link" href="/about">Apie</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/products">Products</a>
+                <a class="nav-link" href="api/ads">Skelbimai</a>
               </li>
             </ul>
 

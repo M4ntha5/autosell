@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAdsTable extends Migration
+class CreateOrdersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ class CreateAdsTable extends Migration
      */
     public function up()
     {
-        Schema::create('ads', function (Blueprint $table) {
+        Schema::create('orders', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->float('price');
-            $table->string('image')->nullable();
             $table->string('phone_no');
-            $table->text('description')->nullable();
-            $table->date('manufacture_date');
+            $table->date('manufacture_date_from');
+            $table->date('manufacture_date_to');
             $table->smallInteger('fuel');
             $table->smallInteger('gearbox');
             $table->smallInteger('body_type');
@@ -29,10 +28,11 @@ class CreateAdsTable extends Migration
             $table->smallInteger('driven_wheels');
             $table->smallInteger('climate_control');
             $table->smallInteger('euro_standard');
-            $table->mediumInteger('mileage');
+            $table->mediumInteger('mileage')->nullable();
             $table->smallInteger('engine_power');
             $table->float('engine_volume');
             $table->smallInteger('damage');
+            $table->integer('status');
             $table->integer('brand_id');
             $table->timestamps();
         });
@@ -45,6 +45,6 @@ class CreateAdsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ads');
+        Schema::dropIfExists('orders');
     }
 }
