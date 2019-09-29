@@ -14,11 +14,14 @@ class CreaeteCommentsTable extends Migration
     public function up()
     {
         Schema::create('comments', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->string('title');
             $table->string('body');
-            $table->integer('ad_id');
+            $table->integer('ad_id')->unsigned();
             $table->timestamps();
+
+            $table->foreign('ad_id')->references('id')->on('ads')->onDelete('cascade')->onUpdate('cascade');
+
         });
     }
 
@@ -30,5 +33,6 @@ class CreaeteCommentsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('comments');
+        $table->dropForeign('comments_ad_id_foreign');
     }
 }

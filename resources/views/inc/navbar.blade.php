@@ -21,7 +21,7 @@
                 <a class="nav-link" href="/about">Apie</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="api/ads">Skelbimai</a>
+                <a class="nav-link" href="/ads">Skelbimai</a>
               </li>
             </ul>
 

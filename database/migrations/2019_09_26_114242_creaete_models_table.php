@@ -14,10 +14,15 @@ class CreaeteModelsTable extends Migration
     public function up()
     {
         Schema::create('models', function (Blueprint $table) {
-            $table->bigIncrements('id');
+
+            $table->engine = 'InnoDB';
+
+            $table->increments('id');
             $table->string('name');
-            $table->integer('id_brand');
+            $table->integer('brand_id')->unsigned();
             $table->timestamps();
+
+            $table->foreign('brand_id')->references('id')->on('brands')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
@@ -29,5 +34,6 @@ class CreaeteModelsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('models');
+        //$table->dropForeign('models_brand_id_foreign');
     }
 }

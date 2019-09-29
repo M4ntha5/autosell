@@ -5,8 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Order;
 
-class OrderController extends Controller
+class OrdersController extends Controller
 {
+
+    public function __construct()
+    {
+      $this->middleware('auth:api');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -18,15 +23,6 @@ class OrderController extends Controller
         return Order::all();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -52,16 +48,6 @@ class OrderController extends Controller
         return $order;
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.

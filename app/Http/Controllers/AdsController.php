@@ -5,8 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Ad;
 
-class AdController extends Controller
+class AdsController extends Controller
 {
+
+    public function __construct()
+    {
+      $this->middleware('auth:api')->except(['index', 'show']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -18,15 +23,6 @@ class AdController extends Controller
         return Ad::all();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -49,18 +45,8 @@ class AdController extends Controller
     //public function show($id)
     public function show(Ad $ad)
     {
-        return $ad;
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        $ads = Ad::findOrFail($ad);
+        return view('ads.show')->with('ads', $ads);
     }
 
     /**

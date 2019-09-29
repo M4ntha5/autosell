@@ -14,7 +14,7 @@ class CreaeteNumberOfDoorsTable extends Migration
     public function up()
     {
         Schema::create('number_of_doors', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->string('name');
             $table->timestamps();
         });

@@ -14,10 +14,13 @@ class CreaeteFavoriteAdsTable extends Migration
     public function up()
     {
         Schema::create('favorite_ads', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->string('body');
-            $table->integer('ad_id');
+            $table->integer('ad_id')->unsigned();
             $table->timestamps();
+
+            $table->foreign('ad_id')->references('id')->on('ads')->onDelete('cascade')->onUpdate('cascade');
+
         });
     }
 
@@ -29,5 +32,6 @@ class CreaeteFavoriteAdsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('favorite_ads');
+        $table->dropForeign('favorite_ads_ad_id_foreign');
     }
 }

@@ -14,10 +14,12 @@ class CreaeteCitysTable extends Migration
     public function up()
     {
         Schema::create('citys', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->string('name');
-            $table->integer('town_id');
+            $table->integer('country_id')->unsigned();
             $table->timestamps();
+
+            $table->foreign('country_id')->references('id')->on('countrys')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
@@ -29,5 +31,6 @@ class CreaeteCitysTable extends Migration
     public function down()
     {
         Schema::dropIfExists('citys');
+        $table->dropForeign('citys_country_id_foreign');
     }
 }

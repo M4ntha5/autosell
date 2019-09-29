@@ -14,7 +14,7 @@ class CreaeteSteeringWheelTable extends Migration
     public function up()
     {
         Schema::create('steering_wheel', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->integer('color');
             $table->timestamps();
         });
