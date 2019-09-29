@@ -15,5 +15,6 @@
 
 Auth::routes();
 
-Route::get('/', 'PagesController@index');   //to open main page
-Route::get('/about', 'PagesController@about');  //to open about page
+Route::get('/', function () {
+    return view('welcome');
+});

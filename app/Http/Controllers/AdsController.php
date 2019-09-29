@@ -8,10 +8,10 @@ use App\Ad;
 class AdsController extends Controller
 {
 
-    public function __construct()
+  /*  public function __construct()
     {
       $this->middleware('auth:api')->except(['index', 'show']);
-    }
+    }*/
     /**
      * Display a listing of the resource.
      *
@@ -45,8 +45,7 @@ class AdsController extends Controller
     //public function show($id)
     public function show(Ad $ad)
     {
-        $ads = Ad::findOrFail($ad);
-        return view('ads.show')->with('ads', $ads);
+        return $ad;
     }
 
     /**

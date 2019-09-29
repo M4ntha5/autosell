@@ -23,7 +23,7 @@ class CreateAdsTable extends Migration
             $table->mediumInteger('mileage');
             $table->smallInteger('engine_power');
             $table->float('engine_volume');
-            $table->smallInteger('damage');
+            $table->integer('damage_id')->unsigned();
             $table->integer('fuel_id')->unsigned();
             $table->integer('gearbox_id')->unsigned();
             $table->integer('body_type_id')->unsigned();
@@ -37,7 +37,7 @@ class CreateAdsTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->timestamps();
 
-
+            $table->foreign('damage_id')->references('id')->on('damage')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('fuel_id')->references('id')->on('fuel_types')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('gearbox_id')->references('id')->on('gearbox_types')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('body_type_id')->references('id')->on('body_types')->onDelete('cascade')->onUpdate('cascade');
@@ -62,6 +62,7 @@ class CreateAdsTable extends Migration
     {
 
         Schema::dropIfExists('ads');
+        $table->dropForeign('ads_damage_id_foreign');
         $table->dropForeign('ads_user_id_foreign');
         $table->dropForeign('ads_brand_id_foreign');
         $table->dropForeign('ads_fuel_id_foreign');

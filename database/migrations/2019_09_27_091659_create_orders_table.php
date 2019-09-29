@@ -22,7 +22,7 @@ class CreateOrdersTable extends Migration
             $table->smallInteger('engine_power');
             $table->float('engine_volume');
             $table->mediumInteger('mileage')->nullable();
-            $table->smallInteger('damage');
+            $table->integer('damage_id')->unsigned();
             $table->integer('status_id')->unsigned();
             $table->integer('fuel_id')->unsigned();
             $table->integer('gearbox_id')->unsigned();
@@ -36,6 +36,7 @@ class CreateOrdersTable extends Migration
             $table->integer('brand_id')->unsigned();
             $table->timestamps();
 
+            $table->foreign('damage_id')->references('id')->on('damage')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('status_id')->references('id')->on('status_types')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('fuel_id')->references('id')->on('fuel_types')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('gearbox_id')->references('id')->on('gearbox_types')->onDelete('cascade')->onUpdate('cascade');
@@ -59,6 +60,7 @@ class CreateOrdersTable extends Migration
     public function down()
     {
         Schema::dropIfExists('orders');
+        $table->dropForeign('ads_damage_id_foreign');
         $table->dropForeign('orders_status_id_foreign');
         $table->dropForeign('orders_fuel_id_foreign');
         $table->dropForeign('orders_gearbox_id_foreign');
