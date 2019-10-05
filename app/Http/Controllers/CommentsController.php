@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Comment;
+use App\Ad;
 
 class CommentsController extends Controller
 {
@@ -17,10 +18,10 @@ class CommentsController extends Controller
    *
    * @return \Illuminate\Http\Response
    */
-  public function index()
+  public function index($id)
   {
-      //$ad = Ad::paginate(15);
-      return Comment::all();
+      $comm = Ad::findOrFail($id)->comments;
+      return $comm;
   }
 
 
@@ -30,9 +31,12 @@ class CommentsController extends Controller
    * @param  \Illuminate\Http\Request  $request
    * @return \Illuminate\Http\Response
    */
-  public function store(Request $request)
+  public function store($id, Request $request)
   {
-      $comment = Comment::create($request->all());
+      //$comment = Comment::create($request->all());
+      $user_data = $request->all();
+      $data = array_merge($user_data, array('ad_id'=> $id));
+      $comment = Comment::where('ad_id', '=', $id)->create($data);
       return response()->json($comment, 201);
   }
 
@@ -43,9 +47,11 @@ class CommentsController extends Controller
    * @return \Illuminate\Http\Response
    */
   //public function show($id)
-  public function show(Comment $comment)
+  public function show($id, $comment)
   {
-      return $comment;
+      $comm = Comment::where('ad_id', '=', $id)->findOrFail($comment);
+
+      return response()->json($comm);
   }
 
 
@@ -57,11 +63,11 @@ class CommentsController extends Controller
    * @return \Illuminate\Http\Response
    */
   //public function update(Request $request, $id)
-  public function update(Request $request, Comment $comment)
+  public function update($id, $comment, Request $request)
   {
-    //  $ad = Ad::findOrFail($id);
-      $comment->update($request->all());
-      return response()->json($comment, 200);
+      $comm = Comment::where('ad_id', '=', $id)->findOrFail($comment)->update($request->all());
+      $new = Comment::where('ad_id', '=', $id)->findOrFail($comment);
+      return response()->json($new, 200);
   }
 
   /**
@@ -70,10 +76,11 @@ class CommentsController extends Controller
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
-  public function destroy(Comment $comment)
+  public function destroy($id, $comment)
   {
       //$ad = Ad::findOrFail($id);
-      $comment->delete();
+      $comm = Comment::where('ad_id', '=', $id)->findOrFail($comment);    // padaryt kad nebutu galima trint ne to skelbimo komentus
+      $comm->delete();
       return response()->json(null, 204);
   }
 }

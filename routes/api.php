@@ -26,11 +26,11 @@ Route::put('ads/{ad}', 'AdsController@update');
 Route::delete('ads/{ad}', 'AdsController@destroy');
 
 // comment routes
-Route::get('comments', 'CommentsController@index');
-Route::get('comments/{comment}', 'CommentsController@show');
-Route::post('comments', 'CommentsController@store');
-Route::put('comments/{comment}', 'CommentsController@update');
-Route::delete('comments/{comment}', 'CommentsController@destroy');
+Route::get('ads/{ad}/comments', 'CommentsController@index');
+Route::get('ads/{ad}/comments/{comment}', 'CommentsController@show');
+Route::post('ads/{ad}/comments', 'CommentsController@store');
+Route::put('ads/{ad}/comments/{comment}', 'CommentsController@update');
+Route::delete('ads/{ad}/comments/{comment}', 'CommentsController@destroy');
 
 // order routes
 Route::get('orders', 'OrdersController@index');

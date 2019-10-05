@@ -21,6 +21,7 @@ class AdsController extends Controller
     {
         //$ad = Ad::paginate(15);
         return Ad::all();
+
     }
 
 

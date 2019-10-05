@@ -34,6 +34,7 @@ class CreateAdsTable extends Migration
             $table->integer('climate_control_id')->unsigned();
             $table->integer('euro_standard_id')->unsigned();
             $table->integer('brand_id')->unsigned();
+            $table->integer('category_id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->timestamps();
 
@@ -49,6 +50,7 @@ class CreateAdsTable extends Migration
             $table->foreign('euro_standard_id')->references('id')->on('euro_standard')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('brand_id')->references('id')->on('brands')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade')->onUpdate('cascade');
 
         });
     }
