@@ -44,13 +44,7 @@ Route::post('orders', 'OrdersController@store');
 Route::put('orders/{order}', 'OrdersController@update');
 Route::delete('orders/{order}', 'OrdersController@destroy');
 
-<<<<<<< HEAD
 Route:fallback(function(){
   return response()->json([
     'message'=>'Page not found'], 404);
-=======
-Route::fallback(function(){
-    return response()->json([
-        'message' => 'Page Not Found.'], 404);
->>>>>>> 84e2be8a3626a97c13c949d15d7f056e0e8f8395
 });
