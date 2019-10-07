@@ -25,12 +25,17 @@ Route::post('ads', 'AdsController@store');
 Route::put('ads/{ad}', 'AdsController@update');
 Route::delete('ads/{ad}', 'AdsController@destroy');
 
+
+// reik padaryt sudetini api kad butu pvz: api/ads/1/comments
+
+Route::get('ads/{id}/comments', 'CommentsController@index');
+
 // comment routes
-Route::get('ads/{ad}/comments', 'CommentsController@index');
-Route::get('ads/{ad}/comments/{comment}', 'CommentsController@show');
-Route::post('ads/{ad}/comments', 'CommentsController@store');
-Route::put('ads/{ad}/comments/{comment}', 'CommentsController@update');
-Route::delete('ads/{ad}/comments/{comment}', 'CommentsController@destroy');
+Route::get('comments', 'CommentsController@index');
+Route::get('comments/{comment}', 'CommentsController@show');
+Route::post('comments', 'CommentsController@store');
+Route::put('comments/{comment}', 'CommentsController@update');
+Route::delete('comments/{comment}', 'CommentsController@destroy');
 
 // order routes
 Route::get('orders', 'OrdersController@index');
@@ -39,7 +44,13 @@ Route::post('orders', 'OrdersController@store');
 Route::put('orders/{order}', 'OrdersController@update');
 Route::delete('orders/{order}', 'OrdersController@destroy');
 
+<<<<<<< HEAD
 Route:fallback(function(){
   return response()->json([
     'message'=>'Page not found'], 404);
+=======
+Route::fallback(function(){
+    return response()->json([
+        'message' => 'Page Not Found.'], 404);
+>>>>>>> 84e2be8a3626a97c13c949d15d7f056e0e8f8395
 });
