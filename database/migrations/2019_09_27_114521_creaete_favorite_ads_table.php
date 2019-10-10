@@ -17,9 +17,11 @@ class CreaeteFavoriteAdsTable extends Migration
             $table->increments('id');
             $table->string('body');
             $table->integer('ad_id')->unsigned();
+            $table->integer('user_id')->unsigned();
             $table->timestamps();
 
             $table->foreign('ad_id')->references('id')->on('ads')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
 
         });
     }

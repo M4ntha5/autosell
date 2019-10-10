@@ -19,7 +19,7 @@ class AdsController extends Controller
      */
     public function index()
     {
-        $ad = Ad::orderBy('created_at', 'desc')->paginate(1);
+        $ad = Ad::orderBy('created_at', 'desc')->paginate(15);
         return $ad;   // Ad::all();
 
     }

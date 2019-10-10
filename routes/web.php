@@ -18,3 +18,7 @@ Auth::routes();
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/ads', function () {
+    return view('ads.index');
+});

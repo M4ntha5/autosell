@@ -18,7 +18,8 @@
       <div class="mb-3" id="app">
         <navbar></navbar>
         <div class="container">
-
+          <ads>
+          </ads>
         </div>
       </div>
 

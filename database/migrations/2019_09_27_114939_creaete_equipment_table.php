@@ -16,8 +16,8 @@ class CreaeteEquipmentTable extends Migration
         Schema::create('equipment', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('feature_id')->unsigned();
-            $table->integer('ad_id')->unsigned();
-            $table->integer('order_id')->unsigned();
+            $table->integer('ad_id')->unsigned()->nullable();
+            $table->integer('order_id')->unsigned()->nullable();
             $table->timestamps();
 
             $table->foreign('feature_id')->references('id')->on('features')->onDelete('cascade')->onUpdate('cascade');

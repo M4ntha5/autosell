@@ -1838,6 +1838,32 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -1872,10 +1898,27 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       ads: [],
-      ad: {
+      ad: _defineProperty({
+        price: '',
+        image: '',
         phone_no: '',
-        price: ''
-      },
+        description: '',
+        manufacture_date: '',
+        mileage: '',
+        engine_power: '',
+        engine_volume: '',
+        damage_id: '',
+        fuel_id: '',
+        gearbox_id: '',
+        body_type_id: '',
+        color_id: '',
+        steering_wheel_id: '',
+        number_of_doors_id: '',
+        driven_wheels_id: '',
+        climate_control_id: '',
+        euro_standard_id: '',
+        brand_id: ''
+      }, "euro_standard_id", ''),
       pagination: {}
     };
   },
@@ -1913,15 +1956,34 @@ __webpack_require__.r(__webpack_exports__);
         fetch("api/ads/".concat(id), {
           method: 'delete'
         }).then(function (res) {
-          return res.json();
-        }).then(function (data) {
           alert('Ad removed');
 
-          _this2.fetchAds(1);
+          _this2.fetchAds();
         })["catch"](function (err) {
           return console.log(err);
         });
       }
+    },
+    addAd: function addAd() {
+      var _this3 = this;
+
+      fetch('api/ads', {
+        method: 'post',
+        body: JSON.stringify(this.ad),
+        headers: {
+          'content-type': 'application/json'
+        }
+      }).then(function (res) {
+        return res.json();
+      }).then(function (data) {
+        _this3.ad.price = '';
+        _this3.ad.phone_no = '';
+        alert('Ad added');
+
+        _this3.fetchAds();
+      })["catch"](function (err) {
+        return console.log(err);
+      });
     }
   }
 });
@@ -37223,99 +37285,17 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "div",
-    [
-      _c("h2", [_vm._v("Ads")]),
-      _vm._v(" "),
-      _vm._l(_vm.ads, function(ad) {
-        return _c("div", { key: ad.id, staticClass: "card card-body mb-2" }, [
-          _c("h3", [_vm._v(_vm._s(ad.phone_no))]),
-          _vm._v(" "),
-          _c("p", [_vm._v(_vm._s(ad.price))]),
-          _vm._v(" "),
-          _c("hr"),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-danger",
-              on: {
-                click: function($event) {
-                  return _vm.deleteAd(ad.id)
-                }
-              }
-            },
-            [_vm._v("Delete")]
-          )
-        ])
-      }),
-      _vm._v(" "),
-      _c("nav", { attrs: { "aria-label": "Page navigation example" } }, [
-        _c("ul", { staticClass: "pagination" }, [
-          _c(
-            "li",
-            {
-              staticClass: "page-item",
-              class: [{ disabled: !_vm.pagination.prev_page_url }]
-            },
-            [
-              _c(
-                "a",
-                {
-                  staticClass: "page-link",
-                  attrs: { href: "#" },
-                  on: {
-                    click: function($event) {
-                      return _vm.fetchAds(_vm.pagination.prev_page_url)
-                    }
-                  }
-                },
-                [_vm._v("Previous")]
-              )
-            ]
-          ),
-          _vm._v(" "),
-          _c("li", { staticClass: "page-item disabled" }, [
-            _c(
-              "a",
-              { staticClass: "page-link text-dark", attrs: { href: "#" } },
-              [
-                _vm._v(
-                  "Page " +
-                    _vm._s(_vm.pagination.current_page) +
-                    " of " +
-                    _vm._s(_vm.pagination.last_page)
-                )
-              ]
-            )
-          ]),
-          _vm._v(" "),
-          _c(
-            "li",
-            {
-              staticClass: "page-item",
-              class: [{ disabled: !_vm.pagination.next_page_url }]
-            },
-            [
-              _c(
-                "a",
-                {
-                  staticClass: "page-link",
-                  attrs: { href: "#" },
-                  on: {
-                    click: function($event) {
-                      return _vm.fetchAds(_vm.pagination.next_page_url)
-                    }
-                  }
-                },
-                [_vm._v("Next")]
-              )
-            ]
-          )
-        ])
+    "ul",
+    { staticClass: "list-group pt-5" },
+    _vm._l(_vm.ads, function(ad) {
+      return _c("li", { key: ad.id, staticClass: "list-group-item" }, [
+        _vm._v(_vm._s(ad.phone_no) + "\n       "),
+        _c("span", { staticClass: "badge" }, [_vm._v(_vm._s(ad.price))]),
+        _vm._v(" "),
+        _c("span", { staticClass: "badge" }, [_vm._v("id" + _vm._s(ad.id))])
       ])
-    ],
-    2
+    }),
+    0
   )
 }
 var staticRenderFns = []
@@ -37350,14 +37330,73 @@ var staticRenderFns = [
     return _c(
       "nav",
       {
-        staticClass:
-          "navbar navbar-expand-sm navbar-dark p-3 mb-2 bg-dark text-white"
+        staticClass: "navbar navbar-expand-md navbar-light bg-light shadow-sm"
       },
       [
         _c("div", { staticClass: "container" }, [
-          _c("a", { staticClass: "navbar=brand", attrs: { href: "#" } }, [
+          _c("a", { staticClass: "navbar-brand", attrs: { href: "/" } }, [
             _vm._v("AutoSell")
-          ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "navbar-toggler",
+              attrs: {
+                type: "button",
+                "data-toggle": "collapse",
+                "data-target": "#navbarSupportedContent",
+                "aria-controls": "navbarSupportedContent",
+                "aria-expanded": "false"
+              }
+            },
+            [_c("span", { staticClass: "navbar-toggler-icon" })]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "collapse navbar-collapse",
+              attrs: { id: "navbarSupportedContent" }
+            },
+            [
+              _c("ul", { staticClass: "navbar-nav mr-auto" }, [
+                _c("li", { staticClass: "nav-item" }, [
+                  _c(
+                    "a",
+                    { staticClass: "nav-link", attrs: { href: "/about" } },
+                    [_vm._v("Apie")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("li", { staticClass: "nav-item" }, [
+                  _c(
+                    "a",
+                    { staticClass: "nav-link", attrs: { href: "/ads" } },
+                    [_vm._v("Skelbimai")]
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c("ul", { staticClass: "navbar-nav ml-auto" }, [
+                _c("li", { staticClass: "nav-item" }, [
+                  _c(
+                    "a",
+                    { staticClass: "nav-link", attrs: { href: "/login" } },
+                    [_vm._v("Log in")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("li", { staticClass: "nav-item" }, [
+                  _c(
+                    "a",
+                    { staticClass: "nav-link", attrs: { href: "/register" } },
+                    [_vm._v("Register")]
+                  )
+                ])
+              ])
+            ]
+          )
         ])
       ]
     )

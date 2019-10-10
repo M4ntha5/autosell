@@ -15,7 +15,7 @@ class CreaeteSteeringWheelTable extends Migration
     {
         Schema::create('steering_wheel', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('color');
+            $table->string('name');
             $table->timestamps();
         });
     }
