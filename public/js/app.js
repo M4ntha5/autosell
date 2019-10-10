@@ -1849,6 +1849,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1864,14 +1883,45 @@ __webpack_require__.r(__webpack_exports__);
     this.fetchAds();
   },
   methods: {
-    fetchAds: function fetchAds() {
+    fetchAds: function fetchAds(page_url) {
       var _this = this;
 
-      fetch('http://127.0.0.1:8000/api/ads').then(function (res) {
+      var vm = this;
+      page_url = page_url || '/api/ads';
+      fetch(page_url).then(function (res) {
         return res.json();
       }).then(function (res) {
         _this.ads = res.data;
+        vm.makePagination(res);
+      })["catch"](function (err) {
+        return console.log(err);
       });
+    },
+    makePagination: function makePagination(res) {
+      var pagination = {
+        current_page: res.current_page,
+        last_page: res.last_page,
+        next_page_url: res.next_page_url,
+        prev_page_url: res.prev_page_url
+      };
+      this.pagination = pagination;
+    },
+    deleteAd: function deleteAd(id) {
+      var _this2 = this;
+
+      if (confirm('really??')) {
+        fetch("api/ads/".concat(id), {
+          method: 'delete'
+        }).then(function (res) {
+          return res.json();
+        }).then(function (data) {
+          alert('Ad removed');
+
+          _this2.fetchAds(1);
+        })["catch"](function (err) {
+          return console.log(err);
+        });
+      }
     }
   }
 });
@@ -37181,9 +37231,89 @@ var render = function() {
         return _c("div", { key: ad.id, staticClass: "card card-body mb-2" }, [
           _c("h3", [_vm._v(_vm._s(ad.phone_no))]),
           _vm._v(" "),
-          _c("p", [_vm._v(_vm._s(ad.price))])
+          _c("p", [_vm._v(_vm._s(ad.price))]),
+          _vm._v(" "),
+          _c("hr"),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-danger",
+              on: {
+                click: function($event) {
+                  return _vm.deleteAd(ad.id)
+                }
+              }
+            },
+            [_vm._v("Delete")]
+          )
         ])
-      })
+      }),
+      _vm._v(" "),
+      _c("nav", { attrs: { "aria-label": "Page navigation example" } }, [
+        _c("ul", { staticClass: "pagination" }, [
+          _c(
+            "li",
+            {
+              staticClass: "page-item",
+              class: [{ disabled: !_vm.pagination.prev_page_url }]
+            },
+            [
+              _c(
+                "a",
+                {
+                  staticClass: "page-link",
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      return _vm.fetchAds(_vm.pagination.prev_page_url)
+                    }
+                  }
+                },
+                [_vm._v("Previous")]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c("li", { staticClass: "page-item disabled" }, [
+            _c(
+              "a",
+              { staticClass: "page-link text-dark", attrs: { href: "#" } },
+              [
+                _vm._v(
+                  "Page " +
+                    _vm._s(_vm.pagination.current_page) +
+                    " of " +
+                    _vm._s(_vm.pagination.last_page)
+                )
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c(
+            "li",
+            {
+              staticClass: "page-item",
+              class: [{ disabled: !_vm.pagination.next_page_url }]
+            },
+            [
+              _c(
+                "a",
+                {
+                  staticClass: "page-link",
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      return _vm.fetchAds(_vm.pagination.next_page_url)
+                    }
+                  }
+                },
+                [_vm._v("Next")]
+              )
+            ]
+          )
+        ])
+      ])
     ],
     2
   )
