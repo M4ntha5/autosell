@@ -22,3 +22,9 @@ Route::get('/', function () {
 Route::get('/ads', function () {
     return view('ads.index');
 });
+Route::get('/ads/{id}', function () {
+    return view('ads.show');
+});
+Route::get('/about', function () {
+    return view('pages.about');
+});
