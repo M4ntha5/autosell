@@ -139,7 +139,9 @@
 
   <ul class="list-group" >
      <li class="list-group-item" v-for="ad in ads" v-bind:key="ad.id">
-       {{ad.id}} brand: {{ad.brand_id}} model:{{ad.model_id}}
+       <a v-bind:href="'/ads/'+ ad.id">{{ad.id}}</a>
+
+        brand: {{ad.brand_id}} model:{{ad.model_id}}
        <span class="badge">fuel:{{ad.fuel_id}}</span>
 
        <span class="badge">date{{ad.manufacture_date}}</span>
@@ -372,49 +374,6 @@
         this.ad.model_id = ad.model_id ;
         this.ad.user_id = ad.user_id;
       }
-
-      /*editAd()
-      {
-        if(this.edit)
-        {
-          console.log(this);
-          fetch(`api/ads/${ad.id}`, {
-            method: 'put',
-            body: JSON.stringify(this.ad),
-            headers: {
-              'content-type': 'application/json'
-            }
-          })
-          .then(res => res.json())
-          .then(data => {
-            this.ad.id = ad.id;
-            this.ad.price = ad.price;
-            this.ad.image =null;
-            this.ad.phone_no = ad.phone_no;
-            this.ad.description = ad.description;
-            this.ad.manufacture_date = ad.manufacture_date;
-            this.ad.mileage = ad.mileage;
-            this.ad.engine_power = ad.engine_power;
-            this.ad.engine_volume = ad.engine_volume;
-            this.ad.damage_id = ad.damage_id;
-            this.ad.fuel_id = ad.fuel_id;
-            this.ad.gearbox_id = ad.gearbox_id;
-            this.ad.body_type_id = ad.body_type_id;
-            this.ad.color_id = ad.color_id;
-            this.ad.steering_wheel_id = ad.steering_wheel_id;
-            this.ad.number_of_doors_id = ad.number_of_doors_id;
-            this.ad.driven_wheels_id = ad.driven_wheels_id;
-            this.ad.climate_control_id = ad.climate_control_id;
-            this.ad.euro_standard_id = ad.euro_standard_id;
-            this.ad.brand_id =ad.brand_id;
-            this.ad.model_id = ad.model_id ;
-            this.ad.user_id = ad.user_id;
-            alert('Ad updated');
-            this.fetchAds();
-          })
-          .catch(err => console.log(err));
-        }
-      }*/
     }
   };
 </script>
