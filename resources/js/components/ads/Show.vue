@@ -66,32 +66,5 @@
       }
     }
   }
-/*
-editAd(ad)
-{
-  this.edit =true;
-  this.ad_id = ad.id;
-  this.ad.id = ad.id;
-  this.ad.price = ad.price;
-  this.ad.image =null;
-  this.ad.phone_no = ad.phone_no;
-  this.ad.description = ad.description;
-  this.ad.manufacture_date = ad.manufacture_date;
-  this.ad.mileage = ad.mileage;
-  this.ad.engine_power = ad.engine_power;
-  this.ad.engine_volume = ad.engine_volume;
-  this.ad.damage_id = ad.damage_id;
-  this.ad.fuel_id = ad.fuel_id;
-  this.ad.gearbox_id = ad.gearbox_id;
-  this.ad.body_type_id = ad.body_type_id;
-  this.ad.color_id = ad.color_id;
-  this.ad.steering_wheel_id = ad.steering_wheel_id;
-  this.ad.number_of_doors_id = ad.number_of_doors_id;
-  this.ad.driven_wheels_id = ad.driven_wheels_id;
-  this.ad.climate_control_id = ad.climate_control_id;
-  this.ad.euro_standard_id = ad.euro_standard_id;
-  this.ad.brand_id =ad.brand_id;
-  this.ad.model_id = ad.model_id ;
-  this.ad.user_id = ad.user_id;
-}*/
+
 </script>
