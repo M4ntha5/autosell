@@ -1,19 +1,74 @@
 <template>
+<div>
 
-  <ul class="list-group" >
-     <li class="list-group-item">
-       <a v-bind:href="'/ads/'+ ad.id"></a>
 
-        brand: model:
-       <span class="badge">fuel:</span>
+  <table>
+    <tr>
+      <td>{{ad.price}}</td>
+    </tr>
+    <tr>
+      <td>{{ad.phone_no}}</td>
+    </tr>
+    <tr>
+      <td>{{ad.description}}</td>
+    </tr>
 
-       <span class="badge">date</span>
-       <span class="badge">gearbox:</span>
-       <span class="badge">body:</span>
-       <span class="badge">desc</span>
-       <span class="badge">price</span>
-     </li>
-  </ul>
+    <tr>
+      <td>{{ad.manufacture_date}}</td>
+    </tr>
+    <tr>
+      <td>{{ad.mileage}}</td>
+    </tr>
+    <tr>
+      <td>{{ad.engine_power}}</td>
+    </tr>
+
+    <tr>
+      <td>{{ad.engine_volume}}</td>
+    </tr>
+    <tr>
+      <td>{{ad.damage}}</td>
+    </tr>
+    <tr>
+      <td>{{ad.fuel}}</td>
+    </tr>
+
+    <tr>
+      <td>{{ad.gearbox}}</td>
+    </tr>
+    <tr>
+      <td>{{ad.body_type}}</td>
+    </tr>
+
+    <tr>
+      <td>{{ad.color}}</td>
+    </tr>
+    <tr>
+      <td>{{ad.steering_wheel}}</td>
+    </tr>
+    <tr>
+      <td>{{ad.number_of_doors}}</td>
+    </tr>
+    <tr>
+      <td>{{ad.driven_wheels}}</td>
+    </tr>
+    <tr>
+      <td>{{ad.climate_control}}</td>
+    </tr>
+    <tr>
+      <td>{{ad.euro_standard}}</td>
+    </tr>
+    <tr>
+      <td>{{ad.brand}}</td>
+    </tr>
+    <tr>
+      <td>{{ad.model}}</td>
+    </tr>
+    <tr>
+      <td>{{ad.user}}</td>
+    </tr>
+  </table>
+</div>
 
 
 </template>
@@ -33,38 +88,41 @@
           mileage: '',
           engine_power: '',
           engine_volume: '',
-          damage_id: '',
-          fuel_id: '',
-          gearbox_id: '',
-          body_type_id: '',
-          color_id: '',
-          steering_wheel_id: '',
-          number_of_doors_id: '',
-          driven_wheels_id: '',
-          climate_control_id: '',
-          euro_standard_id: '',
-          brand_id: '',
-          model_id: '',
-          user_id: ''
+          damage: '',
+          fuel: '',
+          gearbox: '',
+          body_type: '',
+          color: '',
+          steering_wheel: '',
+          number_of_doors: '',
+          driven_wheels: '',
+          climate_control: '',
+          euro_standard: '',
+          brand: '',
+          model: '',
+          user: ''
         }
       };
     },
     created() {
-      this.fetchAd();
+      this.fetchAds();
     },
     methods:
     {
-      fetchAd(ad)
+      fetchAds()  // ok
       {
-        /*page_url = `/api/ads${id}`;*/
-        fetch(`/api/ads/${ad.id}`)
+        let path = window.location.pathname;
+        //Break the path into segments
+        let segments = path.split("/");
+
+        let page_url = `/api/ads/${segments[2]}`;
+        fetch(page_url)
         .then(res => res.json())
         .then(res => {
-          console.log(res);
+          this.ad = res[0];
         })
         .catch(err => console.log(err));
       }
     }
-  }
-
+  };
 </script>

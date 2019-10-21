@@ -39,6 +39,14 @@ Route::post('orders', 'OrdersController@store');
 Route::put('orders/{order}', 'OrdersController@update');
 Route::delete('orders/{order}', 'OrdersController@destroy');
 
+// user routes
+Route::get('users', 'UsersController@index');
+Route::get('users/{user}', 'UsersController@show');
+Route::post('users', 'UsersController@store');
+Route::put('users/{user}', 'UsersController@update');
+Route::delete('users/{users}', 'UsersController@destroy');
+
+
 Route::fallback(function(){
   return response()->json([
     'message'=>'Page not found'], 404);

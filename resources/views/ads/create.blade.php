@@ -2,9 +2,9 @@
 
 @section('content')
   <h1 class=""></h1>
-  cia yra show
+  cia yra create
    <div >
-     <show></show>
+     <create></create>
    </div>
 
 @endsection

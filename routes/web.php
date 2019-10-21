@@ -18,13 +18,17 @@ Auth::routes();
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/about', function () {
+    return view('pages.about');
+});
 
 Route::get('/ads', function () {
     return view('ads.index');
 });
-Route::get('/ads/{id}', function () {
+Route::get('/ads/{ad}', function () {
     return view('ads.show');
 });
-Route::get('/about', function () {
-    return view('pages.about');
+
+Route::get('ads/create', function () {
+    return view('ads.create');
 });
