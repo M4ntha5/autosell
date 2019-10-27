@@ -61,7 +61,6 @@ class AdsController extends Controller
 
     }
 
-
     /**
      * Store a newly created resource in storage.
      *
@@ -70,51 +69,24 @@ class AdsController extends Controller
      */
     public function store(Request $request)
     {
-      /*  $this->validate($request, [
-          'image' => 'image|nullable|max:1999'
-        ]);
+        $exploaded = explode(',',$request->image);
+        $decoded = base64_decode($exploaded[1]);
 
-        if($request->hasFile('image'))
-        {
-          $fileNameWithExt = $request->file('image')->getClientOriginalName();
-          $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
-          $extension = $request->file('image')->getClientOriginalExtension();
-          $fileNameToStore = $fileName.'_'.time().'.'.$extension;
-          $path = $request->file('image')->storeAs('public/images', $fileNameToStore);
-        }
+        if(str_contains($exploaded[0], 'jpeg'))
+          $extension = 'jpg';
         else
-        {
-          $fileNameToStore = 'noimage.jpg';
-        }
+          $extension = 'png';
 
 
+        $fileName = str_random().'.'.$extension;
 
+        $path = storage_path('app\public\images').'/'.$fileName;
 
-        $ad = new Ad;
-        $ad->price = $request->input('price');
-        $ad->phone_no = $request->input('phone_no');
-        $ad->description = $request->input('description');
-        $ad->manufacture_date = $request->input('manufacture_date');
-        $ad->mileage = $request->input('mileage');
-        $ad->engine_power = $request->input('engine_power');
-        $ad->engine_volume = $request->input('engine_volume');
-        $ad->damage_id = $request->input('damage_id');
-        $ad->fuel_id = $request->input('fuel_id');
-        $ad->gearbox_id = $request->input('gearbox_id');
-        $ad->body_type_id = $request->input('body_type_id');
-        $ad->color_id = $request->input('color_id');
-        $ad->steering_wheel_id = $request->input('steering_wheel_id');
-        $ad->number_of_doors_id = $request->input('number_of_doors_id');
-        $ad->driven_wheels_id = $request->input('driven_wheels_id');
-        $ad->climate_control_id = $request->input('climate_control_id');
-        $ad->euro_standard_id = $request->input('euro_standard_id');
-        $ad->brand_id = $request->input('brand_id');
-        $ad->model_id = $request->input('model_id');
-        $ad->user_id = $request->input('user_id');
-        $ad->image = $fileNameToStore;
-        $ad->save();*/
+        file_put_contents($path, $decoded);
 
-        $ad = Ad::create($request->all());
+        $ad = Ad::create($request->except('image') + [
+          'image' => $fileName
+        ]);
         return response()->json($ad, 201);
     }
 
@@ -194,9 +166,4 @@ class AdsController extends Controller
         return response()->json(null, 204);
     }
 
-  /*  public function getFuelTypes()
-    {
-      $types = DB::table('fuel_types')->get();
-      return $types;
-    }*/
 }

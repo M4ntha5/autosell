@@ -1,8 +1,10 @@
 <template>
 <div>
 
-
   <table>
+
+    <img :src="'/storage/images/'+ ad.image" class="img-fluid" alt="Responsive image">
+
     <tr>
       <td>{{ad.price}}</td>
     </tr>
@@ -109,7 +111,7 @@
     },
     methods:
     {
-      fetchAds()  // ok
+      fetchAds() 
       {
         let path = window.location.pathname;
         //Break the path into segments

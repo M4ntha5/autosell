@@ -4,11 +4,11 @@
 
 
 <div v-if="!edit">
-  <form  @submit.prevent="addAd" class="mb-3">
-
+  <form  @submit.prevent="addAd" enctype="multipart/form-data" class="mb-3">
     foto:
-      <input type="file" @change="onFileSelected"></input>
-
+    <div>
+      <input type="file" @change="onFileSelected" class="form-control"></input>
+    </div>
     Kaina:
     <div class="form-group">
       <input type="number" class="form-control"  v-model="ad.price"></input>
@@ -89,12 +89,15 @@
     <div class="form-group">
       <input type="number" class="form-control" v-model="ad.user_id"></input>
     </div>
-
       <button type="submit" class="form-control">Save</button>
   </form>
 </div>
 <div v-else>
   <form  @submit.prevent="addAd" class="mb-3">
+    Nuotrauka:
+    <div>
+      <input type="file" @change="onFileSelected" class="form-control"></input>
+    </div>
     Kaina:
     <div class="form-group">
       <input type="number" class="form-control"  v-model="ad.price"></input>
@@ -180,32 +183,34 @@
 </div>
 
 
-  <ul class="list-group" >
+  <a role="button" href="/ads/create" class="btn btn-primary float-right ">Sukurti nauja</a>
 
-     <li class="list-group-item" v-for="ad in ads" v-bind:key="ad.id">
+<div class="pt-5" v-for="ad in ads" v-bind:key="ad.id">
+  <div class="card" >
+    <div class="card-body" >
+      <div class="row">
+        <div class="col-4">
+          <a v-bind:href="'/ads/'+ ad.id">
+            <img :src="'/storage/images/'+ ad.image" width="240px" height="180px" class="img-fluid" alt="Responsive image">
+          </a>
+        </div>
+        <div class="col-8">
+          <a v-bind:href="'/ads/'+ ad.id">
+            <h1>{{ad.brand}} {{ad.model}}, {{ad.engine_volume}} l., {{ad.body_type}}</h1>
+          </a>
+          <h2><b>{{ad.price}} €</b></h2>
+          <p>{{ad.manufacture_date}} {{ad.gearbox}} {{ad.mileage}} km</p>
+          <p>{{ad.fuel}} {{ad.engine_power}} kW</p>
+        </div>
+      </div>
+      <button @click="editAd(ad)" class="btn btn-info">Redaguoti</button>
 
-       <a v-bind:href="'/ads/'+ ad.id">{{ad.id}}</a>
-
-        brand: {{ad.brand}} model: {{ad.model}}
-       <span class="badge">fuel: {{ad.fuel}}</span>
-
-       <span class="badge">date: {{ad.manufacture_date}}</span>
-       <span class="badge">gearbox: {{ad.gearbox}}</span>
-       <span class="badge">body: {{ad.body_type}}</span>
-       <span class="badge">desc: {{ad.description}}</span>
-       <span class="badge">price: {{ad.price}}</span>
-       <hr>
-
-        <button @click="editAd(ad)" class="btn btn-info">edit</button>
-
-        <button @click="deleteAd(ad.id)" class="btn btn-danger">Delete</button>
+      <button @click="deleteAd(ad.id)" class="btn btn-danger">Istrinti</button>
+    </div>
+  </div>
+</div>
 
 
-
-
-      </hr>
-     </li>
-  </ul>
 
   <nav aria-label="page navigation example">
     <ul class="pagination">
@@ -222,9 +227,6 @@
       </li>
     </ul>
   </nav>
-
-
-
 
 
 </div>
@@ -360,7 +362,6 @@ import axios from 'axios';
               this.ad.user_id = '';
               alert('Ad added');
               this.fetchAds();
-              axios.post('public/storage/images/', this.ad.image);
             })
             .catch(err => console.log(err));
         }
@@ -430,10 +431,13 @@ import axios from 'axios';
         this.ad.model_id = ad.model;
         this.ad.user_id = ad.user;
       },
-      onFileSelected(event)
+      onFileSelected(e)
       {
-        this.ad.image = event.target.files[0].name;
-        console.log(event);
+        var reader = new FileReader();
+        reader.readAsDataURL(e.target.files[0]);
+        reader.onload = (e) => {
+            this.ad.image = e.target.result;
+        }
       }
 
     }

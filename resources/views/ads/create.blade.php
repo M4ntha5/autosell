@@ -1,10 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-  <h1 class=""></h1>
-  cia yra create
-   <div >
-     <create></create>
+
+  <div id="app">
+     <div class="container mt-3">
+       <h1>Ads</h1>
+       <create>
+       </create>
+     </div>
    </div>
 
 @endsection

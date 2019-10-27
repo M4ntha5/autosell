@@ -28,7 +28,6 @@ Route::get('/ads', function () {
 Route::get('/ads/{ad}', function () {
     return view('ads.show');
 });
-
-Route::get('ads/create', function () {
+Route::get('/ads/create', function () {
     return view('ads.create');
 });

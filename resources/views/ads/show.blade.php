@@ -1,10 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-  <h1 class=""></h1>
-  cia yra show
-   <div >
-     <show></show>
+  <div id="app">
+     <div class="container mt-3">
+       <h1>Ads</h1>
+       <show>
+       </show>
+     </div>
    </div>
-
 @endsection
