@@ -28,6 +28,17 @@ Route::get('/ads', function () {
 Route::get('/ads/{ad}', function () {
     return view('ads.show');
 });
-Route::get('/ads/create', function () {
-    return view('ads.create');
+
+Route::get('/orders', function () {
+    return view('orders.index');
+});
+Route::get('/orders/{order}', function () {
+    return view('orders.show');
+});
+
+Route::get('/users', function () {
+    return view('users.index');
+});
+Route::get('/users/{user}', function () {
+    return view('users.show');
 });

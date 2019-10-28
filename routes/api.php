@@ -21,6 +21,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 // ad routes
 Route::get('ads', 'AdsController@index');
 Route::get('ads/{ad}', 'AdsController@show');
+//Route::get('ads/create', 'AdsController@create');
 Route::post('ads', 'AdsController@store');
 Route::put('ads/{ad}', 'AdsController@update');
 Route::delete('ads/{ad}', 'AdsController@destroy');

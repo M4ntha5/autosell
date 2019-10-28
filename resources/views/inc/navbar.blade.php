@@ -24,6 +24,9 @@
                 <a class="nav-link" href="/ads">Skelbimai</a>
               </li>
               <li class="nav-item">
+                <a class="nav-link" href="/orders">Mano uzsakymai</a>
+              </li>
+              <li class="nav-item">
                 <a class="nav-link" href="/users">Users</a>
               </li>
             </ul>

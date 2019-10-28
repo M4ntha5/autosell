@@ -55,7 +55,6 @@ class CommentsController extends Controller
       return response()->json($comm);
   }
 
-
   /**
    * Update the specified resource in storage.
    *

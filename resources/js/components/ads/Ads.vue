@@ -2,213 +2,214 @@
 
 <div>
 
-
-<div v-if="!edit">
-  <form  @submit.prevent="addAd" enctype="multipart/form-data" class="mb-3">
-    foto:
-    <div>
-      <input type="file" @change="onFileSelected" class="form-control"></input>
-    </div>
-    Kaina:
-    <div class="form-group">
-      <input type="number" class="form-control"  v-model="ad.price"></input>
-    </div>
-    Tel. nr.
-    <div class="form-group">
-      <input type="tel" class="form-control" v-model="ad.phone_no"></input>
-    </div>
-    Aprasymas
-    <div class="form-group">
-      <input type="text" class="form-control" v-model="ad.description"></input>
-    </div>
-    pagaminimo data
-    <div class="form-group">
-      <input type="date" class="form-control" v-model="ad.manufacture_date"></input>
-    </div>
-    rida
-    <div class="form-group">
-      <input type="number" class="form-control" v-model="ad.mileage"></input>
-    </div>
-    Variklio galia
-    <div class="form-group">
-      <input type="number" class="form-control" v-model="ad.engine_power"></input>
-    </div>
-    Variklio turis
-    <div class="form-group">
-      <input type="number" class="form-control" v-model="ad.engine_volume"></input>
-    </div>
-    Zala
-    <div class="form-group">
-      <input type="number" class="form-control" v-model="ad.damage_id"></input>
-    </div>
-    Kuro tipas
-    <div class="form-group">
-      <input type="number" class="form-control" v-model="ad.fuel_id"></input>
-    </div>
-    Pavaru deze
-    <div class="form-group">
-      <input type="number" class="form-control" v-model="ad.gearbox_id"></input>
-    </div>
-    Kebulo tipas
-    <div class="form-group">
-      <input type="number" class="form-control" v-model="ad.body_type_id"></input>
-    </div>
-    Spalva
-    <div class="form-group">
-      <input type="number" class="form-control" v-model="ad.color_id"></input>
-    </div>
-    Vairo padetis
-    <div class="form-group">
-      <input type="number" class="form-control" v-model="ad.steering_wheel_id"></input>
-    </div>
-    Duru skaicius
-    <div class="form-group">
-      <input type="number" class="form-control" v-model="ad.number_of_doors_id"></input>
-    </div>
-    Varomieji ratai
-    <div class="form-group">
-      <input type="number" class="form-control" v-model="ad.driven_wheels_id"></input>
-    </div>
-    climato valdymas
-    <div class="form-group">
-      <input type="number" class="form-control" v-model="ad.climate_control_id"></input>
-    </div>
-    euro standartas
-    <div class="form-group">
-      <input type="number" class="form-control" v-model="ad.euro_standard_id"></input>
-    </div>
-    gamintojas
-    <div class="form-group">
-      <input type="number" class="form-control" v-model="ad.brand_id"></input>
-    </div>
-    modelis
-    <div class="form-group">
-      <input type="number" class="form-control" v-model="ad.model_id"></input>
-    </div>
-    pradavejas
-    <div class="form-group">
-      <input type="number" class="form-control" v-model="ad.user_id"></input>
-    </div>
-      <button type="submit" class="form-control">Save</button>
-  </form>
-</div>
-<div v-else>
-  <form  @submit.prevent="addAd" class="mb-3">
-    Nuotrauka:
-    <div>
-      <input type="file" @change="onFileSelected" class="form-control"></input>
-    </div>
-    Kaina:
-    <div class="form-group">
-      <input type="number" class="form-control"  v-model="ad.price"></input>
-    </div>
-    Tel. nr
-    <div class="form-group">
-      <input type="tel" class="form-control" v-model="ad.phone_no"></input>
-    </div>
-    Aprasymas
-    <div class="form-group">
-      <input type="text" class="form-control" v-model="ad.description"></input>
-    </div>
-    Pagaminimo data
-    <div class="form-group">
-      <input type="date" class="form-control" v-model="ad.manufacture_date"></input>
-    </div>
-    Rida
-    <div class="form-group">
-      <input type="number" class="form-control" v-model="ad.mileage"></input>
-    </div>
-    Variklio galia
-    <div class="form-group">
-      <input type="number" class="form-control" v-model="ad.engine_power"></input>
-    </div>
-    Variklio turis
-    <div class="form-group">
-      <input type="number" class="form-control" v-model="ad.engine_volume"></input>
-    </div>
-    Zala
-    <div class="form-group">
-      <input type="text" class="form-control" v-model="ad.damage_id"></input>
-    </div>
-    Kuro tipas
-    <div class="form-group">
-      <input type="text" class="form-control" v-model="ad.fuel_id"></input>
-    </div>
-    Pavaru deze
-    <div class="form-group">
-      <input type="text" class="form-control" v-model="ad.gearbox_id"></input>
-    </div>
-    Kebulo tipas
-    <div class="form-group">
-      <input type="text" class="form-control" v-model="ad.body_type_id"></input>
-    </div>
-    Spalva
-    <div class="form-group">
-      <input type="text" class="form-control" v-model="ad.color_id"></input>
-    </div>
-    Vairo padetis
-    <div class="form-group">
-      <input type="text" class="form-control" v-model="ad.steering_wheel_id"></input>
-    </div>
-    Duru skaicius
-    <div class="form-group">
-      <input type="text" class="form-control" v-model="ad.number_of_doors_id"></input>
-    </div>
-    Varomieji ratai
-    <div class="form-group">
-      <input type="text" class="form-control" v-model="ad.driven_wheels_id"></input>
-    </div>
-    Climato valdymas
-    <div class="form-group">
-      <input type="text" class="form-control" v-model="ad.climate_control_id"></input>
-    </div>
-    Euro standartas
-    <div class="form-group">
-      <input type="text" class="form-control" v-model="ad.euro_standard_id"></input>
-    </div>
-    Marke
-    <div class="form-group">
-      <input type="text" class="form-control" v-model="ad.brand_id"></input>
-    </div>
-    Modelis
-    <div class="form-group">
-      <input type="text" class="form-control" v-model="ad.model_id"></input>
-    </div>
-    Pardavejas
-    <div class="form-group">
-      <input type="text" class="form-control" v-model="ad.user_id"></input>
-    </div>
-      <button type="submit" class="form-control">Save</button>
-  </form>
-</div>
-
-
-  <a role="button" href="/ads/create" class="btn btn-primary float-right ">Sukurti nauja</a>
-
-<div class="pt-5" v-for="ad in ads" v-bind:key="ad.id">
-  <div class="card" >
-    <div class="card-body" >
-      <div class="row">
-        <div class="col-4">
-          <a v-bind:href="'/ads/'+ ad.id">
-            <img :src="'/storage/images/'+ ad.image" width="240px" height="180px" class="img-fluid" alt="Responsive image">
-          </a>
+  <div v-show="show">
+    <div v-show="!edit">
+      <form  @submit.prevent="addAd" enctype="multipart/form-data" class="mb-3">
+        Foto:
+        <div>
+          <input type="file" @change="onFileSelected" class="form-control"></input>
         </div>
-        <div class="col-8">
-          <a v-bind:href="'/ads/'+ ad.id">
-            <h1>{{ad.brand}} {{ad.model}}, {{ad.engine_volume}} l., {{ad.body_type}}</h1>
-          </a>
-          <h2><b>{{ad.price}} €</b></h2>
-          <p>{{ad.manufacture_date}} {{ad.gearbox}} {{ad.mileage}} km</p>
-          <p>{{ad.fuel}} {{ad.engine_power}} kW</p>
+        Kaina:
+        <div class="form-group">
+          <input type="number" class="form-control"  v-model="ad.price"></input>
         </div>
-      </div>
-      <button @click="editAd(ad)" class="btn btn-info">Redaguoti</button>
-
-      <button @click="deleteAd(ad.id)" class="btn btn-danger">Istrinti</button>
+        Tel. nr.
+        <div class="form-group">
+          <input type="tel" class="form-control" v-model="ad.phone_no"></input>
+        </div>
+        Aprasymas
+        <div class="form-group">
+          <input type="text" class="form-control" v-model="ad.description"></input>
+        </div>
+        Pagaminimo data
+        <div class="form-group">
+          <input type="date" class="form-control" v-model="ad.manufacture_date"></input>
+        </div>
+        Rida
+        <div class="form-group">
+          <input type="number" class="form-control" v-model="ad.mileage"></input>
+        </div>
+        Variklio galia
+        <div class="form-group">
+          <input type="number" class="form-control" v-model="ad.engine_power"></input>
+        </div>
+        Variklio turis
+        <div class="form-group">
+          <input type="number" class="form-control" v-model="ad.engine_volume"></input>
+        </div>
+        Zala
+        <div class="form-group">
+          <input type="number" class="form-control" v-model="ad.damage_id"></input>
+        </div>
+        Kuro tipas
+        <div class="form-group">
+          <input type="number" class="form-control" v-model="ad.fuel_id"></input>
+        </div>
+        Pavaru deze
+        <div class="form-group">
+          <input type="number" class="form-control" v-model="ad.gearbox_id"></input>
+        </div>
+        Kebulo tipas
+        <div class="form-group">
+          <input type="number" class="form-control" v-model="ad.body_type_id"></input>
+        </div>
+        Spalva
+        <div class="form-group">
+          <input type="number" class="form-control" v-model="ad.color_id"></input>
+        </div>
+        Vairo padetis
+        <div class="form-group">
+          <input type="number" class="form-control" v-model="ad.steering_wheel_id"></input>
+        </div>
+        Duru skaicius
+        <div class="form-group">
+          <input type="number" class="form-control" v-model="ad.number_of_doors_id"></input>
+        </div>
+        Varomieji ratai
+        <div class="form-group">
+          <input type="number" class="form-control" v-model="ad.driven_wheels_id"></input>
+        </div>
+        Klimato valdymas
+        <div class="form-group">
+          <input type="number" class="form-control" v-model="ad.climate_control_id"></input>
+        </div>
+        Euro standartas
+        <div class="form-group">
+          <input type="number" class="form-control" v-model="ad.euro_standard_id"></input>
+        </div>
+        Gamintojas
+        <div class="form-group">
+          <input type="number" class="form-control" v-model="ad.brand_id"></input>
+        </div>
+        Modelis
+        <div class="form-group">
+          <input type="number" class="form-control" v-model="ad.model_id"></input>
+        </div>
+        Pradavejas
+        <div class="form-group">
+          <input type="number" class="form-control" v-model="ad.user_id"></input>
+        </div>
+          <button type="submit" class="form-control">Save</button>
+      </form>
+    </div>
+    <div v-show="edit">
+      <form  @submit.prevent="addAd" class="mb-3">
+        Nuotrauka:
+        <div>
+          <input type="file" @change="onFileSelected" class="form-control"></input>
+        </div>
+        Kaina:
+        <div class="form-group">
+          <input type="number" class="form-control"  v-model="ad.price"></input>
+        </div>
+        Tel. nr
+        <div class="form-group">
+          <input type="tel" class="form-control" v-model="ad.phone_no"></input>
+        </div>
+        Aprasymas
+        <div class="form-group">
+          <input type="text" class="form-control" v-model="ad.description"></input>
+        </div>
+        Pagaminimo data
+        <div class="form-group">
+          <input type="date" class="form-control" v-model="ad.manufacture_date"></input>
+        </div>
+        Rida
+        <div class="form-group">
+          <input type="number" class="form-control" v-model="ad.mileage"></input>
+        </div>
+        Variklio galia
+        <div class="form-group">
+          <input type="number" class="form-control" v-model="ad.engine_power"></input>
+        </div>
+        Variklio turis
+        <div class="form-group">
+          <input type="number" class="form-control" v-model="ad.engine_volume"></input>
+        </div>
+        Zala
+        <div class="form-group">
+          <input type="text" class="form-control" v-model="ad.damage_id"></input>
+        </div>
+        Kuro tipas
+        <div class="form-group">
+          <input type="text" class="form-control" v-model="ad.fuel_id"></input>
+        </div>
+        Pavaru deze
+        <div class="form-group">
+          <input type="text" class="form-control" v-model="ad.gearbox_id"></input>
+        </div>
+        Kebulo tipas
+        <div class="form-group">
+          <input type="text" class="form-control" v-model="ad.body_type_id"></input>
+        </div>
+        Spalva
+        <div class="form-group">
+          <input type="text" class="form-control" v-model="ad.color_id"></input>
+        </div>
+        Vairo padetis
+        <div class="form-group">
+          <input type="text" class="form-control" v-model="ad.steering_wheel_id"></input>
+        </div>
+        Duru skaicius
+        <div class="form-group">
+          <input type="text" class="form-control" v-model="ad.number_of_doors_id"></input>
+        </div>
+        Varomieji ratai
+        <div class="form-group">
+          <input type="text" class="form-control" v-model="ad.driven_wheels_id"></input>
+        </div>
+        Climato valdymas
+        <div class="form-group">
+          <input type="text" class="form-control" v-model="ad.climate_control_id"></input>
+        </div>
+        Euro standartas
+        <div class="form-group">
+          <input type="text" class="form-control" v-model="ad.euro_standard_id"></input>
+        </div>
+        Marke
+        <div class="form-group">
+          <input type="text" class="form-control" v-model="ad.brand_id"></input>
+        </div>
+        Modelis
+        <div class="form-group">
+          <input type="text" class="form-control" v-model="ad.model_id"></input>
+        </div>
+        Pardavejas
+        <div class="form-group">
+          <input type="text" class="form-control" v-model="ad.user_id"></input>
+        </div>
+          <button type="submit" class="form-control">Save</button>
+      </form>
     </div>
   </div>
-</div>
+
+  <button class="btn btn-primary float-right" @click="showCreate">Sukurti nauja</button>
+
+  <div class="pt-5" v-for="ad in ads" v-bind:key="ad.id">
+    <div class="card" >
+      <div class="card-body" >
+        <div class="row mb-3">
+          <div class="col-4">
+            <a v-bind:href="'/ads/'+ ad.id">
+              <img :src="'/storage/images/'+ ad.image" width="240px" height="180px" class="img-fluid" alt="Responsive image">
+            </a>
+          </div>
+          <div class="col-8">
+            <a v-bind:href="'/ads/'+ ad.id">
+              <h1>{{ad.brand}} {{ad.model}}, {{ad.engine_volume}} l., {{ad.body_type}}</h1>
+            </a>
+            <h2><b>{{ad.price}} €</b></h2>
+            <p>{{ad.manufacture_date}} {{ad.gearbox}} {{ad.mileage}} km</p>
+            <p>{{ad.fuel}} {{ad.engine_power}} kW</p>
+          </div>
+        </div>
+        <button @click="editAd(ad)" class="btn btn-primary">Redaguoti</button>
+
+        <button @click="deleteAd(ad.id)" class="btn btn-danger">Istrinti</button>
+      </div>
+    </div>
+  </div>
+
 
 
 
@@ -227,7 +228,6 @@
       </li>
     </ul>
   </nav>
-
 
 </div>
 
@@ -267,6 +267,7 @@ import axios from 'axios';
           user: ''
         },
         edit: false,
+        show: false,
         ad_id: '',
         pagination: {}
       };
@@ -289,32 +290,20 @@ import axios from 'axios';
         })
         .catch(err => console.log(err));
       },
-      /*fetchAd(id)
-      {
-        let vm = this;
-
-        fetch(`api/ads/${id}`)
-        .then(res => res.json())
-        .then(res => {
-          this.ad = res;
-          vm.makePagination(res);
-        })
-        .catch(err => console.log(err));
-      },*/
       makePagination(res)
       {
-        let paginat = {
+        let pagination = {
           current_page: res.current_page,
           last_page: res.last_page,
           next_page_url: res.next_page_url,
           prev_page_url: res.prev_page_url
         };
-        this.pagination = paginat;
+        this.pagination = pagination;
       },
 
       deleteAd(id)  //veikia ok
       {
-        if(confirm('really??'))
+        if(confirm('Ar tikrai norite pasalinti?'))
         {
             fetch(`api/ads/${id}`, {
               method: 'delete'
@@ -347,7 +336,7 @@ import axios from 'axios';
               this.ad.mileage = '';
               this.ad.engine_power = '';
               this.ad.engine_volume = '';
-              this.ad.damage_id = '';
+              this.ad.fuel_id = '';
               this.ad.fuel_id = '';
               this.ad.gearbox_id = '';
               this.ad.body_type_id = '';
@@ -361,6 +350,7 @@ import axios from 'axios';
               this.ad.model_id = '';
               this.ad.user_id = '';
               alert('Ad added');
+              this.show = false;
               this.fetchAds();
             })
             .catch(err => console.log(err));
@@ -399,6 +389,7 @@ import axios from 'axios';
             this.ad.model_id = '';
             this.ad.user_id = '';
             alert('Ad updated');
+            this.show = false;
             this.fetchAds();
           })
           .catch(err => console.log(err));
@@ -407,6 +398,7 @@ import axios from 'axios';
       editAd(ad)
       {
         this.edit =true;
+        this.show =true;
         this.ad_id = ad.id;
         this.ad.id = ad.id;
         this.ad.price = ad.price;
@@ -438,6 +430,10 @@ import axios from 'axios';
         reader.onload = (e) => {
             this.ad.image = e.target.result;
         }
+      },
+      showCreate()
+      {
+        this.show = true;
       }
 
     }
