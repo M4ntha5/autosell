@@ -14,7 +14,6 @@
     <tr>
       <td>{{ad.description}}</td>
     </tr>
-
     <tr>
       <td>{{ad.manufacture_date}}</td>
     </tr>
@@ -24,7 +23,6 @@
     <tr>
       <td>{{ad.engine_power}}</td>
     </tr>
-
     <tr>
       <td>{{ad.engine_volume}}</td>
     </tr>
@@ -34,14 +32,12 @@
     <tr>
       <td>{{ad.fuel}}</td>
     </tr>
-
     <tr>
       <td>{{ad.gearbox}}</td>
     </tr>
     <tr>
       <td>{{ad.body_type}}</td>
     </tr>
-
     <tr>
       <td>{{ad.color}}</td>
     </tr>
@@ -111,7 +107,7 @@
     },
     methods:
     {
-      fetchAds() 
+      fetchAds()
       {
         let path = window.location.pathname;
         //Break the path into segments

@@ -14,7 +14,18 @@ class UsersController extends Controller
      */
     public function index()
     {
-        return User::all();
+        $users = User::join('citys', 'users.city_id', '=', 'citys.id')
+                     ->join('countrys', 'users.country_id', '=', 'countrys.id')
+                     ->select('users.id', 'users.created_at','users.updated_at',
+                              'users.name',
+                              'users.email',
+                              'citys.name as city',
+                              'countrys.name as country')
+                     ->orderBy('created_at', 'desc')->paginate(6);
+
+
+        //orderBy('created_at', 'desc')->paginate(6);
+        return $users;
     }
 
     /**

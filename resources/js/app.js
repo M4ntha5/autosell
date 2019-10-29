@@ -18,11 +18,19 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i);
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
-Vue.component('ads', require('./components/ads/Ads.vue').default);
-Vue.component('show', require('./components/ads/Show.vue').default);
-Vue.component('create', require('./components/ads/Create.vue').default);
-//Vue.component('ad', require('./components/ads/Ad.vue').default);
 Vue.component('navbar', require('./components/Navbar.vue').default);
+//ads
+Vue.component('ads', require('./components/ads/Ads.vue').default);
+Vue.component('show-ad', require('./components/ads/Show.vue').default);
+//Comments
+Vue.component('comments', require('./components/comments/Comments.vue').default);
+//Vue.component('show-c', require('./components/ads/Show.vue').default);
+//orders
+Vue.component('orders', require('./components/orders/Orders.vue').default);
+Vue.component('show-order', require('./components/orders/Show.vue').default);
+//users
+Vue.component('users', require('./components/users/Users.vue').default);
+Vue.component('show-user', require('./components/users/Show.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

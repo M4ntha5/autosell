@@ -19,8 +19,14 @@ class CreateUsersTable extends Migration
              $table->string('email')->unique();
              $table->timestamp('email_verified_at')->nullable();
              $table->string('password');
+             $table->string('country_id')->unsigned();
+             $table->string('city_id')->unsigned();
              $table->rememberToken();
              $table->timestamps();
+
+
+             $table->foreign('country_id')->references('id')->on('countrys')->onDelete('cascade')->onUpdate('cascade');
+             $table->foreign('city_id')->references('id')->on('citys')->onDelete('cascade')->onUpdate('cascade');
          });
      }
 
@@ -32,5 +38,7 @@ class CreateUsersTable extends Migration
      public function down()
      {
          Schema::dropIfExists('users');
+         $table->dropForeign('users_country_id_foreign');
+         $table->dropForeign('users_city_id_foreign');
      }
 }
