@@ -45,10 +45,10 @@
                     @endif
                 @else
                   <li class="nav-item">
-                    <a class="nav-link" href="/discount">Discount configure</a>
+                    <a class="nav-link" href="/orders">Mano uzsakymai</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="/admin">Admin controls</a>
+                    <a class="nav-link" href="/users">Users</a>
                   </li>
 
 

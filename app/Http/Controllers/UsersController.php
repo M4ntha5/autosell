@@ -7,6 +7,39 @@ use App\User;
 
 class UsersController extends Controller
 {
+
+/*  public function login(Request $request)
+  {
+      $http = new \GuzzleHttp\Client;
+      try
+      {
+          $response = $http->post('http://127.0.0.1:8000/oauth/token', [
+              'form_params' => [
+                  'grant_type' => 'client_credentials',
+                  'client_id' => config('services.passport.client_id'),
+                  'client_secret' => config('services.passport.client_secret'),
+                  'username' => $request->username,
+                  'password' => $request->password,
+              ],
+          ]);
+          return $response->getBody();
+      }
+      catch (\GuzzleHttp\Exception\BadResponseException $e)
+      {
+          if ($e->getCode() === 400)
+          {
+              return response()->json('Invalid Request. Please enter a username or a password.', $e->getCode());
+          }
+          else if ($e->getCode() === 401)
+          {
+              return response()->json('Your credentials are incorrect. Please try again', $e->getCode());
+          }
+          return response()->json('Something went wrong on the server.', $e->getCode());
+      }
+  }*/
+
+
+
     /**
      * Display a listing of the resource.
      *
@@ -26,16 +59,6 @@ class UsersController extends Controller
 
         //orderBy('created_at', 'desc')->paginate(6);
         return $users;
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -61,16 +84,6 @@ class UsersController extends Controller
         return $user;
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
