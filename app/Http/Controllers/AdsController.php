@@ -20,6 +20,8 @@ class AdsController extends Controller
     public function index()
     {
         //$ads = Ad::orderBy('created_at', 'desc')->paginate(2);
+
+
        $ads = Ad::join('damage', 'ads.damage_id', '=', 'damage.id')
                 ->join('fuel_types', 'ads.fuel_id', '=', 'fuel_types.id')
                 ->join('gearbox_types', 'ads.gearbox_id', '=', 'gearbox_types.id')
@@ -57,6 +59,7 @@ class AdsController extends Controller
                           'users.name as user'
                         )
                 ->orderBy('created_at', 'desc')->paginate(6);
+;
         return $ads;             // Ad::all();
 
     }
