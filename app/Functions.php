@@ -7,9 +7,14 @@ use Illuminate\Support\Facades\DB;
 
 class Functions extends Model
 {
-    public function getAllDamageTypes()
-    {
-      $damage = DB::table("damage")->get();
-      return $damage;
-    }
+
+	public static function getAllAdEquipment($ad)
+	{
+		$equipment = DB::table("equipment")
+			->join('features', 'equipment.feature_id', '=', 'features.id')
+			->join('ads', 'equipment.ad_id', '=', 'ads.id')
+			->select('features.name as features', 'equipment.id','ads.id as ad_id')
+			->where('equipment.ad_id', '=', $ad)->get();
+		return $equipment;
+	}
 }

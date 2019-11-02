@@ -34,6 +34,7 @@ class CreateOrdersTable extends Migration
             $table->integer('climate_control_id')->unsigned();
             $table->integer('euro_standard_id')->unsigned();
             $table->integer('brand_id')->unsigned();
+            $table->integer('model_id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->timestamps();
 
@@ -49,6 +50,7 @@ class CreateOrdersTable extends Migration
             $table->foreign('climate_control_id')->references('id')->on('climate_control')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('euro_standard_id')->references('id')->on('euro_standard')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('brand_id')->references('id')->on('brands')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('model_id')->references('id')->on('models')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
 
         });

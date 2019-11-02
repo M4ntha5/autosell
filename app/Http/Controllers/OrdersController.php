@@ -20,7 +20,8 @@ class OrdersController extends Controller
     public function index()
     {
         //$ad = Ad::paginate(15);
-        return Order::all();
+        $orders = Order::joinEnumsToOrders();
+        return $orders;
     }
 
 

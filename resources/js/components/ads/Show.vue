@@ -2,7 +2,13 @@
 <div>
   <div>
     <h1>{{ad.brand}} {{ad.model}}, {{ad.engine_volume}} l., {{ad.body_type}}</h1>
-    Kaina {{ad.price}}
+    <h5>Kaina </h5>
+
+    <button @click="editAd(ad)" class="btn btn-primary" style="float: right;">Redaguoti</button>
+
+    <button @click="deleteAd(ad.id)" class="btn btn-danger" style="float: right;">Istrinti</button>
+    
+    <h2 style="color:blue;">{{ad.price}} €</h2>
         <div class="row mb-3">
 
           <div class="col-4">
@@ -17,7 +23,7 @@
               </tr>
               <tr>
                 <th>Variklis</th>
-                <td>{{ad.engine_volume}} cm3, ({{ad.engine_power}} Kw)</td>
+                <td>{{ad.engine_volume*1000}} cm3, ({{ad.engine_power}} Kw)</td>
               </tr>
               <tr>
                 <th>Kuro tipas</th>
@@ -63,6 +69,18 @@
             </table>
           </div>
         </div>
+        <H1 clas="pt-5 mb-5">Iranga</H1>
+
+
+        <table class="table mt-5" >
+          <tbody  >
+            <tr v-for="eq in equipment" v-bind:key="eq.id">
+              <td >{{eq.features}}</td>
+            </tr>
+
+          </tbody>
+        </table>
+
     </div>
 </div>
 
@@ -73,7 +91,7 @@
   {
     data() {
       return {
-        ads: [],
+        equipment: [],
         ad: {
           price: '',
           image: '',
@@ -114,7 +132,8 @@
         fetch(page_url)
         .then(res => res.json())
         .then(res => {
-          this.ad = res[0];
+          this.ad = res.data[0];
+          this.equipment = res.equipment;
         })
         .catch(err => console.log(err));
       }
