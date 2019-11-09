@@ -26,7 +26,7 @@ class Ad extends JsonResource
             'engine_volume' => $this->engine_volume,
             'damage' => $this->damage,
             'fuel' => $this->fuel,
-            'gearbox' => $this->igearbox_,
+            'gearbox' => $this->gearbox,
             'body_type' => $this->body_type,
             'color' => $this->color,
             'steering_wheel' => $this->steering_wheel,

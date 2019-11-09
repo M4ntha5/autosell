@@ -17,54 +17,10 @@ class AdsController extends Controller
 {
   public function __construct()
   {
-    $this->middleware('auth.role:admin', ['except' => 'store']);
+    $this->middleware('auth.role:admin', ['except' => 'index', 'destroy', 'store']);
     $this->middleware('auth.role:user', ['except' => 'index', 'destroy']);
   }
   
-
-  /**
-   * Register a new user
-   */
-  /* public function signUp(Request $request)
-  {    
-    InputHelper::inputChecker(
-      $request,
-      [ 
-          $request->email,
-          $request->password
-      ],
-
-      function (Request $request) 
-      {
-          User::create($request);            
-          return ResponseHelper::jsonResponse(null, Response::HTTP_OK, config('messages.success'))->send();
-      });
-  }*/
-    /**
-   * Login user and return a token
-   */
-  /* public function login(Request $request)
-  {
-    $token = $this->guard($request->email, $request->password);
-    if ($token) 
-    {
-        return ResponseHelper::jsonResponse(null, Response::HTTP_OK, config('messages.success'))->header('Authorization', $token)->send();
-    } 
-    else 
-    {
-        return ResponseHelper::jsonResponse(null, Response::HTTP_BAD_REQUEST, config('messages.fail'))->send();
-    }
-  }*/
-  /**
-   * Return auth guard
-   */
-  /* private function guard($username, $password)
-  {
-      return Auth::guard('user')->attempt(array('email' => $email, 'password' => $password));
-  }
-  */
-
-
   /**
    * Display a listing of the resource.
    *
@@ -74,8 +30,8 @@ class AdsController extends Controller
   {
       // $ads = Ad::orderBy('created_at', 'desc')->paginate(2);
 
-    $ads = Ad::joinEnumsToAds();
-    return $ads;             // Ad::all();
+      $ads = Ad::getAllAds();
+      return $ads;             // Ad::all();
 
   }
 

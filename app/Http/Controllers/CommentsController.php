@@ -9,10 +9,10 @@ use App\Ad;
 class CommentsController extends Controller
 {
 
-  /*public function __construct()
+  public function __construct()
   {
     $this->middleware('auth:api')->except(['index', 'show']);
-  }*/
+  }
   /**
    * Display a listing of the resource.
    *
@@ -20,7 +20,7 @@ class CommentsController extends Controller
    */
   public function index($id)
   {
-      $comm = Ad::findOrFail($id)->comments;
+      $comm = Ad::getAllComments($id);
       return $comm;
   }
 
@@ -34,10 +34,7 @@ class CommentsController extends Controller
   public function store($id, Request $request)
   {
       //$comment = Comment::create($request->all());
-      $user_data = $request->all();
-      $data = array_merge($user_data, array('ad_id'=> $id));
-      $comment = Comment::where('ad_id', '=', $id)->create($data);
-      return response()->json($comment, 201);
+      return Comment::soreCommentOnAd($id, $request);
   }
 
   /**

@@ -23,7 +23,7 @@
               </tr>
               <tr>
                 <th>Variklis</th>
-                <td>{{ad.engine_volume*1000}} cm3, ({{ad.engine_power}} Kw)</td>
+                <td>{{ad.engine_volume}} cm<sup>3</sup>, ({{ad.engine_power}} Kw)</td>
               </tr>
               <tr>
                 <th>Kuro tipas</th>
@@ -77,11 +77,14 @@
             <tr v-for="eq in equipment" v-bind:key="eq.id">
               <td >{{eq.features}}</td>
             </tr>
-
           </tbody>
         </table>
-
     </div>
+    <h2><b>Komentarai</b></h2>
+      <p>{{ad.description}}</p>
+
+ 
+
 </div>
 
 </template>
@@ -132,6 +135,7 @@
         fetch(page_url)
         .then(res => res.json())
         .then(res => {
+          console.log(res);
           this.ad = res.data[0];
           this.equipment = res.equipment;
         })
