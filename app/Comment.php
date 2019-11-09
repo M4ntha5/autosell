@@ -24,7 +24,4 @@ class Comment extends Model
         return response()->json($comment, 201);
     }
 
-    public static function showAdComments
-
-
 }

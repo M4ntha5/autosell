@@ -11,7 +11,7 @@ class UsersController extends Controller
   public function __construct()
   {
       $this->middleware('auth.role:admin');
-      $this->middleware('auth.role:admin', ['only' => 'show']);
+      $this->middleware('auth.role:user')->only(['show']);
   }
   /**
    * Display a listing of the resource.
@@ -20,14 +20,7 @@ class UsersController extends Controller
    */
   public function index()
   {
-      $users = User::join('citys', 'users.city_id', '=', 'citys.id')
-                    ->join('countrys', 'users.country_id', '=', 'countrys.id')
-                    ->select('users.id', 'users.created_at','users.updated_at',
-                            'users.name',
-                            'users.email',
-                            'citys.name as city',
-                            'countrys.name as country')
-                    ->orderBy('created_at', 'desc')->paginate(6);
+      $users = User::orderBy('created_at', 'desc')->paginate(6);
 
 
       //orderBy('created_at', 'desc')->paginate(6);

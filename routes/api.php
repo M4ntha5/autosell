@@ -34,9 +34,9 @@ Route::group([], function()
 {
     Route::get('ads', 'AdsController@index');
     Route::get('ads/{ad}', 'AdsController@show');
-    Route::post('ads', 'AdsController@store');//->middleware('auth.role:admin,user');
-    Route::put('ads/{ad}', 'AdsController@update');//->middleware('auth.role:admin,user');
-    Route::delete('ads/{ad}', 'AdsController@destroy');//->middleware('auth.role:admin,user');
+    Route::post('ads', 'AdsController@store');
+    Route::put('ads/{ad}', 'AdsController@update');
+    Route::delete('ads/{ad}', 'AdsController@destroy');
 }); 
 
 // comment routes
@@ -44,9 +44,9 @@ Route::group([], function()
 {
     Route::get('ads/{ad}/comments', 'CommentsController@index');
     Route::get('ads/{ad}/comments/{comment}', 'CommentsController@show');
-    Route::post('ads/{ad}/comments', 'CommentsController@store');//->middleware('auth.role:admin,user');
-    Route::put('ads/{ad}/comments/{comment}', 'CommentsController@update');//->middleware('auth.role:admin,user');
-    Route::delete('ads/{ad}/comments/{comment}', 'CommentsController@destroy');//->middleware('auth.role:admin,user');
+    Route::post('ads/{ad}/comments', 'CommentsController@store');
+    Route::put('ads/{ad}/comments/{comment}', 'CommentsController@update');
+    Route::delete('ads/{ad}/comments/{comment}', 'CommentsController@destroy');
 });
 // order routes
 Route::group([], function() 
@@ -81,9 +81,6 @@ Route::get('fuel_types', 'APIController@getFuelTypes');
 Route::get('gearboxes', 'APIController@getGearboxes');
 Route::get('models', 'APIController@getModels');
 Route::get('steering_wheels', 'APIController@getSteeringWheels');
-
-
-
 
 
 

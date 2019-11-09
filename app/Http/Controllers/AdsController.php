@@ -17,8 +17,8 @@ class AdsController extends Controller
 {
   public function __construct()
   {
-    $this->middleware('auth.role:admin', ['except' => 'index', 'destroy', 'store']);
-    $this->middleware('auth.role:user', ['except' => 'index', 'destroy']);
+    $this->middleware('auth.role:admin')->except(['index', 'show']);
+    $this->middleware('auth.role:user')->except(['index', 'show']);
   }
   
   /**

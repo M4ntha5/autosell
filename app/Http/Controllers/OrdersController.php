@@ -10,8 +10,8 @@ class OrdersController extends Controller
 
     public function __construct()
     {
-      $this->middleware('auth.role:admin', ['except' => 'store']);
-      $this->middleware('auth.role:user', ['except' => 'index', 'destroy']);
+      $this->middleware('auth.role:admin')->except(['store']);
+      $this->middleware('auth.role:user')->except(['index', 'destroy']);
     }
     /**
      * Display a listing of the resource.
