@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 
 class Ad extends Model
 {
@@ -31,6 +32,49 @@ class Ad extends Model
     {
         return Ad::findOrFail($id)->comments;
     }
+
+    public static function deleteAd(Ad $ad)
+    {
+        $ad->delete();
+        return response()->json(null, 204);
+    }
+    public static function updateAd(Request $request, Ad $ad)
+    {
+        $ad->update($request->all());
+        return response()->json($ad, 200);
+    }
+
+    public static function storeAd(Request $request)
+    {
+        if($request->image != null)
+        {
+          $exploaded = explode(',',$request->image);
+          $decoded = base64_decode($exploaded[1]);
+    
+          if(str_contains($exploaded[0], 'jpeg'))
+            $extension = 'jpg';
+          else
+            $extension = 'png';
+    
+          $fileName = str_random().'.'.$extension;
+    
+          $path = storage_path('app\public\images').'/'.$fileName;
+    
+          file_put_contents($path, $decoded);
+    
+          $ad = Ad::create($request->except('image') + [
+            'image' => $fileName
+          ]);
+          return response()->json($ad, 201);
+        }
+        else
+        {
+          $ad = Ad::create($request->all());
+          return response()->json($ad, 201);
+        }
+    }
+
+    
 
     public static function joinEnumsToAd($id)
     {

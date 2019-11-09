@@ -20,12 +20,9 @@ class OrdersController extends Controller
      */
     public function index()
     {
-        //$ad = Ad::paginate(15);
         $orders = Order::joinEnumsToOrders();
         return $orders;
     }
-
-
     /**
      * Store a newly created resource in storage.
      *
@@ -34,8 +31,8 @@ class OrdersController extends Controller
      */
     public function store(Request $request)
     {
-        $order = Order::create($request->all());
-        return response()->json($order, 201);
+        $order = Order::storeOrder($request);
+        return $order;
     }
 
     /**
@@ -44,13 +41,10 @@ class OrdersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    //public function show($id)
     public function show(Order $order)
     {
         return $order;
     }
-
-
     /**
      * Update the specified resource in storage.
      *
@@ -58,14 +52,11 @@ class OrdersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    //public function update(Request $request, $id)
     public function update(Request $request, Order $order)
     {
-      //  $ad = Ad::findOrFail($id);
-        $order->update($request->all());
-        return response()->json($order, 200);
+        $order = Order::updateOrder($request, $order);
+        return $order;
     }
-
     /**
      * Remove the specified resource from storage.
      *
@@ -74,8 +65,7 @@ class OrdersController extends Controller
      */
     public function destroy(Order $order)
     {
-        //$ad = Ad::findOrFail($id);
-        $order->delete();
-        return response()->json(null, 204);
+        $order = Order::deleteOrder($order);
+        return $order;
     }
 }

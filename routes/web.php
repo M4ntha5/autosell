@@ -47,7 +47,3 @@ Route::get('/users', function () {
 Route::get('/users/{user}', function () {
     return view('users.show');
 });
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');

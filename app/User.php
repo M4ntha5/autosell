@@ -7,6 +7,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Request;
 
 class User extends Authenticatable implements JWTSubject
 {
@@ -43,6 +44,30 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->hasMany('App\Ad');
     }
+    public static function getAllUsers()
+    {
+        $users = User::orderBy('created_at', 'desc')->paginate(6);
+        return $users;
+    }
+
+    public static function getUser($id)
+    {
+        $user = User::findOrFail($id);
+        return $user;
+    }
+
+    public static function updateUser(Request $request, User $user)
+    {
+        $user->update($request->all());
+        return response()->json($user, 200);
+    }
+
+    public static function deleteUser(User $user)
+    {
+        $user->delete();
+        return response()->json(null, 204);
+    }
+
 
     public static function create(array $request)
     {

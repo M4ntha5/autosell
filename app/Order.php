@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 
 class Order extends Model
 {
@@ -11,6 +12,23 @@ class Order extends Model
                           'fuel_id','gearbox_id','body_type_id','color_id','steering_wheel_id',
                           'number_of_doors_id','driven_wheels_id','climate_control_id','euro_standard_id',
                           'brand_id', 'model_id', 'user_id'];
+
+    public static function storeOrder()
+    {
+        $order = Order::create($request->all());
+        return response()->json($order, 201);
+    }
+    public static function updateOrder(Request $request, Order $order)
+    {
+        $order->update($request->all());
+        return response()->json($order, 200);
+    }
+
+    public static function deleteOrder(Order $order)
+    {
+        $order->delete();
+        return response()->json(null, 204);
+    }
 
 
     public static function joinEnumsToOrders()

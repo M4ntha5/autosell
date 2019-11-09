@@ -3,19 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\BodyType;
-use App\Brand;
-use App\ClimateControl;
-use App\Color;
-use App\Damage;
-use App\Door;
-use App\DrivenWheel;
-use App\EuroStandard;
-use App\Fuel;
-use App\Gearbox;
-use App\Models;
-use App\SteeringWheel;
-
+use App\FeaturesModels\BodyType;
+use App\FeaturesModels\Brand;
+use App\FeaturesModels\ClimateControl;
+use App\FeaturesModels\Color;
+use App\FeaturesModels\Damage;
+use App\FeaturesModels\Door;
+use App\FeaturesModels\DrivenWheel;
+use App\FeaturesModels\EuroStandard;
+use App\FeaturesModels\Fuel;
+use App\FeaturesModels\Gearbox;
+use App\FeaturesModels\Models;
+use App\FeaturesModels\SteeringWheel;
 
 
 class APIController extends Controller
