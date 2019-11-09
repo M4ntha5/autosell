@@ -17,6 +17,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+
+
 Route::group(['prefix' => 'auth'], function () 
 {
     Route::post('login', 'AuthController@login');
@@ -24,17 +26,17 @@ Route::group(['prefix' => 'auth'], function ()
     Route::post('refresh', 'AuthController@refresh');
     Route::post('me', 'AuthController@me');
     Route::post('payload', 'AuthController@payload');
-
 });
+
 
 // ad routes
 Route::group([], function() 
 {
     Route::get('ads', 'AdsController@index');
     Route::get('ads/{ad}', 'AdsController@show');
-    Route::post('ads', 'AdsController@store');
-    Route::put('ads/{ad}', 'AdsController@update');
-    Route::delete('ads/{ad}', 'AdsController@destroy');
+    Route::post('ads', 'AdsController@store')->middleware('auth.role:admin,user');
+    Route::put('ads/{ad}', 'AdsController@update')->middleware('auth.role:admin,user');
+    Route::delete('ads/{ad}', 'AdsController@destroy')->middleware('auth.role:admin,user');
 }); 
 
 // comment routes
@@ -42,9 +44,9 @@ Route::group([], function()
 {
     Route::get('ads/{ad}/comments', 'CommentsController@index');
     Route::get('ads/{ad}/comments/{comment}', 'CommentsController@show');
-    Route::post('ads/{ad}/comments', 'CommentsController@store');
-    Route::put('ads/{ad}/comments/{comment}', 'CommentsController@update');
-    Route::delete('ads/{ad}/comments/{comment}', 'CommentsController@destroy');
+    Route::post('ads/{ad}/comments', 'CommentsController@store')->middleware('auth.role:admin,user');
+    Route::put('ads/{ad}/comments/{comment}', 'CommentsController@update')->middleware('auth.role:admin,user');
+    Route::delete('ads/{ad}/comments/{comment}', 'CommentsController@destroy')->middleware('auth.role:admin,user');
 });
 // order routes
 Route::group([], function() 
@@ -55,7 +57,6 @@ Route::group([], function()
     Route::put('orders/{order}', 'OrdersController@update');
     Route::delete('orders/{order}', 'OrdersController@destroy');
 });
-
 // user routes
 Route::group([], function() 
 {

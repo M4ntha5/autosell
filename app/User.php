@@ -6,6 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
+use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable implements JWTSubject
 {
@@ -38,6 +39,28 @@ class User extends Authenticatable implements JWTSubject
         'email_verified_at' => 'datetime',
     ];
 
+    public function ads()
+    {
+        return $this->hasMany('App\Ad');
+    }
+
+    public static function create(array $request)
+    {
+        $user = new User();   
+        if (!empty($request['email'])) 
+        {
+            $user->email = $request['email'];
+        }
+        if (!empty($request['password'])) 
+        {
+            $user->password = Hash::make($request['password']);
+        }
+        $user->name = 'jonas';
+        $user->save();    
+        
+        return $user;   
+    }
+
 
     public function getJWTIdentifier()
     {
@@ -54,9 +77,14 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 
-    public function ads()
+    /**
+     * Get the password for the user.
+     *
+     * @return string
+     */
+    public function getAuthPassword()
     {
-        return $this->hasMany('App\Ad');
+        return $this->password;
     }
 
 }

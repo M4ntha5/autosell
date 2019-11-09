@@ -107,8 +107,4 @@ class Ad extends Model
 
     }
 
-  /*  function user()
-    {
-       $this->belongsTo('\Models\User','user_id','id');
-    }*/
 }
