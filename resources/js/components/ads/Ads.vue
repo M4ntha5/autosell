@@ -428,9 +428,10 @@ import axios from 'axios';
 
       deleteAd(id)  //veikia ok
       {
+        const token = localStorage.getItem('token');
         if(confirm('Ar tikrai norite pasalinti?'))
         {
-            fetch(`api/ads/${id}`, {
+            fetch(`api/ads/${id}?token=` + token, {
               method: 'delete'
             })
             .then(res => {
@@ -442,6 +443,7 @@ import axios from 'axios';
         },
         addAd()
         {
+          const token = localStorage.getItem('token');
           if(!this.edit)
           {
             //add
@@ -449,7 +451,9 @@ import axios from 'axios';
               method: 'post',
               body: JSON.stringify(this.ad),
               headers: {
-                'content-type': 'application/json'
+                'content-type': 'application/json',
+                'Accept': 'application/json',
+                'Autorization': 'Bearer '+ token
               }
             })
             .then(res => res.json())
@@ -489,7 +493,9 @@ import axios from 'axios';
             method: 'put',
             body: JSON.stringify(this.ad),
             headers: {
-              'content-type': 'application/json'
+              'content-type': 'application/json',
+              'Accept': 'application/json',
+              'Authorization': 'Bearer ' +token
             }
           })
           .then(res => res.json())

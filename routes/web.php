@@ -15,6 +15,13 @@
 
 Auth::routes();
 
+Route::get('/signup', function () {
+    return view('test.signup');
+});
+Route::get('/signin', function () {
+    return view('test.signin');
+});
+
 Route::get('/', function () {
     return view('welcome');
 });

@@ -7,19 +7,19 @@
       <form  @submit.prevent="addUser" class="mb-3">
         Vardas:
         <div class="form-group">
-          <input type="text" class="form-control" v-model="user.name"></input>
+          <input type="text" class="form-control" v-model="user.name">
         </div>
         El. pastas
         <div class="form-group">
-          <input type="email" class="form-control" v-model="user.email"></input>
+          <input type="email" class="form-control" v-model="user.email">
         </div>
         Miestas
         <div class="form-group">
-          <input type="number" class="form-control" v-model="user.city_id"></input>
+          <input type="number" class="form-control" v-model="user.city_id">
         </div>
         Salis
         <div class="form-group">
-          <input type="number" class="form-control" v-model="user.country_id"></input>
+          <input type="number" class="form-control" v-model="user.country_id">
         </div>
           <button type="submit" class="form-control">Issaugoti</button>
       </form>
@@ -104,8 +104,9 @@
     {
       fetchUsers(page_url)  //veikia ok
       {
+        const token = localStorage.getItem('token');
         let vm = this;
-        page_url = page_url || '/api/users';
+        page_url = page_url || '/api/users?token=' + token;
         fetch(page_url)
         .then(res => res.json())
         .then(res => {

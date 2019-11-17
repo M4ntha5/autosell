@@ -13,12 +13,14 @@ use Illuminate\Http\Response;
 use App\Http\Helpers\ResponseHelper;
 use Illuminate\Support\Facades\Auth;
 
+use Tymon\JWTAuth\Facades\JWTAuth;
+
 class AdsController extends Controller
 {
     public function __construct()
     {
-      $this->middleware('auth.role:admin')->except(['index', 'show']);
-      $this->middleware('auth.role:user')->except(['index', 'show']);
+        $this->middleware('auth.role:admin', ['except' => ['index', 'show']]);
+        $this->middleware('auth.role:user', ['except' => ['index', 'show']]);
     }
     
     /**
@@ -40,8 +42,44 @@ class AdsController extends Controller
      */
     public function store(Request $request)
     {
-        $ad =  Ad::storeAd($request);
-        return $ad;
+        /*$ad =  Ad::storeAd($request);
+        return $ad;*/
+
+        if($request->image != null)
+        {
+          $exploaded = explode(',',$request->image);
+          $decoded = base64_decode($exploaded[1]);
+    
+          if(str_contains($exploaded[0], 'jpeg'))
+            $extension = 'jpg';
+          else
+            $extension = 'png';
+    
+          $fileName = str_random().'.'.$extension;
+    
+          $path = storage_path('app\public\images').'/'.$fileName;
+    
+          file_put_contents($path, $decoded);
+
+          //getting user for user_id on ad
+          $user = JWTAuth::parseToken()->toUser();
+    
+          $ad = Ad::create($request->except('image', 'user_id') + [
+            'image' => $fileName,
+            'user_id' => $user->id
+          ]);
+          return response()->json($ad, 201);
+        }
+        else
+        {
+          //$ad = Ad::create($request->all());
+
+          $user = JWTAuth::parseToken()->toUser();
+          $ad = Ad::create($request->except('user_id') + [
+            'user_id' => $user->id
+          ]);
+          return response()->json($ad, 201);
+        }
     }
 
     /**
