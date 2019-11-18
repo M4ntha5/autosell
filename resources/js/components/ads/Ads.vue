@@ -18,7 +18,7 @@
 
         <div class="form-group">
           <label>Tel. nr.</label>
-          <input type="tel" class="form-control" v-model="ad.phone_no">
+          <input type="tel" class="form-control" flaceholder="+370 61 234 567" v-model="ad.phone_no">
         </div>
 
         <div class="form-group">
@@ -141,10 +141,7 @@
             <option v-for='data in models' :key='data.id' :value='data.id'>{{data.name}}</option>
           </select>
         </div>
-        Pradavejas
-        <div class="form-group">
-          <input type="number" class="form-control" v-model="ad.user_id">
-        </div>
+
         
           <button type="submit" class="form-control">Save</button>
       </form>
@@ -285,10 +282,6 @@
             <option value="0">Pasirinkti</option>
             <option v-for='data in models' :key='data.id' :value='data.id'>{{data.name}}</option>
           </select>
-        </div>
-        Pradavejas
-        <div class="form-group">
-          <input type="number" class="form-control" v-model="ad.user_id">
         </div>
 
           <button type="submit" class="form-control">Save</button>

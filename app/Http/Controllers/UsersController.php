@@ -8,11 +8,11 @@ use App\User;
 class UsersController extends Controller
 {
 
-    public function __construct()
+    /*public function __construct()
     {
         $this->middleware('auth.role:admin');
         $this->middleware('auth.role:user')->only(['show']);
-    }
+    }*/
 
     /**
      * Display a listing of the resource.
@@ -56,7 +56,15 @@ class UsersController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        return User::updateUser($request, $user);
+        $this->validate($request, [
+            'email' => 'required|email',
+            'name' => 'required|string',
+            'country_id' => 'integer|min:1',
+            'city_id' => 'integer|min:1',
+        ]);
+
+        $user = User::updateUser($request, $user);
+        return $user;
     }
 
     /**

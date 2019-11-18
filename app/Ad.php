@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class Ad extends Model
 {
@@ -46,31 +47,35 @@ class Ad extends Model
 
     public static function storeAd(Request $request)
     {
+        $user = JWTAuth::parseToken()->toUser();
         if($request->image != null)
         {
-          $exploaded = explode(',',$request->image);
-          $decoded = base64_decode($exploaded[1]);
-    
-          if(str_contains($exploaded[0], 'jpeg'))
-            $extension = 'jpg';
-          else
-            $extension = 'png';
-    
-          $fileName = str_random().'.'.$extension;
-    
-          $path = storage_path('app\public\images').'/'.$fileName;
-    
-          file_put_contents($path, $decoded);
-    
-          $ad = Ad::create($request->except('image') + [
-            'image' => $fileName
-          ]);
-          return response()->json($ad, 201);
+            $exploaded = explode(',',$request->image);
+            $decoded = base64_decode($exploaded[1]);
+      
+            if(str_contains($exploaded[0], 'jpeg'))
+              $extension = 'jpg';
+            else
+              $extension = 'png';
+      
+            $fileName = str_random().'.'.$extension;
+      
+            $path = storage_path('app\public\images').'/'.$fileName;
+      
+            file_put_contents($path, $decoded);
+      
+            $ad = Ad::create($request->except('image', 'user_id') + [
+              'image' => $fileName,
+              'user_id' => $user->id
+            ]);
+            return response()->json($ad, 201);
         }
         else
         {
-          $ad = Ad::create($request->all());
-          return response()->json($ad, 201);
+            $ad = Ad::create($request->except('user_id') + [
+              'user_id' => $user->id
+            ]);
+            return response()->json($ad, 201);
         }
     }
 

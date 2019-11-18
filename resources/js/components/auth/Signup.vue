@@ -51,7 +51,10 @@ export default {
                 headers: {'X-Requested-With': 'XMLHttpRequest'}
             })
             .then(
-                (response) => console.log(response)
+                (response) => {
+                    //console.log(response)
+                    window.location.href = "/home";
+                }
             )
             .catch(
                 (error) => console.log(error)

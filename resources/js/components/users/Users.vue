@@ -128,10 +128,16 @@
 
       deleteUser(id)  //veikia ok
       {
+        const token = localStorage.getItem('token');
         if(confirm('Ar tikrai norite pasalinti naudotoja?'))
         {
             fetch(`api/users/${id}`, {
-              method: 'delete'
+              method: 'delete',
+              headers: {
+                'content-type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': 'Bearer '+ token
+              }
             })
             .then(res => {
               alert('Naudotojas pasalintas');
@@ -142,6 +148,7 @@
         },
         addUser()
         {
+          const token = localStorage.getItem('token');
           if(this.edit)
           {
             //update
@@ -149,7 +156,9 @@
               method: 'put',
               body: JSON.stringify(this.user),
               headers: {
-                'content-type': 'application/json'
+                'content-type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': 'Bearer '+ token
               }
             })
             .then(res => res.json())

@@ -155,13 +155,6 @@
             </div>
         </div>
         
-        <div class="form-row">
-            <label for="user">Pradavejas</label>
-            <input type="number" class="form-control" id="user" required v-model="order.user_id">
-             <div class="valid-feedback">
-                Looks good!
-            </div>
-        </div> 
         <div class="form-row mt-3">
             <button type="submit" class="form-control">Issaugoti</button>
         </div>
@@ -245,10 +238,6 @@
         Modelis
         <div class="form-group">
           <input type="text" class="form-control" v-model="order.model_id">
-        </div>
-        Pardavejas
-        <div class="form-group">
-          <input type="text" class="form-control" v-model="order.user_id">
         </div>
           <button type="submit" class="form-control">Issaugoti</button>
       </form>
@@ -374,8 +363,9 @@ import axios from 'axios';
     {
       fetchOrders(page_url)  //veikia ok
       {
+        const token = localStorage.getItem('token');
         let vm = this;
-        page_url = page_url || '/api/orders';
+        page_url = page_url || '/api/orders?token=' +token;
         fetch(page_url)
         .then(res => res.json())
         .then(res => {
@@ -397,9 +387,10 @@ import axios from 'axios';
 
       deleteOrder(id)  //veikia ok
       {
+        const token = localStorage.getItem('token');
         if(confirm('Ar tikrai norite pasalinti?'))
         {
-            fetch(`api/orders/${id}`, {
+            fetch(`api/orders/${id}?token=` +token, {
               method: 'delete'
             })
             .then(res => {
@@ -411,6 +402,7 @@ import axios from 'axios';
         },
         addOrder()
         {
+          const token = localStorage.getItem('token');
           if(!this.edit)
           {
             //add
@@ -418,7 +410,9 @@ import axios from 'axios';
               method: 'post',
               body: JSON.stringify(this.order),
               headers: {
-                'content-type': 'application/json'
+                'content-type': 'application/json',
+                'Accept': 'application/json',
+                'Autorization': 'Bearer '+ token
               }
             })
             .then(res => res.json())
@@ -456,7 +450,9 @@ import axios from 'axios';
             method: 'put',
             body: JSON.stringify(this.order),
             headers: {
-              'content-type': 'application/json'
+              'content-type': 'application/json',
+              'Accept': 'application/json',
+              'Autorization': 'Bearer '+ token
             }
           })
           .then(res => res.json())

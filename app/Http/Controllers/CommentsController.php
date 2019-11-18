@@ -9,10 +9,10 @@ use App\Ad;
 class CommentsController extends Controller
 {
 
-    public function __construct()
+    /*public function __construct()
     {
         $this->middleware('auth.role:user')->except(['index', 'show']);
-    }
+    }*/
 
     /**
      * Display a listing of the resource.
@@ -33,6 +33,11 @@ class CommentsController extends Controller
      */
     public function store($id, Request $request)
     {
+        $this->validate($request, [
+            'title' => 'required|min:3',
+            'body' => 'required|min:1',
+        ]);
+
         $comment = Comment::storeCommentOnAd($id, $request);
         return $comment;
     }
@@ -58,6 +63,10 @@ class CommentsController extends Controller
      */
     public function update($id, $comment, Request $request)
     {
+        $this->validate($request, [
+            'title' => 'required|min:3',
+            'body' => 'required|min:1',
+        ]);
         $comment = Comment::updateComment($id, $comment, $request);
         return $comment;
     }

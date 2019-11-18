@@ -15,12 +15,20 @@ class Order extends Model
 
     public static function storeOrder()
     {
-        $order = Order::create($request->all());
+        $user = JWTAuth::parseToken()->toUser();
+
+        $order = Order::create($request->except('user_id', 'status_id') + [
+            'user_id' => $user->id,
+            'status_id' => 1
+          ]);
         return response()->json($order, 201);
     }
     public static function updateOrder(Request $request, Order $order)
     {
-        $order->update($request->all());
+        $order = Order::create($request->except('user_id') + [
+            'user_id' => $user->id,
+          ]);
+       // $order->update($request->all());
         return response()->json($order, 200);
     }
 

@@ -1,12 +1,11 @@
 <?php
 
-namespace App;
+namespace App\FeaturesModels;
 
 use Illuminate\Database\Eloquent\Model;
 
 class Damage extends Model
 {
-
     protected $table = 'damage';
 
     public static function getAllDamages()

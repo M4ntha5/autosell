@@ -17,11 +17,13 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AdsController extends Controller
 {
-    public function __construct()
+    //kazkodel per konstruktoriu neveiki, tad padariau per api routes faila
+    /*public function __construct()
     {
+
         $this->middleware('auth.role:admin', ['except' => ['index', 'show']]);
         $this->middleware('auth.role:user', ['except' => ['index', 'show']]);
-    }
+    }*/
     
     /**
      * Display a listing of the resource.
@@ -30,6 +32,7 @@ class AdsController extends Controller
      */
     public function index()
     {
+        
         $ads = Ad::getAllAds();
         return $ads;
     }
@@ -42,44 +45,30 @@ class AdsController extends Controller
      */
     public function store(Request $request)
     {
-        /*$ad =  Ad::storeAd($request);
-        return $ad;*/
+        $this->validate($request, [
+            'price' => 'required|decimal',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'phone_no' => 'required|regex:/(+370)[0-9]{8}/',
+            'manufacture_date' => 'required|date|date_format:Y-m-d',
+            'mileage' => 'required|integer|min:0',
+            'engine_power' => 'required|integer|min:0',
+            'engine_volume' => 'required|decimal|min:0',
+            'damage_id' => 'required|integer|min:0',
+            'fuel_id' => 'required|integer|min:0',
+            'gearbox_id' => 'required|integer|min:0',
+            'body_type_id' => 'required|integer|min:0',
+            'color_id' => 'required|integer|min:0',
+            'steering_wheel_id' => 'required|integer|min:0',
+            'number_of_doors_id' => 'required|integer|min:0',
+            'driven_wheels_id' => 'required|integer|min:0',
+            'climate_control_id' => 'required|integer|min:0',
+            'euro_standard_id' => 'required|integer|min:0',
+            'brand_id' => 'required|integer|min:0',
+            'model_id' => 'required|integer|min:0'
+        ]);
 
-        if($request->image != null)
-        {
-          $exploaded = explode(',',$request->image);
-          $decoded = base64_decode($exploaded[1]);
-    
-          if(str_contains($exploaded[0], 'jpeg'))
-            $extension = 'jpg';
-          else
-            $extension = 'png';
-    
-          $fileName = str_random().'.'.$extension;
-    
-          $path = storage_path('app\public\images').'/'.$fileName;
-    
-          file_put_contents($path, $decoded);
-
-          //getting user for user_id on ad
-          $user = JWTAuth::parseToken()->toUser();
-    
-          $ad = Ad::create($request->except('image', 'user_id') + [
-            'image' => $fileName,
-            'user_id' => $user->id
-          ]);
-          return response()->json($ad, 201);
-        }
-        else
-        {
-          //$ad = Ad::create($request->all());
-
-          $user = JWTAuth::parseToken()->toUser();
-          $ad = Ad::create($request->except('user_id') + [
-            'user_id' => $user->id
-          ]);
-          return response()->json($ad, 201);
-        }
+        $ad =  Ad::storeAd($request);
+        return $ad;
     }
 
     /**
@@ -104,6 +93,28 @@ class AdsController extends Controller
      */
     public function update(Request $request, Ad $ad)
     {
+        $this->validate($request, [
+            'price' => 'required|decimal',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'phone_no' => 'required|regex:/(+370)[0-9]{8}/',
+            'manufacture_date' => 'required|date|date_format:Y-m-d',
+            'mileage' => 'required|integer|min:0',
+            'engine_power' => 'required|integer|min:1',
+            'engine_volume' => 'required|decimal|min:1',
+            'damage_id' => 'required|integer|min:1',
+            'fuel_id' => 'required|integer|min:1',
+            'gearbox_id' => 'required|integer|min:1',
+            'body_type_id' => 'required|integer|min:1',
+            'color_id' => 'required|integer|min:1',
+            'steering_wheel_id' => 'required|integer|min:1',
+            'number_of_doors_id' => 'required|integer|min:1',
+            'driven_wheels_id' => 'required|integer|min:1',
+            'climate_control_id' => 'required|integer|min:1',
+            'euro_standard_id' => 'required|integer|min:1',
+            'brand_id' => 'required|integer|min:1',
+            'model_id' => 'required|integer|min:1'
+        ]);
+
         return Ad::updateAd($request, $ad);
     }
 
