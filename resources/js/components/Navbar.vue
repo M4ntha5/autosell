@@ -1,40 +1,218 @@
 <template>
-  <div>
-    <b-navbar toggleable="lg" type="dark" variant="info">
-      <b-navbar-brand href="#">NavBar</b-navbar-brand>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+    <div class="container">
 
-      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+        <div v-if="role != null && role != 'undefined'">
+          <a class="navbar-brand" href="/home">AutoSell</a>
+        </div>
+        <div v-else>
+          <a class="navbar-brand" href="/">AutoSell</a>
+        </div>
 
-      <b-collapse id="nav-collapse" is-nav>
-        <b-navbar-nav>
-          <b-nav-item href="#">Link</b-nav-item>
-          <b-nav-item href="#" disabled>Disabled</b-nav-item>
-        </b-navbar-nav>
+        <button class="navbar-toggler" type="button" 
+        data-toggle="collapse" data-target="#navbarSupportedContent" 
+        aria-controls="navbarSupportedContent" aria-expanded="false" >
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-        <!-- Right aligned nav items -->
-        <b-navbar-nav class="ml-auto">
-          <b-nav-form>
-            <b-form-input size="sm" class="mr-sm-2" placeholder="Search"></b-form-input>
-            <b-button size="sm" class="my-2 my-sm-0" type="submit">Search</b-button>
-          </b-nav-form>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <!-- Left Side Of Navbar -->
 
-          <b-nav-item-dropdown text="Lang" right>
-            <b-dropdown-item href="#">EN</b-dropdown-item>
-            <b-dropdown-item href="#">ES</b-dropdown-item>
-            <b-dropdown-item href="#">RU</b-dropdown-item>
-            <b-dropdown-item href="#">FA</b-dropdown-item>
-          </b-nav-item-dropdown>
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="/about">Apie</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/ads">Skelbimai</a>
+              </li>
 
-          <b-nav-item-dropdown right>
-            <!-- Using 'button-content' slot -->
-            <template v-slot:button-content>
-              <em>User</em>
-            </template>
-            <b-dropdown-item href="#">Profile</b-dropdown-item>
-            <b-dropdown-item href="#">Sign Out</b-dropdown-item>
-          </b-nav-item-dropdown>
-        </b-navbar-nav>
-      </b-collapse>
-    </b-navbar>
-  </div>
+            </ul>
+
+            <!-- Right Side Of Navbar -->
+            <div v-if="role == 'admin'"> 
+            <ul  class="navbar-nav ml-auto">
+                <!-- Authentication Links -->
+                <li class="nav-item">
+                  <a class="nav-link" href="/orders">Orders</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/users">Users</a>
+                </li>
+            </ul>
+            </div>
+            <div v-else-if="role == 'user'">
+            <ul  class="navbar-nav ml-auto">
+                <!-- Authentication Links -->
+                <li class="nav-item">
+                  <a class="nav-link" href="/myorders">My orders</a>
+                </li>
+            </ul>
+            </div>
+            <div v-if="token == null">
+            <ul  class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/signin">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="signup">Register</a>
+                </li>
+            </ul >
+            </div>
+            <div v-else> 
+            <ul  class="navbar-nav ml-auto">
+                <li class="nav-item">
+                  <button @click="logout()" class="btn">Logout</button>
+                </li>
+            </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+
 </template>
+
+<script>
+export default {
+    data() {
+      return {
+        token: null,
+        role: null,
+        exp: null,
+        id: null
+      }
+    },
+    created() {
+      this.auth();
+    },
+
+    methods: {
+
+      logout()
+      {
+          const token = localStorage.getItem('token');
+          axios.post('/api/auth/logout', [], {
+            headers: {
+                'content-type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': 'Bearer '+ token
+              }
+          })
+          .then(
+                (response) => {
+                    localStorage.removeItem('token');
+                    localStorage.removeItem('role');
+                    localStorage.removeItem('tokenExp');
+                    localStorage.removeItem('userid');
+                    this.token = null;
+                    this.role = null;
+                    this.exp = null;
+                    this.id = null;
+                    window.location.href = "/signin";
+                }
+          )             
+      },
+
+      auth()
+      {
+        const token = localStorage.getItem('token');
+        if(token !== null && token !== 'undefined')
+        {          
+            var currentTime = Date.now() / 1000;            
+
+            const role = localStorage.getItem('role');
+            const tokenExp = localStorage.getItem('exp');
+
+            if(currentTime > tokenExp)
+            {
+              console.log("token expired");
+              localStorage.removeItem('token');
+              localStorage.removeItem('exp');
+              localStorage.removeItem('role');
+              localStorage.removeItem('userid');
+
+              this.token = null;
+              this.role = null;
+              this.exp = null;
+              this.id = null;
+              window.location.href = "/signin";
+            }
+            else
+            {
+              this.exp = tokenExp;
+              console.log("token not expired");
+              if(role == 'admin')
+              {
+                console.log("ifadmin");
+                this.token = token;
+                this.role = role;
+
+              }
+              else if(role == 'user')
+              {
+                console.log("if user");
+                this.token = token;
+                this.role = role;
+              }
+            }
+        }
+        else
+        {
+          this.token = null;
+          this.role = null;
+          this.exp = null;
+          this.id = null;
+          localStorage.removeItem('token');
+          localStorage.removeItem('exp');
+          localStorage.removeItem('role');
+          localStorage.removeItem('userid');
+          console.log("tokenas nullas", token);
+        
+        }
+      }/*,
+      getPayload()
+      {
+
+        const token = localStorage.getItem('token');
+        if(token != null)
+        {
+          fetch('api/auth/payload?token=' + token, {
+              method: 'post',
+              headers: {
+                      'content-type': 'application/json',
+                      'Accept': 'application/json'
+                  }
+              })
+              .then(res => res.json())
+              .then(data => {
+                  localStorage.setItem('exp', data.exp);
+                  this.exp = data.exp;
+              })
+              .catch(err => console.log(err));
+        }
+
+      },
+      getAuth()
+      {
+          const token = localStorage.getItem('token');
+          if(token != null)
+          {
+            fetch('api/auth/me?token=' + token, {
+            method: 'post',
+            headers: {
+                    'content-type': 'application/json',
+                    'Accept': 'application/json'
+                }
+            })
+            .then(res => res.json())
+            .then(data => {
+                localStorage.setItem('role', data.role);
+                localStorage.setItem('userid', data.id);
+                this.role = data.role;
+                this.id = data.id;
+            })
+            .catch(err => console.log(err));
+          }
+      }*/ 
+    }
+}
+</script>

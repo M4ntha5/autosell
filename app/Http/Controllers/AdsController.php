@@ -18,12 +18,10 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 class AdsController extends Controller
 {
     //kazkodel per konstruktoriu neveiki, tad padariau per api routes faila
-    /*public function __construct()
+    public function __construct()
     {
-
-        $this->middleware('auth.role:admin', ['except' => ['index', 'show']]);
-        $this->middleware('auth.role:user', ['except' => ['index', 'show']]);
-    }*/
+        $this->middleware('auth.role:admin,user')->except(['index', 'show']);
+    }
     
     /**
      * Display a listing of the resource.
@@ -33,7 +31,7 @@ class AdsController extends Controller
     public function index()
     {
         
-        $ads = Ad::getAllAds();
+        $ads = Ad::joinEnumsToAds();
         return $ads;
     }
 
@@ -46,29 +44,30 @@ class AdsController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'price' => 'required|decimal',
-            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'phone_no' => 'required|regex:/(+370)[0-9]{8}/',
+            'price' => 'required|integer|min:1',
+            'phone_no' => 'required|string',
             'manufacture_date' => 'required|date|date_format:Y-m-d',
-            'mileage' => 'required|integer|min:0',
-            'engine_power' => 'required|integer|min:0',
-            'engine_volume' => 'required|decimal|min:0',
-            'damage_id' => 'required|integer|min:0',
-            'fuel_id' => 'required|integer|min:0',
-            'gearbox_id' => 'required|integer|min:0',
-            'body_type_id' => 'required|integer|min:0',
-            'color_id' => 'required|integer|min:0',
-            'steering_wheel_id' => 'required|integer|min:0',
-            'number_of_doors_id' => 'required|integer|min:0',
-            'driven_wheels_id' => 'required|integer|min:0',
-            'climate_control_id' => 'required|integer|min:0',
-            'euro_standard_id' => 'required|integer|min:0',
-            'brand_id' => 'required|integer|min:0',
-            'model_id' => 'required|integer|min:0'
+            'mileage' => 'required|integer|min:1',
+            'engine_power' => 'required|integer|min:1',
+            'engine_volume' => 'required|integer|min:1',
+            'damage_id' => 'required|integer|min:1',
+            'fuel_id' => 'required|integer|min:1',
+            'gearbox_id' => 'required|integer|min:1',
+            'body_type_id' => 'required|integer|min:1',
+            'color_id' => 'required|integer|min:1',
+            'steering_wheel_id' => 'required|integer|min:1',
+            'number_of_doors_id' => 'required|integer|min:1',
+            'driven_wheels_id' => 'required|integer|min:1',
+            'climate_control_id' => 'required|integer|min:1',
+            'euro_standard_id' => 'required|integer|min:1',
+            'brand_id' => 'required|integer|min:1',
+            'model_id' => 'required|integer|min:1'
         ]);
 
         $ad =  Ad::storeAd($request);
         return $ad;
+        
+        
     }
 
     /**
@@ -94,13 +93,12 @@ class AdsController extends Controller
     public function update(Request $request, Ad $ad)
     {
         $this->validate($request, [
-            'price' => 'required|decimal',
-            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'phone_no' => 'required|regex:/(+370)[0-9]{8}/',
+            'price' => 'required|integer|min:1',
+            'phone_no' => 'required|string',
             'manufacture_date' => 'required|date|date_format:Y-m-d',
-            'mileage' => 'required|integer|min:0',
+            'mileage' => 'required|integer|min:1',
             'engine_power' => 'required|integer|min:1',
-            'engine_volume' => 'required|decimal|min:1',
+            'engine_volume' => 'required|integer|min:1',
             'damage_id' => 'required|integer|min:1',
             'fuel_id' => 'required|integer|min:1',
             'gearbox_id' => 'required|integer|min:1',

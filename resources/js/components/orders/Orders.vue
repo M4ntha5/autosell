@@ -1,250 +1,152 @@
 <template>
 
 <div>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
   <div v-show="show">
-    <div v-show="!edit">
-      <form class="needs-validation mb-3" @submit.prevent="addOrder" novalidate>
-        <div class="form-row">
-            <label for="price">Max kaina</label>
-            <input type="number" class="form-control" id="price" placeholder="5000" required v-model="order.price">
-            <div class="valid-feedback">
-                Looks good!
-            </div>
+    <div v-show="edit">
+      <form @submit="checkForm" @submit.prevent="addOrder" enctype="multipart/form-data" class="mb-3">
+
+        <div class="form-group">
+          <label>Marke</label>
+          <select class="form-control" v-model='order.brand_id' v-on:click='getBrands()' @change='getBrandModels()' required>
+            <option value="0">Pasirinkti</option>
+            <option v-for='data in brands' :key='data.id' :value='data.id'>{{data.name}}</option>
+          </select>
         </div>
-        <div class="form-row">
-            <label for="phone_ne">Tel. nr.</label>
-            <input type="tel" class="form-control" id="phone_ne" placeholder="860000000" required v-model="order.phone_no">
-            <div class="valid-feedback">
-                Looks good!
-            </div>
+
+        <div class="form-group">
+          <label>Modelis</label>
+          <select class="form-control" v-model='order.model_id' v-on:click='getBrandModels()' required>
+            <option value="0">Pasirinkti</option>
+            <option v-for='data in models' :key='data.id' :value='data.id'>{{data.name}}</option>
+          </select>
         </div>
+
         <div class="form-row">
             <label for="date_from">Pagaminimo data nuo</label>
             <input type="date" class="form-control" id="date_from" required v-model="order.manufacture_date_from">
-            <div class="valid-feedback">
-                Looks good!
-            </div>
+
         </div>     
         <div class="form-row">
             <label for="date_to">Pagaminimo data iki</label>
             <input type="date" class="form-control" id="date_from" required v-model="order.manufacture_date_to">
-            <div class="valid-feedback">
-                Looks good!
-            </div>
+
         </div>  
         <div class="form-row">
             <label for="mileage">Rida</label>
             <input type="number" class="form-control" id="mileage" placeholder="123456" v-model="order.mileage">
-            <div class="valid-feedback">
-                Looks good!
-            </div>
-        </div>     
+        </div>   
+
         <div class="form-row">
             <label for="engine_power">Variklio galia</label>
-            <input type="number" class="form-control" id="engine_power" placeholder="200" v-model="order.engine_power">
-            <div class="valid-feedback">
-                Looks good!
-            </div>
+            <input type="number" class="form-control" id="engine_power" required placeholder="200" v-model="order.engine_power">
         </div>   
         <div class="form-row">
             <label for="engine_volume">Variklio turis</label>
-            <input type="number" class="form-control" id="engine_volume" placeholder="2.5" v-model="order.engine_volume">
-            <div class="valid-feedback">
-                Looks good!
-            </div>
+            <input type="number" class="form-control" id="engine_volume" required placeholder="2.5" v-model="order.engine_volume">
         </div>
-        <div class="form-row">
-             <label for="damage">Zala</label>
-            <input type="number" class="form-control" id="damage" required v-model="order.damage_id">
-            <div class="valid-feedback">
-                Looks good!
-            </div>
-        </div>
-        <div class="form-row">
-            <label for="fuel">Kuro tipas</label>
-            <input type="number" class="form-control" id="fuel" required v-model="order.fuel_id">
-            <div class="valid-feedback">
-                Looks good!
-            </div>
-        </div>    
-        <div class="form-row">
-            <label for="gearbox">Pavaru deze</label>
-            <input type="number" class="form-control" id="gearbox" required v-model="order.gearbox_id">
-            <div class="valid-feedback">
-                Looks good!
-            </div>
+        <div class="form-group">
+          <label>Defektai</label>
+          <select class="form-control" v-model='order.damage_id' required>
+            <option value="0">Pasirinkti</option>
+            <option v-for='data in damages' :key='data.id' :value='data.id'>{{data.name}}</option>
+          </select>
         </div>
         
-        <div class="form-row">
-            <label for="body_type">Kebulo tipas</label>
-            <input type="number" class="form-control" id="body_type" required v-model="order.body_type_id">
-            <div class="valid-feedback">
-                Looks good!
-            </div>
+        <div class="form-group">
+          <label>Kuro tipas</label>
+          <select class="form-control" v-model='order.fuel_id' required>
+            <option value="0">Pasirinkti</option>
+            <option v-for='data in fuelTypes' :key='data.id' :value='data.id'>{{data.name}}</option>
+          </select>
         </div>
         
-        <div class="form-row">
-            <label for="color">Spalva</label>
-            <input type="number" class="form-control" id="color" required v-model="order.color_id">
-             <div class="valid-feedback">
-                Looks good!
-            </div>
+        <div class="form-group">
+          <label>Pavaru deze</label>
+          <select class="form-control" v-model='order.gearbox_id'  required>
+            <option value="0">Pasirinkti</option>
+            <option v-for='data in gearboxes' :key='data.id' :value='data.id'>{{data.name}}</option>
+          </select>
         </div>
         
-        <div class="form-row">
-            <label for="steering">Vairo padetis</label>
-            <input type="number" class="form-control" id="steering" required v-model="order.steering_wheel_id">
-            <div class="valid-feedback">
-                Looks good!
-            </div>
-        </div>
-        
-        <div class="form-row">
-            <label for="doors">Duru skaicius</label>
-            <input type="number" class="form-control" id="doors" required v-model="order.number_of_doors_id">
-            <div class="valid-feedback">
-                Looks good!
-            </div>
-        </div>       
-        <div class="form-row">
-            <label for="driven_wheels">Varomieji ratai</label>
-            <input type="number" class="form-control" id="driven_wheels" required v-model="order.driven_wheels_id">
-            <div class="valid-feedback">
-                Looks good!
-            </div>
-        </div>     
-        <div class="form-row">
-            <label for="climate_control">Klimato valdymas</label>
-            <input type="number" class="form-control" id="climate_control" required v-model="order.climate_control_id">
-            <div class="valid-feedback">
-                Looks good!
-            </div>
+        <div class="form-group">
+          <label>Kebulo tipas</label>
+          <select class="form-control" v-model='order.body_type_id' required>
+            <option value="0">Pasirinkti</option>
+            <option v-for='data in bodyTypes' :key='data.id' :value='data.id'>{{data.name}}</option>
+          </select>
         </div>
 
-        <div class="form-row">
-            <label for="euro">Euro standartas</label>
-             <input type="number" class="form-control" id="euro" v-model="order.euro_standard_id">
-             <div class="valid-feedback">
-                Looks good!
-            </div>
+        <div class="form-group">
+          <label>Kliamto valdymas</label>
+          <select class="form-control" v-model='order.climate_control_id' required>
+            <option value="0">Pasirinkti</option>
+            <option v-for='data in climateControls' :key='data.id' :value='data.id'>{{data.name}}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Vairo padetis</label>
+          <select class="form-control" v-model='order.steering_wheel_id'  required>
+            <option value="0">Pasirinkti</option>
+            <option v-for='data in steeringWheels' :key='data.id' :value='data.id'>{{data.name}}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Spalva</label>
+          <select class="form-control" v-model='order.color_id'  required>
+            <option value="0">Pasirinkti</option>
+            <option v-for='data in colors' :key='data.id' :value='data.id'>{{data.name}}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Duru skaicius</label>
+          <select class="form-control" v-model='order.number_of_doors_id' required>
+            <option value="0">Pasirinkti</option>
+            <option v-for='data in doors' :key='data.id' :value='data.id'>{{data.name}}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Varomieji ratai</label>
+          <select class="form-control" v-model='order.driven_wheels_id' required>
+            <option value="0">Pasirinkti</option>
+            <option v-for='data in drivenWheels' :key='data.id' :value='data.id'>{{data.name}}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Euro standartas</label>
+          <select class="form-control" v-model='order.euro_standard_id'  required>
+            <option value="0">Pasirinkti</option>
+            <option v-for='data in euroStandards' :key='data.id' :value='data.id'>{{data.name}}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Uzsakymo statusas</label>
+          <select class="form-control" v-model='order.status_id'  required>
+            <option value="0">Pasirinkti</option>
+            <option v-for='data in statuses' :key='data.id' :value='data.id'>{{data.name}}</option>
+          </select>
         </div>
         
         <div class="form-row">
-            <label for="status">Statusas</label>
-            <input type="number" class="form-control" id="status" v-model="order.euro_standard_id">
-             <div class="valid-feedback">
-                Looks good!
-            </div>
+            <label for="price">Max kaina</label>
+            <input type="number" class="form-control" id="price" placeholder="5000" required v-model="order.price">
         </div>
-        
         <div class="form-row">
-            <label for="brand">Gamintojas</label>
-            <input type="number" class="form-control" id="brand" required v-model="order.brand_id">
-             <div class="valid-feedback">
-                Looks good!
-            </div>
+            <label for="phone_ne">Tel. nr.</label>
+            <input type="tel" class="form-control" id="phone_ne" placeholder="860000000" required v-model="order.phone_no">
         </div>
-        
-        <div class="form-row">
-            <label for="model">Modelis</label>
-            <input type="number" class="form-control" id="model" required v-model="order.model_id">
-             <div class="valid-feedback">
-                Looks good!
-            </div>
-        </div>
-        
+           
         <div class="form-row mt-3">
             <button type="submit" class="form-control">Issaugoti</button>
         </div>
-         
-      </form>
-    </div>
-    <div v-show="edit">
-      <form  @submit.prevent="addOrder" class="mb-3">
-        Kaina:
-        <div class="form-group">
-          <input type="number" class="form-control" min="0" v-model="order.price">
-        </div>
-        Tel. nr
-        <div class="form-group">
-          <input type="tel" class="form-control" v-model="order.phone_no">
-        </div>
-        Pagaminimo data nuo
-        <div class="form-group">
-          <input type="text" class="form-control" v-model="order.manufacture_date_from">
-        </div>
-        Pagaminimo data iki
-        <div class="form-group">
-          <input type="date" class="form-control" v-model="order.manufacture_date_to">
-        </div>
-        Rida
-        <div class="form-group">
-          <input type="number" class="form-control" v-model="order.mileage">
-        </div>
-        Variklio galia
-        <div class="form-group">
-          <input type="number" class="form-control" v-model="order.engine_power">
-        </div>
-        Variklio turis
-        <div class="form-group">
-          <input type="number" class="form-control" v-model="order.engine_volume">
-        </div>
-        Zala
-        <div class="form-group">
-          <input type="text" class="form-control" v-model="order.damage_id">
-        </div>
-        Kuro tipas
-        <div class="form-group">
-          <input type="text" class="form-control" v-model="order.fuel_id">
-        </div>
-        Pavaru deze
-        <div class="form-group">
-          <input type="text" class="form-control" v-model="order.gearbox_id">
-        </div>
-        Kebulo tipas
-        <div class="form-group">
-          <input type="text" class="form-control" v-model="order.body_type_id">
-        </div>
-        Spalva
-        <div class="form-group">
-          <input type="text" class="form-control" v-model="order.color_id">
-        </div>
-        Vairo padetis
-        <div class="form-group">
-          <input type="text" class="form-control" v-model="order.steering_wheel_id">
-        </div>
-        Duru skaicius
-        <div class="form-group">
-          <input type="text" class="form-control" v-model="order.number_of_doors_id">
-        </div>
-        Varomieji ratai
-        <div class="form-group">
-          <input type="text" class="form-control" v-model="order.driven_wheels_id">
-        </div>
-        Climato valdymas
-        <div class="form-group">
-          <input type="text" class="form-control" v-model="order.climate_control_id">
-        </div>
-        Euro standartas
-        <div class="form-group">
-          <input type="text" class="form-control" v-model="order.euro_standard_id">
-        </div>
-        Marke
-        <div class="form-group">
-          <input type="text" class="form-control" v-model="order.brand_id">
-        </div>
-        Modelis
-        <div class="form-group">
-          <input type="text" class="form-control" v-model="order.model_id">
-        </div>
-          <button type="submit" class="form-control">Issaugoti</button>
       </form>
     </div>
   </div>
-
-  <button class="btn btn-primary float-right mb-5" @click="showCreate">Sukurti nauja</button>
 
     <table class="table pt-5">
         <thead>
@@ -260,7 +162,7 @@
             <th scope="col">Funkcijos</th>
             </tr>
         </thead>
-        <tbody v-for="order in orders" v-bind:key="order.id">
+        <tbody v-for="order in orders"  v-bind:key="order.id">
             <tr>
                 <th scope="row">{{order.id}}</th>
                 <td>{{order.brand}} {{order.model}}</td>
@@ -302,23 +204,6 @@
 
 
 <script>
-(function() {
-  'use strict';
-  window.addEventListener('load', function() {
-    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-    var forms = document.getElementsByClassName('needs-validation');
-    // Loop over them and prevent submission
-    var validation = Array.prototype.filter.call(forms, function(form) {
-      form.addEventListener('submit', function(event) {
-        if (form.checkValidity() === false) {
-          event.preventDefault();
-          event.stopPropagation();
-        }
-        form.classList.add('was-validated');
-      }, false);
-    });
-  }, false);
-})();
 import axios from 'axios';
 
   export default
@@ -326,6 +211,20 @@ import axios from 'axios';
     data() {
       return {
         orders: [],
+        bodyTypes: [],
+        brands: [],
+        climateControls: [],
+        colors: [],
+        damages: [],
+        doors: [],
+        drivenWheels: [],
+        euroStandards: [],
+        fuelTypes: [],
+        gearboxes: [],
+        statuses: [],
+        models: [],
+        steeringWheels: [],
+        
         order: {
           price: '',
           phone_no: '',
@@ -347,7 +246,21 @@ import axios from 'axios';
           euro_standard: '',
           brand: '',
           model: '',
-          user: ''
+          user: '',
+          damage_id: '',
+          status_id: '',
+          fuel_id: '',
+          gearbox_id: '',
+          body_type_id: '',
+          color_id: '',
+          steering_wheel_id: '',
+          number_of_doors_id: '',
+          driven_wheels_id: '',
+          climate_control_id: '',
+          euro_standard_id: '',
+          brand_id: '',
+          model_id: '',
+          user_id: ''
         },
         edit: false,
         show: false,
@@ -361,19 +274,46 @@ import axios from 'axios';
 
     methods:
     {
+
+      checkForm:function(e) 
+      {
+        if(this.price && this.phone_no && this.manufacture_date_from && this.manufacture_date_to && this.mileage 
+        && this.engine_power && this.status_id 
+        && this.engine_volume && this.damage_id && this.fuel_id && this.gearbox_id && this.body_type_id 
+        && this.color_id && this.steering_wheel_id && this.number_of_doors_id && this.model_id
+        && this.driven_wheels_id && this.climate_control_id && this.euro_standard_id && this.brand_id )
+        {
+          return this.addOrder();
+        }
+        this.errors = [];     
+          e.preventDefault();
+      },
+
       fetchOrders(page_url)  //veikia ok
       {
         const token = localStorage.getItem('token');
-        let vm = this;
         page_url = page_url || '/api/orders?token=' +token;
         fetch(page_url)
         .then(res => res.json())
         .then(res => {
           this.orders = res.data;
-          vm.makePagination(res);
+          this.makePagination(res);
         })
         .catch(err => console.log(err));
       },
+      //gets all orders enums ids
+      fetchAll()
+      {
+        const token = localStorage.getItem('token');
+        fetch('/api/ordersall?token=' + token)
+        .then(res => res.json())
+        .then(res => {
+          this.orders2 = res.data;
+          this.makePagination(res);
+        })
+        .catch(err => console.log(err));
+      },
+
       makePagination(res)
       {
         let pagination = {
@@ -395,7 +335,7 @@ import axios from 'axios';
             })
             .then(res => {
               alert('Uzsakymas pasalintas');
-              this.fetchAds();
+              this.fetchOrders();
             })
             .catch(err => console.log(err));
           }
@@ -412,7 +352,7 @@ import axios from 'axios';
               headers: {
                 'content-type': 'application/json',
                 'Accept': 'application/json',
-                'Autorization': 'Bearer '+ token
+                'Authorization': 'Bearer '+ token
               }
             })
             .then(res => res.json())
@@ -452,7 +392,7 @@ import axios from 'axios';
             headers: {
               'content-type': 'application/json',
               'Accept': 'application/json',
-              'Autorization': 'Bearer '+ token
+              'Authorization': 'Bearer '+ token
             }
           })
           .then(res => res.json())
@@ -490,6 +430,11 @@ import axios from 'axios';
         this.show =true;
         this.order_id = order.id;
         this.order.id = order.id;
+        this.order.brand_id = order.brand_id;
+        this.order.model_id = order.model_id;
+        this.getBrands();
+        this.getBrandModels();
+        this.order.status_id = order.status_id;
         this.order.price = order.price;
         this.order.phone_no = order.phone_no;
         this.order.manufacture_date_from = order.manufacture_date_from;
@@ -497,23 +442,128 @@ import axios from 'axios';
         this.order.mileage = order.mileage;
         this.order.engine_power = order.engine_power;
         this.order.engine_volume = order.engine_volume;
-        this.order.damage_id = adorder.damage;
-        this.order.fuel_id = order.fuel;
-        this.order.gearbox_id = order.gearbox;
-        this.order.body_type_id = order.body_type;
-        this.order.color_id = order.color;
-        this.order.steering_wheel_id = order.steering_wheel;
-        this.order.number_of_doors_id = order.number_of_doors;
-        this.order.driven_wheels_id = order.driven_wheels;
-        this.order.climate_control_id = order.climate_control;
-        this.order.euro_standard_id = order.euro_standard;
-        this.order.brand_id = order.brand;
-        this.order.model_id = order.model;
-        this.order.user_id = order.user;
+        this.order.damage_id = order.damage_id;
+        this.order.fuel_id = order.fuel_id;
+        this.order.gearbox_id = order.gearbox_id;
+        this.order.body_type_id = order.body_type_id;
+        this.order.color_id = order.color_id;
+        this.order.steering_wheel_id = order.steering_wheel_id;
+        this.order.number_of_doors_id = order.number_of_doors_id;
+        this.order.driven_wheels_id = order.driven_wheels_id;
+        this.order.climate_control_id = order.climate_control_id;
+        this.order.euro_standard_id = order.euro_standard_id;    
+        this.order.user_id = order.user_id;
+        this.getDamages();
+        this.getBodyTypes();
+        this.getClimateControls();
+        this.getColors();
+        this.getNumberOfDoors();
+        this.getDrivenWheels();
+        this.getEuroStandard();
+        this.getFuelTypes();
+        this.getGearboxTypes();   
+        this.getSteeringWheelTypes();
+        this.getStatusTypes();
       },
       showCreate()
       {
         this.show = true;
+      },
+      getDamages()
+      {
+        axios.get('api/damages')
+          .then(function (response) {
+            this.damages = response.data;
+          }.bind(this));
+      },
+      getBodyTypes()
+      {
+        axios.get('api/body_types')
+          .then(function (response) {
+            this.bodyTypes = response.data;
+          }.bind(this));
+      },
+      getBrands()
+      {
+        axios.get('api/brands')
+          .then(function (response) {
+            this.brands = response.data;
+          }.bind(this));
+      },
+      getClimateControls()
+      {
+        axios.get('api/climate_controls')
+          .then(function (response) {
+            this.climateControls = response.data;
+          }.bind(this));
+      },
+      getColors()
+      {
+        axios.get('api/colors')
+          .then(function (response) {
+            this.colors = response.data;
+          }.bind(this));
+      },
+      getNumberOfDoors()
+      {
+        axios.get('api/doors')
+          .then(function (response) {
+            this.doors = response.data;
+          }.bind(this));
+      },
+      getDrivenWheels()
+      {
+        axios.get('api/driven_wheels')
+          .then(function (response) {
+            this.drivenWheels = response.data;
+          }.bind(this));
+      },
+      getEuroStandard()
+      {
+        axios.get('api/euro_standard')
+          .then(function (response) {
+            this.euroStandards = response.data;
+          }.bind(this));
+      },
+      getFuelTypes()
+      {
+        axios.get('api/fuel_types')
+          .then(function (response) {
+            this.fuelTypes = response.data;
+          }.bind(this));
+      },
+      getGearboxTypes()
+      {
+        axios.get('api/gearboxes')
+          .then(function (response) {
+            this.gearboxes = response.data;
+          }.bind(this));
+      },
+      getBrandModels()
+      {
+        axios.get('api/models', {
+          params: {
+            brand_id: this.order.brand_id
+          }
+        })
+          .then(function (response) {
+            this.models = response.data;
+          }.bind(this));
+      },
+      
+      getSteeringWheelTypes()
+      {
+        axios.get('api/steering_wheels')
+          .then(function (response) {
+            this.steeringWheels = response.data;
+          }.bind(this));
+      },
+      getStatusTypes()
+      {
+        axios.get('api/status_types')
+          .then(function (response) {
+            this.statuses = response.data;
+          }.bind(this));
       }
 
     }

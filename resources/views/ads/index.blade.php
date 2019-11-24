@@ -3,8 +3,7 @@
 @section('content')
      <div id="app">
         <div class="container mt-3">
-          <ads>
-          </ads>
+          <ads></ads>
         </div>
       </div>
 @endsection

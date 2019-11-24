@@ -4,14 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Order;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class OrdersController extends Controller
 {
 
-    /*public function __construct()
+   /* public function __construct()
     {
-      $this->middleware('auth.role:admin')->except(['store']);
-      $this->middleware('auth.role:user')->except(['index', 'destroy']);
+        $this->middleware('auth.role:user')->except(['index', 'destroy']);
+        $this->middleware('auth.role:admin')->except(['store', 'myOrders']);
     }*/
     /**
      * Display a listing of the resource.
@@ -23,6 +24,13 @@ class OrdersController extends Controller
         $orders = Order::joinEnumsToOrders();
         return $orders;
     }
+
+    public function getIndexes()
+    {
+        $orders = Order::getAllOrders();
+        return $orders;
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -32,12 +40,12 @@ class OrdersController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'price' => 'required|decimal',
-            'phone_no' => 'required|regex:/(+370)[0-9]{8}/',
+            'price' => 'required|integer',
+            'phone_no' => 'required',
             'manufacture_date_from' => 'required|date|date_format:Y-m-d',
             'manufacture_date_to' => 'required|date|date_format:Y-m-d',
             'engine_power' => 'required|integer|min:0',
-            'engine_volume' => 'required|decimal|min:0',
+            'engine_volume' => 'required|integer|min:0',
             'mileage' => 'integer|min:0',
             'damage_id' => 'required|integer|min:0',
             'fuel_id' => 'required|integer|min:0',
@@ -67,6 +75,16 @@ class OrdersController extends Controller
     {
         return $order;
     }
+
+    public function myOrders()
+    {
+        $user = JWTAuth::parseToken()->toUser();
+
+        $orders = Order::joinEnumsToUserOrders($user->id);
+
+        return $orders;
+
+    }
     /**
      * Update the specified resource in storage.
      *
@@ -77,14 +95,13 @@ class OrdersController extends Controller
     public function update(Request $request, Order $order)
     {
         $this->validate($request, [
-            'price' => 'required|decimal',
-            'phone_no' => 'required|regex:/(+370)[0-9]{8}/',
+            'price' => 'required|integer',
+            'phone_no' => 'required',
             'manufacture_date_from' => 'required|date|date_format:Y-m-d',
             'manufacture_date_to' => 'required|date|date_format:Y-m-d',
             'engine_power' => 'required|integer|min:0',
-            'engine_volume' => 'required|decimal|min:0',
+            'engine_volume' => 'required|integer|min:0',
             'mileage' => 'integer|min:0',
-            'status_id' => 'required|min:0',
             'damage_id' => 'required|integer|min:0',
             'fuel_id' => 'required|integer|min:0',
             'gearbox_id' => 'required|integer|min:0',

@@ -4,51 +4,43 @@
 
   <div v-show="show">
     <div v-show="!edit">
-      <form  @submit.prevent="addAd" enctype="multipart/form-data" class="mb-3">
+      <form @submit="checkForm" @submit.prevent="addAd" enctype="multipart/form-data" class="mb-3">
 
-        <div>
-          <label>Foto</label>
-          <input type="file" @change="onFileSelected" class="form-control">
+
+        <div class="form-group">
+          <label>Marke</label>
+          <select class="form-control" v-model='ad.brand_id' v-on:click='getBrands()' @change='getBrandModels()' required>
+            <option value="0">Pasirinkti</option>
+            <option v-for='data in brands' :key='data.id' :value='data.id'>{{data.name}}</option>
+          </select>
         </div>
 
         <div class="form-group">
-          <label>Kaina</label>
-          <input type="number" min="0" step=".01" class="form-control" v-model="ad.price">
+          <label>Modelis</label>
+          <select class="form-control" v-model='ad.model_id' v-on:click='getBrandModels()' required>
+            <option value="0">Pasirinkti</option>
+            <option v-for='data in models' :key='data.id' :value='data.id'>{{data.name}}</option>
+          </select>
         </div>
 
-        <div class="form-group">
-          <label>Tel. nr.</label>
-          <input type="tel" class="form-control" flaceholder="+370 61 234 567" v-model="ad.phone_no">
-        </div>
-
-        <div class="form-group">
-          <label>Aprasymas</label>
-          <input type="textarea" class="form-control" v-model="ad.description">
-        </div>
-
-        <div class="form-group">
-          <label>Pagaminimo data</label>
-          <input type="date" class="form-control" v-model="ad.manufacture_date">
-        </div>
-
-        <div class="form-group">
-          <label>Rida</label>
-          <input type="number" min="0" class="form-control" v-model="ad.mileage">
-        </div>
-
-        <div class="form-group">
-          <label>Variklio galia (kw)</label>
-          <input type="number" min="0" class="form-control" v-model="ad.engine_power">
+        <div class="form-row">
+            <label >Pagaminimo data</label>
+            <input type="date" class="form-control" v-model="ad.manufacture_date" required>
         </div>
         
-        <div class="form-group">
-          <label>Variklio turis (cm<sup>3</sup>)</label>
-          <input type="number" min="0" class="form-control" v-model="ad.engine_volume">
+        <div class="form-row">
+            <label >Variklio galia (kw)</label>
+            <input type="number" min="0" class="form-control" v-model="ad.engine_power" required>
+        </div>
+
+        <div class="form-row">
+            <label>Variklio turis (cm<sup>3</sup>)</label>
+            <input type="number" min="0" class="form-control" v-model="ad.engine_volume" required>
         </div>
 
         <div class="form-group">
           <label>Defektai</label>
-          <select class="form-control" v-model='ad.damage_id' v-on:click='getDamages()'>
+          <select class="form-control" v-model='ad.damage_id' v-on:click='getDamages()' required>
             <option value="0">Pasirinkti</option>
             <option v-for='data in damages' :key='data.id' :value='data.id'>{{data.name}}</option>
           </select>
@@ -56,7 +48,7 @@
         
         <div class="form-group">
           <label>Kuro tipas</label>
-          <select class="form-control" v-model='ad.fuel_id' v-on:click='getFuelTypes()'>
+          <select class="form-control" v-model='ad.fuel_id' v-on:click='getFuelTypes()' required>
             <option value="0">Pasirinkti</option>
             <option v-for='data in fuelTypes' :key='data.id' :value='data.id'>{{data.name}}</option>
           </select>
@@ -64,7 +56,7 @@
         
         <div class="form-group">
           <label>Pavaru deze</label>
-          <select class="form-control" v-model='ad.gearbox_id' v-on:click='getGearboxTypes()'>
+          <select class="form-control" v-model='ad.gearbox_id' v-on:click='getGearboxTypes()' required>
             <option value="0">Pasirinkti</option>
             <option v-for='data in gearboxes' :key='data.id' :value='data.id'>{{data.name}}</option>
           </select>
@@ -72,31 +64,39 @@
         
         <div class="form-group">
           <label>Kebulo tipas</label>
-          <select class="form-control" v-model='ad.body_type_id' v-on:click='getBodyTypes()'>
+          <select class="form-control" v-model='ad.body_type_id' v-on:click='getBodyTypes()' required>
             <option value="0">Pasirinkti</option>
             <option v-for='data in bodyTypes' :key='data.id' :value='data.id'>{{data.name}}</option>
           </select>
         </div>
 
         <div class="form-group">
-          <label>Spalva</label>
-          <select class="form-control" v-model='ad.color_id' v-on:click='getColors()'>
+          <label>Kliamto valdymas</label>
+          <select class="form-control" v-model='ad.climate_control_id' v-on:click='getClimateControls()' required>
             <option value="0">Pasirinkti</option>
-            <option v-for='data in colors' :key='data.id' :value='data.id'>{{data.name}}</option>
+            <option v-for='data in climateControls' :key='data.id' :value='data.id'>{{data.name}}</option>
           </select>
         </div>
 
         <div class="form-group">
           <label>Vairo padetis</label>
-          <select class="form-control" v-model='ad.steering_wheel_id' v-on:click='getSteeringWheelTypes()'>
+          <select class="form-control" v-model='ad.steering_wheel_id' v-on:click='getSteeringWheelTypes()' required>
             <option value="0">Pasirinkti</option>
             <option v-for='data in steeringWheels' :key='data.id' :value='data.id'>{{data.name}}</option>
           </select>
         </div>
 
         <div class="form-group">
+          <label>Spalva</label>
+          <select class="form-control" v-model='ad.color_id' v-on:click='getColors()' required>
+            <option value="0">Pasirinkti</option>
+            <option v-for='data in colors' :key='data.id' :value='data.id'>{{data.name}}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
           <label>Duru skaicius</label>
-          <select class="form-control" v-model='ad.number_of_doors_id' v-on:click='getNumberOfDoors()'>
+          <select class="form-control" v-model='ad.number_of_doors_id' v-on:click='getNumberOfDoors()' required>
             <option value="0">Pasirinkti</option>
             <option v-for='data in doors' :key='data.id' :value='data.id'>{{data.name}}</option>
           </select>
@@ -104,31 +104,57 @@
 
         <div class="form-group">
           <label>Varomieji ratai</label>
-          <select class="form-control" v-model='ad.driven_wheels_id' v-on:click='getDrivenWheels()'>
+          <select class="form-control" v-model='ad.driven_wheels_id' v-on:click='getDrivenWheels()' required>
             <option value="0">Pasirinkti</option>
             <option v-for='data in drivenWheels' :key='data.id' :value='data.id'>{{data.name}}</option>
           </select>
         </div>
 
         <div class="form-group">
-          <label>Kliamto valdymas</label>
-          <select class="form-control" v-model='ad.climate_control_id' v-on:click='getClimateControls()'>
-            <option value="0">Pasirinkti</option>
-            <option v-for='data in climateControls' :key='data.id' :value='data.id'>{{data.name}}</option>
-          </select>
-        </div>
-
-        <div class="form-group">
           <label>Euro standartas</label>
-          <select class="form-control" v-model='ad.euro_standard_id' v-on:click='getEuroStandard()'>
+          <select class="form-control" v-model='ad.euro_standard_id' v-on:click='getEuroStandard()' required>
             <option value="0">Pasirinkti</option>
             <option v-for='data in euroStandards' :key='data.id' :value='data.id'>{{data.name}}</option>
           </select>
         </div>
 
+        <div class="form-row">
+            <label for="phone_ne">Rida</label>
+            <input type="number" min="0" class="form-control" v-model="ad.mileage" required>
+        </div>
+
+        <div class="form-row">
+            <label for="price">Kaina</label>
+            <input type="number" class="form-control" id="price" placeholder="5000" required v-model="ad.price">
+        </div>
+
+        <div class="form-row">
+            <label for="phone_ne">Tel. nr.</label>
+            <input type="tel" class="form-control" id="phone_ne" placeholder="860000000" required v-model="ad.phone_no">
+        </div>
+
+        <div class="form-row">
+            <label for="phone_ne">Aprasymas</label>
+             <textarea type="textarea" class="form-control" v-model="ad.description"></textarea>
+        </div>
+
+        <div class="form-row">
+            <label for="price">Nuotrauka</label>
+            <input type="file" @change="onFileSelected" class="form-control" required>
+        </div>
+
+        <div class="form-row mt-3">
+            <button type="submit" class="form-control">Issaugoti</button>
+        </div>
+
+      </form>
+    </div>
+    <div v-show="edit">
+      <form @submit="checkForm" @submit.prevent="addAd" class="mb-3">
+        
         <div class="form-group">
           <label>Gamintojas</label>
-          <select class="form-control" v-model='ad.brand_id' v-on:click='getBrands()' @change='getBrandModels()'>
+          <select class="form-control" v-model='ad.brand_id' v-on:click='getBrands()' @change='getBrandModels()' required>
             <option value="0">Pasirinkti</option>
             <option v-for='data in brands' :key='data.id' :value='data.id'>{{data.name}}</option>
           </select>
@@ -136,77 +162,46 @@
 
         <div class="form-group">
           <label>Modelis</label>
-          <select class="form-control" v-model='ad.model_id' v-on:click='getBrandModels()'>
+          <select class="form-control" v-model='ad.model_id' v-on:click='getBrandModels()' required>
             <option value="0">Pasirinkti</option>
             <option v-for='data in models' :key='data.id' :value='data.id'>{{data.name}}</option>
           </select>
         </div>
 
-        
-          <button type="submit" class="form-control">Save</button>
-      </form>
-    </div>
-    <div v-show="edit">
-      <form  @submit.prevent="addAd" class="mb-3">
-                <div>
-          <label>Foto</label>
-          <input type="file" @change="onFileSelected" class="form-control">
-        </div>
-
-        <div class="form-group">
-          <label>Kaina</label>
-          <input type="number" min="0" step=".01" class="form-control" v-model="ad.price">
-        </div>
-
-        <div class="form-group">
-          <label>Tel. nr.</label>
-          <input type="tel" class="form-control" v-model="ad.phone_no">
-        </div>
-
-        <div class="form-group">
-          <label>Aprasymas</label>
-          <input type="textarea" class="form-control" v-model="ad.description">
-        </div>
-
-        <div class="form-group">
-          <label>Pagaminimo data</label>
-          <input type="date" class="form-control" v-model="ad.manufacture_date">
-        </div>
-
-        <div class="form-group">
-          <label>Rida</label>
-          <input type="number" min="0" class="form-control" v-model="ad.mileage">
-        </div>
-
-        <div class="form-group">
-          <label>Variklio galia (kw)</label>
-          <input type="number" min="0" class="form-control" v-model="ad.engine_power">
+        <div class="form-row">
+            <label for="phone_ne">Pagaminimo data</label>
+            <input type="date" class="form-control" v-model="ad.manufacture_date" required>
         </div>
         
-        <div class="form-group">
-          <label>Variklio turis (cm<sup>3</sup>)</label>
-          <input type="number" min="0" class="form-control" v-model="ad.engine_volume">
+        <div class="form-row">
+            <label for="phone_ne">Variklio galia (kw)</label>
+            <input type="number" min="0" class="form-control" v-model="ad.engine_power" required>
+        </div>
+
+        <div class="form-row">
+            <label>Variklio turis (cm<sup>3</sup>)</label>
+            <input type="number" min="0" class="form-control" v-model="ad.engine_volume" required>
         </div>
 
         <div class="form-group">
           <label>Defektai</label>
-          <select class="form-control" v-model='ad.damage_id' v-on:click='getDamages()'>
+          <select class="form-control" v-model='ad.damage_id' v-on:click='getDamages()' required>
             <option value="0">Pasirinkti</option>
-            <option v-for='data in damages' :key='data.id' :value='ad.damage_id'>{{data.name}}</option>
+            <option v-for='data in damages' :key='data.id' :value='data.id'>{{data.name}}</option>
           </select>
         </div>
         
         <div class="form-group">
           <label>Kuro tipas</label>
-          <select class="form-control" v-model='ad.fuel_id' v-on:click='getFuelTypes()'>
+          <select class="form-control" v-model='ad.fuel_id' v-on:click='getFuelTypes()' required>
             <option value="0">Pasirinkti</option>
-            <option v-for='data in fuelTypes' :key='data.id' :value='ad.fuel_id'>{{data.name}}</option>
+            <option v-for='data in fuelTypes' :key='data.id' :value='data.id'>{{data.name}}</option>
           </select>
         </div>
         
         <div class="form-group">
           <label>Pavaru deze</label>
-          <select class="form-control" v-model='ad.gearbox_id' v-on:click='getGearboxTypes()'>
+          <select class="form-control" v-model='ad.gearbox_id' v-on:click='getGearboxTypes()' required>
             <option value="0">Pasirinkti</option>
             <option v-for='data in gearboxes' :key='data.id' :value='data.id'>{{data.name}}</option>
           </select>
@@ -214,31 +209,39 @@
         
         <div class="form-group">
           <label>Kebulo tipas</label>
-          <select class="form-control" v-model='ad.body_type_id' v-on:click='getBodyTypes()'>
+          <select class="form-control" v-model='ad.body_type_id' v-on:click='getBodyTypes()' required>
             <option value="0">Pasirinkti</option>
             <option v-for='data in bodyTypes' :key='data.id' :value='data.id'>{{data.name}}</option>
           </select>
         </div>
 
         <div class="form-group">
-          <label>Spalva</label>
-          <select class="form-control" v-model='ad.color_id' v-on:click='getColors()'>
+          <label>Kliamto valdymas</label>
+          <select class="form-control" v-model='ad.climate_control_id' v-on:click='getClimateControls()' required>
             <option value="0">Pasirinkti</option>
-            <option v-for='data in colors' :key='data.id' :value='data.id'>{{data.name}}</option>
+            <option v-for='data in climateControls' :key='data.id' :value='data.id'>{{data.name}}</option>
           </select>
         </div>
 
         <div class="form-group">
           <label>Vairo padetis</label>
-          <select class="form-control" v-model='ad.steering_wheel_id' v-on:click='getSteeringWheelTypes()'>
+          <select class="form-control" v-model='ad.steering_wheel_id' v-on:click='getSteeringWheelTypes()' required>
             <option value="0">Pasirinkti</option>
             <option v-for='data in steeringWheels' :key='data.id' :value='data.id'>{{data.name}}</option>
           </select>
         </div>
 
         <div class="form-group">
+          <label>Spalva</label>
+          <select class="form-control" v-model='ad.color_id' v-on:click='getColors()' required>
+            <option value="0">Pasirinkti</option>
+            <option v-for='data in colors' :key='data.id' :value='data.id'>{{data.name}}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
           <label>Duru skaicius</label>
-          <select class="form-control" v-model='ad.number_of_doors_id' v-on:click='getNumberOfDoors()'>
+          <select class="form-control" v-model='ad.number_of_doors_id' v-on:click='getNumberOfDoors()' required>
             <option value="0">Pasirinkti</option>
             <option v-for='data in doors' :key='data.id' :value='data.id'>{{data.name}}</option>
           </select>
@@ -246,50 +249,52 @@
 
         <div class="form-group">
           <label>Varomieji ratai</label>
-          <select class="form-control" v-model='ad.driven_wheels_id' v-on:click='getDrivenWheels()'>
+          <select class="form-control" v-model='ad.driven_wheels_id' v-on:click='getDrivenWheels()' required>
             <option value="0">Pasirinkti</option>
             <option v-for='data in drivenWheels' :key='data.id' :value='data.id'>{{data.name}}</option>
           </select>
         </div>
 
         <div class="form-group">
-          <label>Kliamto valdymas</label>
-          <select class="form-control" v-model='ad.climate_control_id' v-on:click='getClimateControls()'>
-            <option value="0">Pasirinkti</option>
-            <option v-for='data in climateControls' :key='data.id' :value='data.id'>{{data.name}}</option>
-          </select>
-        </div>
-
-        <div class="form-group">
           <label>Euro standartas</label>
-          <select class="form-control" v-model='ad.euro_standard_id' v-on:click='getEuroStandard()'>
+          <select class="form-control" v-model='ad.euro_standard_id' v-on:click='getEuroStandard()' required>
             <option value="0">Pasirinkti</option>
             <option v-for='data in euroStandards' :key='data.id' :value='data.id'>{{data.name}}</option>
           </select>
         </div>
 
-        <div class="form-group">
-          <label>Gamintojas</label>
-          <select class="form-control" v-model='ad.brand_id' v-on:click='getBrands()' @change='getBrandModels()'>
-            <option value="0">Pasirinkti</option>
-            <option v-for='data in brands' :key='data.id' :value='data.id'>{{data.name}}</option>
-          </select>
+        <div class="form-row">
+            <label for="phone_ne">Rida</label>
+            <input type="number" min="0" class="form-control" v-model="ad.mileage" required>
         </div>
 
-        <div class="form-group">
-          <label>Modelis</label>
-          <select class="form-control" v-model='ad.model_id' v-on:click='getBrandModels()'>
-            <option value="0">Pasirinkti</option>
-            <option v-for='data in models' :key='data.id' :value='data.id'>{{data.name}}</option>
-          </select>
+        <div class="form-row">
+            <label for="price">Kaina</label>
+            <input type="number" class="form-control" id="price" placeholder="5000" required v-model="ad.price">
         </div>
 
-          <button type="submit" class="form-control">Save</button>
+        <div class="form-row">
+            <label for="phone_ne">Tel. nr.</label>
+            <input type="tel" class="form-control" id="phone_ne" placeholder="860000000" required v-model="ad.phone_no">
+        </div>
+
+        <div class="form-row">
+            <label for="phone_ne">Aprasymas</label>
+            <textarea type="textarea" class="form-control" v-model="ad.description"></textarea>
+        </div>
+
+        <div class="form-row">
+            <label for="price">Nuotrauka</label>
+            <input type="file" @change="onFileSelected" class="form-control">
+        </div>
+        <div class="form-row mt-3">
+            <button type="submit" class="form-control">Issaugoti</button>
+        </div>
       </form>
     </div>
   </div>
 
-  <button class="btn btn-primary float-right" @click="showCreate">Sukurti nauja</button>
+  <button v-if="role != 'undefined' && role != null" class="btn btn-primary float-right" @click="showCreate">Sukurti nauja</button>
 
   <div class="pt-5" v-for="ad in ads" v-bind:key="ad.id">
     <div class="card" >
@@ -309,14 +314,12 @@
             <p>{{ad.fuel}} {{ad.engine_power}} kW</p>
           </div>
         </div>
-        <button @click="editAd(ad)" class="btn btn-primary">Redaguoti</button>
+        <button  v-if="role == 'admin'" @click="editAd(ad)" class="btn btn-primary">Redaguoti</button>
 
-        <button @click="deleteAd(ad.id)" class="btn btn-danger">Istrinti</button>
+        <button v-if="role == 'admin'" @click="deleteAd(ad.id)" class="btn btn-danger">Istrinti</button>
       </div>
     </div>
   </div>
-
-
 
 
   <nav aria-label="page navigation example">
@@ -342,6 +345,7 @@
 
 
 <script>
+
 import axios from 'axios';
 
   export default
@@ -361,6 +365,10 @@ import axios from 'axios';
         gearboxes: [],
         models: [],
         steeringWheels: [],
+        user: {
+          email: '',
+          role: ''
+        },
         ad: {
           price: '',
           image: '',
@@ -387,6 +395,7 @@ import axios from 'axios';
         edit: false,
         show: false,
         ad_id: '',
+        role: null,
         pagination: {}
       };
     },
@@ -396,15 +405,30 @@ import axios from 'axios';
 
     methods:
     {
-      fetchAds(page_url)  //veikia ok
+      checkForm:function(e) 
       {
-        let vm = this;
+        if(this.price && this.phone_no && this.manufacture_date && this.mileage && this.engine_power 
+        && this.engine_volume && this.damage_id && this.fuel_id && this.gearbox_id && this.body_type_id 
+        && this.color_id && this.steering_wheel_id && this.number_of_doors_id && this.model_id
+        && this.driven_wheels_id && this.climate_control_id && this.euro_standard_id && this.brand_id )
+        {
+          return this.addAd();
+        }
+        this.errors = [];     
+        e.preventDefault();
+      },
+
+
+      fetchAds(page_url)  //veikia ok
+      {   
         page_url = page_url || '/api/ads';
         fetch(page_url)
         .then(res => res.json())
         .then(res => {
           this.ads = res.data;
-          vm.makePagination(res);
+          this.makePagination(res);
+          const role = localStorage.getItem('role');
+          this.role = role;
         })
         .catch(err => console.log(err));
       },
@@ -434,8 +458,24 @@ import axios from 'axios';
             .catch(err => console.log(err));
           }
         },
+        getUser()
+        {
+            axios.post('api/auth/me', {}, {
+                headers: {
+                  'content-type': 'application/json',
+                  'Accept': 'application/json',
+                  'Authorization': 'Bearer '+ token
+                }
+            })
+            .then(res => res.json())
+            .then(data => {
+              this.user.role = data.role,
+              this.user.email = data.email
+            });
+        },
         addAd()
         {
+          
           const token = localStorage.getItem('token');
           if(!this.edit)
           {
@@ -446,7 +486,7 @@ import axios from 'axios';
               headers: {
                 'content-type': 'application/json',
                 'Accept': 'application/json',
-                'Autorization': 'Bearer '+ token
+                'Authorization': 'Bearer '+ token
               }
             })
             .then(res => res.json())
@@ -459,7 +499,7 @@ import axios from 'axios';
               this.ad.mileage = '';
               this.ad.engine_power = '';
               this.ad.engine_volume = '';
-              this.ad.fuel_id = '';
+              this.ad.damage_id = '';
               this.ad.fuel_id = '';
               this.ad.gearbox_id = '';
               this.ad.body_type_id = '';
@@ -560,9 +600,8 @@ import axios from 'axios';
         getGearboxTypes();
         getBrandModels();
         getSteeringWheelTypes();
-
-
       },
+
       onFileSelected(e)
       {
         var reader = new FileReader();
@@ -571,6 +610,7 @@ import axios from 'axios';
             this.ad.image = e.target.result;
         }
       },
+
       showCreate()
       {
         this.show = true;

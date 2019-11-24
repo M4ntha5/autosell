@@ -18,9 +18,11 @@ class CreaeteCommentsTable extends Migration
             $table->string('title');
             $table->string('body');
             $table->integer('ad_id')->unsigned();
+            $table->integer('user_id')->unsigned();
             $table->timestamps();
 
             $table->foreign('ad_id')->references('id')->on('ads')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
 
         });
     }
@@ -34,5 +36,6 @@ class CreaeteCommentsTable extends Migration
     {
         Schema::dropIfExists('comments');
         $table->dropForeign('comments_ad_id_foreign');
+        $table->dropForeign('comments_user_id_foreign');
     }
 }

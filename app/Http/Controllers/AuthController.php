@@ -60,21 +60,6 @@ class AuthController extends Controller
         ], 200);
 
     }
-  /**
-   * Get a JWT via given credentials.
-   *
-   * @return \Illuminate\Http\JsonResponse
-   */
-    public function login()
-    {
-        $credentials = request(['email', 'password']);
-
-        if (! $token = JWTAuth::attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
-        }
-
-        return $this->respondWithToken($token);
-    }
 
     /**
      * Get the authenticated User.

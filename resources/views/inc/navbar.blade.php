@@ -34,22 +34,27 @@
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
                 <!-- Authentication Links -->
-                @guest
+                @if (localStorage.getItem('token') == null)
                     <li class="nav-item">
                         <a class="nav-link" href="/signin">{{ __('Login') }}</a>
                     </li>
-                    @if (Route::has('register'))
-                        <li class="nav-item">
-                            <a class="nav-link" href="sinup">{{ __('Register') }}</a>
-                        </li>
-                    @endif
-                @else
+                    <li class="nav-item">
+                        <a class="nav-link" href="signup">{{ __('Register') }}</a>
+                    </li>
+                @elseif(localStorage.getItem('role') == 'admin')
                   <li class="nav-item">
                     <a class="nav-link" href="/orders">Mano uzsakymai</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="/users">Users</a>
                   </li>
+                @else
+                  <li class="nav-item">
+                      <a class="nav-link" href="/orders">Mano uzsakymai</a>
+                    </li>
+                    <li class="nav-item">
+                  </li>
+                @endif
 
 
                     <li class="nav-item dropdown">

@@ -16,11 +16,12 @@
 Auth::routes();
 
 Route::get('/signup', function () {
-    return view('test.signup');
+    return view('jwt.signup');
 });
 Route::get('/signin', function () {
-    return view('test.signin');
+    return view('jwt.signin');
 });
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -43,6 +44,9 @@ Route::get('/ads/{ad}', function () {
 
 Route::get('/orders', function () {
     return view('orders.index');
+});
+Route::get('/myorders', function () {
+    return view('orders.userOrders');
 });
 Route::get('/orders/{order}', function () {
     return view('orders.show');

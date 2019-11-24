@@ -1,30 +1,22 @@
 <template>
-    <form>
+    <form @submit="checkForm" @submit.prevent="signup">
+
         <div class="form-group">
             <label for="name">Name</label>
-            <input  type="text"
-                    id="name"
-                    name="name"
-                    class="form-control"
-                    v-model="name">
+            <input type="text" id="name" name="name" class="form-control" v-model="name" required>
         </div>
+
         <div class="form-group">
             <label for="email">Email</label>
-            <input  type="email"
-                    id="email"
-                    name="email"
-                    class="form-control"
-                    v-model="email">
+            <input type="email" id="email" name="email" class="form-control" v-model="email" required >
         </div>
+
         <div class="form-group">
             <label for="password">Password</label>
-            <input  type="password"
-                    id="password"
-                    name="password"
-                    class="form-control"
-                    v-model="password">
+            <input type="password" id="password" name="password" class="form-control" v-model="password" required>
         </div>
-        <button type="submit" class="btn btn-primary" @click.prevent="signup">SignUp</button>
+
+        <button type="submit" class="btn btn-primary" >Registruotis</button>
     </form>
 </template>
 
@@ -41,6 +33,16 @@ export default {
         }
     },
     methods: {
+        checkForm:function(e) 
+        {
+            if(this.name && this.email && this.password  )
+            {
+                return this.signup();
+            }
+            this.errors = [];     
+            e.preventDefault();
+        },
+
         signup() {
             axios.post('/api/auth/signup', {
                 name: this.name,
@@ -52,8 +54,7 @@ export default {
             })
             .then(
                 (response) => {
-                    //console.log(response)
-                    window.location.href = "/home";
+                    window.location.href = "/signin";
                 }
             )
             .catch(

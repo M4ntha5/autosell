@@ -37,6 +37,20 @@ class Ad extends JsonResource
             'brand' => $this->brand,
             'model' => $this->model,
             'user' => $this->user,
+            'user_id' => $this->user_id,
+            'brand_id' => $this->brand_id,
+            'model_id' => $this->model_id,
+            'fuel_id' => $this->fuel_id,
+            'gearbox_id' => $this->gearbox_id,
+            'body_type_id' => $this->body_type_id,
+            'color_id' => $this->color_id,
+            'steering_wheel_id' => $this->steering_wheel_id,
+            'number_of_doors_id' => $this->number_of_doors_id,
+            'driven_wheels_id' => $this->driven_wheels_id,
+            'climate_control_id' => $this->climate_control_id,
+            'euro_standard_id' => $this->euro_standard_id,
+            'damage_id' => $this->damage_id
+
         ];
     }
 }

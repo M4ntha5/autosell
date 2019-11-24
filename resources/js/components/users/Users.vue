@@ -2,30 +2,34 @@
 
 <div>
 
-  <div v-show="show">
     <div v-show="edit">
-      <form  @submit.prevent="addUser" class="mb-3">
-        Vardas:
-        <div class="form-group">
-          <input type="text" class="form-control" v-model="user.name">
+      <form  @submit="checkForm" @submit.prevent="addUser" class="mb-3">
+        <div class="form-row">
+            <label>Vardas</label>
+            <input type="text" class="form-control" v-model="user.name" required>
         </div>
-        El. pastas
-        <div class="form-group">
-          <input type="email" class="form-control" v-model="user.email">
+        <div class="form-row">
+            <label>El. pastas</label>
+            <input type="email" class="form-control" v-model="user.email" required>
         </div>
-        Miestas
         <div class="form-group">
-          <input type="number" class="form-control" v-model="user.city_id">
+          <label>Salis</label>
+          <select class="form-control" v-model="user.country_id" v-on:click='getCountrys()' @change='getCitys()' >
+            <option value="0">Pasirinkti</option>
+            <option v-for='data in countrys' :key='data.id' :value='data.id'>{{data.name}}</option>
+          </select>
         </div>
-        Salis
         <div class="form-group">
-          <input type="number" class="form-control" v-model="user.country_id">
+          <label>Miestas</label>
+          <select class="form-control" v-model="user.city_id" v-on:click='getCitys()'>
+            <option value="0">Pasirinkti</option>
+            <option v-for='data in citys' :key='data.id' :value='data.id'>{{data.name}}</option>
+          </select>
         </div>
+ 
           <button type="submit" class="form-control">Issaugoti</button>
       </form>
     </div>
-  </div>
-
 
 
   <table class="table table-hover">
@@ -34,18 +38,16 @@
         <th scope="col">ID</th>
         <th scope="col">Vardas</th>
         <th scope="col">El. pastas</th>
-        <th scope="col">Salis</th>
-        <th scope="col">Miestas</th>
+        <th scope="col">Role</th>
         <th scope="col">Actions</th>
       </tr>
     </thead>
     <tbody v-for="user in users" v-bind:key="user.id">
       <tr>
-        <th scope="row"><a v-bind:href="'/users/'+ user.id">{{user.id}}</a></th>
+        <th scope="row">{{user.id}}</th>
         <td>{{user.name}}</td>
         <td>{{user.email}}</td>
-        <td>{{user.country}}</td>
-        <td>{{user.city}}</td>
+        <td>{{user.role}}</td>
         <td>
           <button @click="editUser(user)" class="btn btn-primary">Redaguoti</button>
           <button @click="deleteUser(user.id)" class="btn btn-danger">Istrinti</button>
@@ -79,16 +81,25 @@
 
 <script>
 
+import axios from 'axios';
+
   export default
   {
     data() {
       return {
         users: [],
+        countrys: [],
+        citys: [],
         user: {
           name: '',
           email: '',
           country: '',
-          city: ''
+          city: '',
+          role: ''
+        },
+        auth: {
+          role: '',
+          emial: ''
         },
         edit: false,
         show: false,
@@ -102,19 +113,39 @@
 
     methods:
     {
-      fetchUsers(page_url)  //veikia ok
+      checkForm:function(e) 
       {
+        if(this.user.name && this.user.email)
+        {
+          return this.addUser();
+        }
+        this.errors = [];     
+        e.preventDefault();
+      },
+    
+    
+      fetchUsers(page_url)  //veikia ok
+      { 
         const token = localStorage.getItem('token');
-        let vm = this;
-        page_url = page_url || '/api/users?token=' + token;
-        fetch(page_url)
+        page_url = page_url || '/api/users';
+        fetch(page_url, {
+          method: 'get',
+          headers: {
+              'content-type': 'application/json',
+              'Accept': 'application/json',
+              'Authorization': 'Bearer '+ token
+          }
+        })
         .then(res => res.json())
         .then(res => {
           this.users = res.data;
-          vm.makePagination(res);
+          this.makePagination(res);
         })
-        .catch(err => console.log(err));
+        .catch(err => 
+          console.log(err),
+        );
       },
+      
       makePagination(res)
       {
         let pagination = {
@@ -169,6 +200,7 @@
               this.user.city_id = '';
               alert('user updated');
               this.show = false;
+              this.edit = false;
               this.fetchUsers();
             })
             .catch(err => console.log(err));
@@ -184,6 +216,8 @@
         this.user.email = user.email;
         this.user.country_id = user.country;
         this.user.city_id = user.city;
+        this.getCitys();
+        this.getCountrys();
       },
       /*onFileSelected(e)
       {
@@ -196,7 +230,25 @@
       showCreate()
       {
         this.show = true;
-      }
+      },
+      getCountrys()
+      {
+        axios.get('api/countrys')
+          .then(function (response) {
+            this.countrys = response.data;
+          }.bind(this));
+      },
+      getCitys()
+      {
+        axios.get('api/citys', {
+          params: {
+            country_id: this.user.country_id
+          }
+        })
+          .then(function (response) {
+            this.citys = response.data;
+          }.bind(this));
+      },
 
     }
   };

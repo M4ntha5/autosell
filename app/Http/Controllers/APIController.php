@@ -16,6 +16,9 @@ use App\FeaturesModels\Fuel;
 use App\FeaturesModels\Gearbox;
 use App\FeaturesModels\Models;
 use App\FeaturesModels\SteeringWheel;
+use App\FeaturesModels\StatusType;
+use App\FeaturesModels\City;
+use App\FeaturesModels\Country;
 
 
 class APIController extends Controller
@@ -24,6 +27,21 @@ class APIController extends Controller
     public function getBodyTypes()
     {
         return BodyType::getAllBodyTypes();
+    }
+
+    public function getCitys(Request $request)
+    {
+        return City::getAllCitys($request->country_id);
+    }
+
+    public function getCountrys()
+    {
+        return Country::getAllCountrys();
+    }
+    
+    public function getStatusTypes()
+    {
+        return StatusType::getAllStatusTypes();
     }
 
 

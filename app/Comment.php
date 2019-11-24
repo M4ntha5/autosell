@@ -4,10 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class Comment extends Model
 {
-    protected $fillable = ['title','body', 'ad_id'];
+    protected $fillable = ['title','body', 'ad_id', 'user_id'];
 
     protected $table = 'comments';
 
@@ -18,8 +19,9 @@ class Comment extends Model
 
     public static function storeCommentOnAd($id, Request $request)
     {
+        $user = JWTAuth::parseToken()->toUser();
         $user_data = $request->all();
-        $data = array_merge($user_data, array('ad_id'=> $id));
+        $data = array_merge($user_data, array('ad_id'=> $id, 'user_id' => $user->id));
         $comment = Comment::where('ad_id', '=', $id)->create($data);
         return response()->json($comment, 201);
     }
