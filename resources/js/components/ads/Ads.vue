@@ -40,7 +40,7 @@
 
         <div class="form-group">
           <label>Defektai</label>
-          <select class="form-control" v-model='ad.damage_id' v-on:click='getDamages()' required>
+          <select class="form-control" v-model='ad.damage_id' required>
             <option value="0">Pasirinkti</option>
             <option v-for='data in damages' :key='data.id' :value='data.id'>{{data.name}}</option>
           </select>
@@ -48,7 +48,7 @@
         
         <div class="form-group">
           <label>Kuro tipas</label>
-          <select class="form-control" v-model='ad.fuel_id' v-on:click='getFuelTypes()' required>
+          <select class="form-control" v-model='ad.fuel_id' required>
             <option value="0">Pasirinkti</option>
             <option v-for='data in fuelTypes' :key='data.id' :value='data.id'>{{data.name}}</option>
           </select>
@@ -56,7 +56,7 @@
         
         <div class="form-group">
           <label>Pavaru deze</label>
-          <select class="form-control" v-model='ad.gearbox_id' v-on:click='getGearboxTypes()' required>
+          <select class="form-control" v-model='ad.gearbox_id' required>
             <option value="0">Pasirinkti</option>
             <option v-for='data in gearboxes' :key='data.id' :value='data.id'>{{data.name}}</option>
           </select>
@@ -64,7 +64,7 @@
         
         <div class="form-group">
           <label>Kebulo tipas</label>
-          <select class="form-control" v-model='ad.body_type_id' v-on:click='getBodyTypes()' required>
+          <select class="form-control" v-model='ad.body_type_id' required>
             <option value="0">Pasirinkti</option>
             <option v-for='data in bodyTypes' :key='data.id' :value='data.id'>{{data.name}}</option>
           </select>
@@ -72,7 +72,7 @@
 
         <div class="form-group">
           <label>Kliamto valdymas</label>
-          <select class="form-control" v-model='ad.climate_control_id' v-on:click='getClimateControls()' required>
+          <select class="form-control" v-model='ad.climate_control_id' required>
             <option value="0">Pasirinkti</option>
             <option v-for='data in climateControls' :key='data.id' :value='data.id'>{{data.name}}</option>
           </select>
@@ -80,7 +80,7 @@
 
         <div class="form-group">
           <label>Vairo padetis</label>
-          <select class="form-control" v-model='ad.steering_wheel_id' v-on:click='getSteeringWheelTypes()' required>
+          <select class="form-control" v-model='ad.steering_wheel_id'  required>
             <option value="0">Pasirinkti</option>
             <option v-for='data in steeringWheels' :key='data.id' :value='data.id'>{{data.name}}</option>
           </select>
@@ -88,7 +88,7 @@
 
         <div class="form-group">
           <label>Spalva</label>
-          <select class="form-control" v-model='ad.color_id' v-on:click='getColors()' required>
+          <select class="form-control" v-model='ad.color_id'  required>
             <option value="0">Pasirinkti</option>
             <option v-for='data in colors' :key='data.id' :value='data.id'>{{data.name}}</option>
           </select>
@@ -96,7 +96,7 @@
 
         <div class="form-group">
           <label>Duru skaicius</label>
-          <select class="form-control" v-model='ad.number_of_doors_id' v-on:click='getNumberOfDoors()' required>
+          <select class="form-control" v-model='ad.number_of_doors_id' required>
             <option value="0">Pasirinkti</option>
             <option v-for='data in doors' :key='data.id' :value='data.id'>{{data.name}}</option>
           </select>
@@ -104,7 +104,7 @@
 
         <div class="form-group">
           <label>Varomieji ratai</label>
-          <select class="form-control" v-model='ad.driven_wheels_id' v-on:click='getDrivenWheels()' required>
+          <select class="form-control" v-model='ad.driven_wheels_id'  required>
             <option value="0">Pasirinkti</option>
             <option v-for='data in drivenWheels' :key='data.id' :value='data.id'>{{data.name}}</option>
           </select>
@@ -112,7 +112,7 @@
 
         <div class="form-group">
           <label>Euro standartas</label>
-          <select class="form-control" v-model='ad.euro_standard_id' v-on:click='getEuroStandard()' required>
+          <select class="form-control" v-model='ad.euro_standard_id' required>
             <option value="0">Pasirinkti</option>
             <option v-for='data in euroStandards' :key='data.id' :value='data.id'>{{data.name}}</option>
           </select>
@@ -185,7 +185,7 @@
 
         <div class="form-group">
           <label>Defektai</label>
-          <select class="form-control" v-model='ad.damage_id' v-on:click='getDamages()' required>
+          <select class="form-control" v-model='ad.damage_id'  required>
             <option value="0">Pasirinkti</option>
             <option v-for='data in damages' :key='data.id' :value='data.id'>{{data.name}}</option>
           </select>
@@ -193,7 +193,7 @@
         
         <div class="form-group">
           <label>Kuro tipas</label>
-          <select class="form-control" v-model='ad.fuel_id' v-on:click='getFuelTypes()' required>
+          <select class="form-control" v-model='ad.fuel_id'  required>
             <option value="0">Pasirinkti</option>
             <option v-for='data in fuelTypes' :key='data.id' :value='data.id'>{{data.name}}</option>
           </select>
@@ -201,7 +201,7 @@
         
         <div class="form-group">
           <label>Pavaru deze</label>
-          <select class="form-control" v-model='ad.gearbox_id' v-on:click='getGearboxTypes()' required>
+          <select class="form-control" v-model='ad.gearbox_id'  required>
             <option value="0">Pasirinkti</option>
             <option v-for='data in gearboxes' :key='data.id' :value='data.id'>{{data.name}}</option>
           </select>
@@ -209,7 +209,7 @@
         
         <div class="form-group">
           <label>Kebulo tipas</label>
-          <select class="form-control" v-model='ad.body_type_id' v-on:click='getBodyTypes()' required>
+          <select class="form-control" v-model='ad.body_type_id' required>
             <option value="0">Pasirinkti</option>
             <option v-for='data in bodyTypes' :key='data.id' :value='data.id'>{{data.name}}</option>
           </select>
@@ -217,7 +217,7 @@
 
         <div class="form-group">
           <label>Kliamto valdymas</label>
-          <select class="form-control" v-model='ad.climate_control_id' v-on:click='getClimateControls()' required>
+          <select class="form-control" v-model='ad.climate_control_id' required>
             <option value="0">Pasirinkti</option>
             <option v-for='data in climateControls' :key='data.id' :value='data.id'>{{data.name}}</option>
           </select>
@@ -225,7 +225,7 @@
 
         <div class="form-group">
           <label>Vairo padetis</label>
-          <select class="form-control" v-model='ad.steering_wheel_id' v-on:click='getSteeringWheelTypes()' required>
+          <select class="form-control" v-model='ad.steering_wheel_id'  required>
             <option value="0">Pasirinkti</option>
             <option v-for='data in steeringWheels' :key='data.id' :value='data.id'>{{data.name}}</option>
           </select>
@@ -233,7 +233,7 @@
 
         <div class="form-group">
           <label>Spalva</label>
-          <select class="form-control" v-model='ad.color_id' v-on:click='getColors()' required>
+          <select class="form-control" v-model='ad.color_id'  required>
             <option value="0">Pasirinkti</option>
             <option v-for='data in colors' :key='data.id' :value='data.id'>{{data.name}}</option>
           </select>
@@ -241,7 +241,7 @@
 
         <div class="form-group">
           <label>Duru skaicius</label>
-          <select class="form-control" v-model='ad.number_of_doors_id' v-on:click='getNumberOfDoors()' required>
+          <select class="form-control" v-model='ad.number_of_doors_id'  required>
             <option value="0">Pasirinkti</option>
             <option v-for='data in doors' :key='data.id' :value='data.id'>{{data.name}}</option>
           </select>
@@ -249,7 +249,7 @@
 
         <div class="form-group">
           <label>Varomieji ratai</label>
-          <select class="form-control" v-model='ad.driven_wheels_id' v-on:click='getDrivenWheels()' required>
+          <select class="form-control" v-model='ad.driven_wheels_id'  required>
             <option value="0">Pasirinkti</option>
             <option v-for='data in drivenWheels' :key='data.id' :value='data.id'>{{data.name}}</option>
           </select>
@@ -257,7 +257,7 @@
 
         <div class="form-group">
           <label>Euro standartas</label>
-          <select class="form-control" v-model='ad.euro_standard_id' v-on:click='getEuroStandard()' required>
+          <select class="form-control" v-model='ad.euro_standard_id'  required>
             <option value="0">Pasirinkti</option>
             <option v-for='data in euroStandards' :key='data.id' :value='data.id'>{{data.name}}</option>
           </select>
@@ -567,6 +567,11 @@ import axios from 'axios';
         this.show =true;
         this.ad_id = ad.id;
         this.ad.id = ad.id;
+        this.ad.brand_id =ad.brand;
+        this.ad.model_id = ad.model;
+        this.ad.user_id = ad.user;
+        this.getBrands();
+        this.getBrandModels();
         this.ad.price = ad.price;
         this.ad.image = ad.image;
         this.ad.phone_no = ad.phone_no;
@@ -576,30 +581,26 @@ import axios from 'axios';
         this.ad.engine_power = ad.engine_power;
         this.ad.engine_volume = ad.engine_volume;
         this.ad.damage_id = ad.damage;
+        this.getDamages();
         this.ad.fuel_id = ad.fuel;
+        this.getFuelTypes();
         this.ad.gearbox_id = ad.gearbox;
+        this.getGearboxTypes();
         this.ad.body_type_id = ad.body_type;
+        this.getBodyTypes();
         this.ad.color_id = ad.color;
+        this.getColors();
         this.ad.steering_wheel_id = ad.steering_wheel;
+        this.getSteeringWheelTypes();
         this.ad.number_of_doors_id = ad.number_of_doors;
+        this.getNumberOfDoors();
         this.ad.driven_wheels_id = ad.driven_wheels;
+        this.getDrivenWheels();
         this.ad.climate_control_id = ad.climate_control;
+        this.getClimateControls();
         this.ad.euro_standard_id = ad.euro_standard;
-        this.ad.brand_id =ad.brand;
-        this.ad.model_id = ad.model;
-        this.ad.user_id = ad.user;
-        getDamages();
-        getBodyTypes();
-        getBrands();
-        getClimateControls();
-        getColors();
-        getNumberOfDoors();
-        getDrivenWheels();
-        getEuroStandard();
-        getFuelTypes();
-        getGearboxTypes();
-        getBrandModels();
-        getSteeringWheelTypes();
+        this.getEuroStandard();
+        
       },
 
       onFileSelected(e)
@@ -614,6 +615,18 @@ import axios from 'axios';
       showCreate()
       {
         this.show = true;
+        this.getBrands();
+        this.getBrandModels();
+        this.getDamages();
+        this.getFuelTypes();
+        this.getGearboxTypes();
+        this.getBodyTypes();
+        this.getColors();
+        this.getSteeringWheelTypes();
+        this.getNumberOfDoors();
+        this.getDrivenWheels();
+        this.getClimateControls();
+        this.getEuroStandard();
       },
 
       getDamages()

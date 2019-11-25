@@ -157,12 +157,15 @@ import axios from 'axios';
         this.pagination = pagination;
       },
 
-      deleteUser(id)  //veikia ok
+      deleteUser(id)  
       {
         const token = localStorage.getItem('token');
+        console.log(token);
+          console.log(id);
         if(confirm('Ar tikrai norite pasalinti naudotoja?'))
         {
-            fetch(`api/users/${id}`, {
+          
+            fetch(`/api/users/${id}`, {
               method: 'delete',
               headers: {
                 'content-type': 'application/json',

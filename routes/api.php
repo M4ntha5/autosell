@@ -67,7 +67,7 @@ Route::get('users', 'UsersController@index')->middleware('auth.role:admin');
 Route::get('users/{user}', 'UsersController@show')->middleware('auth.role:admin,user');
 //Route::post('users', 'UsersController@store');
 Route::put('users/{user}', 'UsersController@update')->middleware('auth.role:admin,user');
-Route::delete('users/{users}', 'UsersController@destroy')->middleware('auth.role:admin,user');
+Route::delete('users/{user}', 'UsersController@destroy')->middleware('auth.role:admin,user');
 
 
 
