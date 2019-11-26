@@ -217,6 +217,7 @@
             </table>
           </div>
         </div>
+        <!--
         <H1 clas="pt-5 mb-5">Iranga</H1>
 
         <table class="table mt-5" >
@@ -226,22 +227,23 @@
             </tr>
           </tbody>
         </table>
+        -->
     </div>
     <hr>
-    <h2><b>Aprasymas</b></h2>
+    <h2><b>Aprašymas</b></h2>
       <p>{{ad.description}}</p>
     <hr>
-    <h2><b>Pardavejas</b></h2>
+    <h2><b>Pardavėjas</b></h2>
       <h4>Vardas: <b>{{ad.user}}</b></h4>
-      <h4>Numeris: <b>{{ad.phone_no}}</b></h4>
+      <h4>Tel. numeris: <b>{{ad.phone_no}}</b></h4>
     <hr>
 
       <div v-if="!edit">
         <div v-if="currUser != null && currUser != 'undefined'" mb-3>
-          <h3>Prideti komentara</h3>
+          <h3>Pridėti komentarą</h3>
           <form class="form-group" @submit.prevent="addComment"> 
             <div class="form-group">
-              <label for="title">Antraste</label>
+              <label for="title">Antrastė</label>
               <input type="text" class="form-control" v-model="comment.title">
             </div>
             <div class="form-group">
@@ -256,10 +258,10 @@
       </div>
       <div v-else>
         <div v-if="currUser != null && currUser != 'undefined'" mb-3>
-          <h3>Prideti komentara</h3>
+          <h3>Pridėti komentarą</h3>
           <form class="form-group" @submit.prevent="addComment"> 
             <div class="form-group">
-              <label for="title">Antraste</label>
+              <label for="title">Antraštė</label>
               <input type="text" class="form-control" v-model="comment.title">
             </div>
             <div class="form-group">
@@ -409,8 +411,7 @@ import axios from 'axios';
         this.role = localStorage.getItem('role');
         this.currUser = localStorage.getItem('userid');
 
-        let page_url = `/api/ads/${segments[2]}`;
-        fetch(page_url)
+        fetch(`/api/ads/${segments[2]}`)
         .then(res => res.json())
         .then(res => {
           this.ad = res.data[0];
@@ -427,12 +428,13 @@ import axios from 'axios';
         //Break the path into segments
         let segments = path.split("/");
         //update
-          fetch(`/api/ads/${segments[2]}?token=` +token, {
+          fetch(`/api/ads/${segments[2]}`, {
             method: 'put',
             body: JSON.stringify(this.ad_edit),
             headers: {
               'content-type': 'application/json',
-              'Accept': 'application/json'
+              'Accept': 'application/json',
+              'Authorization': 'Bearer ' + token
             }
           })
           .then(res => res.json())

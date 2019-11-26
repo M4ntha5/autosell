@@ -43,6 +43,32 @@ class Ad extends Model
     }
     public static function updateAd(Request $request, Ad $ad)
     {
+        $user = JWTAuth::parseToken()->toUser();
+        $img = $request->input('image');
+        if(strlen($img) > 20)
+        {
+            $exploaded = explode(',',$request->image);
+            $decoded = base64_decode($exploaded[1]);
+      
+            if(str_contains($exploaded[0], 'jpeg'))
+              $extension = 'jpg';
+            else
+              $extension = 'png';
+      
+            $fileName = str_random().'.'.$extension;
+      
+            $path = storage_path('app\public\images').'/'.$fileName;
+      
+            file_put_contents($path, $decoded);
+      
+            $ad->update($request->except('image', 'user_id') + [
+              'image' => $fileName,
+              'user_id' => $user->id
+            ]);
+            return response()->json($ad, 200);
+        }
+        
+
         $ad->update($request->all());
         return response()->json($ad, 200);
     }
@@ -74,8 +100,10 @@ class Ad extends Model
         }
         else
         {
-            $ad = Ad::create($request->except('user_id') + [
-              'user_id' => $user->id
+            $filename = "defalt.png";
+            $ad = Ad::create($request->except('imgae','user_id') + [
+                'image' => $filename,
+                'user_id' => $user->id
             ]);
             return response()->json($ad, 201);
         }

@@ -12,7 +12,7 @@
             <label>El. pastas</label>
             <input type="email" class="form-control" v-model="user.email" required>
         </div>
-        <div class="form-group">
+      <!--  <div class="form-group">
           <label>Salis</label>
           <select class="form-control" v-model="user.country_id" v-on:click='getCountrys()' @change='getCitys()' >
             <option value="0">Pasirinkti</option>
@@ -26,8 +26,10 @@
             <option v-for='data in citys' :key='data.id' :value='data.id'>{{data.name}}</option>
           </select>
         </div>
- 
+        -->
+        <div class="mt-3"> 
           <button type="submit" class="form-control">Issaugoti</button>
+        </div>
       </form>
     </div>
 
@@ -74,7 +76,6 @@
   </nav>
 
 </div>
-
 
 </template>
 
@@ -160,9 +161,7 @@ import axios from 'axios';
       deleteUser(id)  
       {
         const token = localStorage.getItem('token');
-        console.log(token);
-          console.log(id);
-        if(confirm('Ar tikrai norite pasalinti naudotoja?'))
+        if(confirm('Ar tikrai norite pašalinti naudotoją?'))
         {
           
             fetch(`/api/users/${id}`, {
@@ -174,7 +173,7 @@ import axios from 'axios';
               }
             })
             .then(res => {
-              alert('Naudotojas pasalintas');
+              alert('Naudotojas pašalintas');
               this.fetchUsers();
             })
             .catch(err => console.log(err));
@@ -199,9 +198,9 @@ import axios from 'axios';
             .then(data => {
               this.user.name = '';
               this.user.email = '';
-              this.user.country_id = '';
-              this.user.city_id = '';
-              alert('user updated');
+              //this.user.country_id = '';
+              //this.user.city_id = '';
+              alert('Vartotjas atnaujintas');
               this.show = false;
               this.edit = false;
               this.fetchUsers();
@@ -217,10 +216,10 @@ import axios from 'axios';
         this.user.id = user.id;
         this.user.name = user.name;
         this.user.email = user.email;
-        this.user.country_id = user.country;
-        this.user.city_id = user.city;
-        this.getCitys();
-        this.getCountrys();
+        //this.user.country_id = user.country;
+        //this.user.city_id = user.city;
+        //this.getCitys();
+        //this.getCountrys();
       },
       /*onFileSelected(e)
       {

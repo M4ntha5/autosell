@@ -6,7 +6,7 @@
       <form @submit="checkForm" @submit.prevent="addOrder" enctype="multipart/form-data" class="mb-3">
 
         <div class="form-group">
-          <label>Marke</label>
+          <label>Markė</label>
           <select class="form-control" v-model='order.brand_id' v-on:click='getBrands()' @change='getBrandModels()' required>
             <option value="0">Pasirinkti</option>
             <option v-for='data in brands' :key='data.id' :value='data.id'>{{data.name}}</option>
@@ -41,7 +41,7 @@
             <input type="number" class="form-control" id="engine_power" required placeholder="200" v-model="order.engine_power">
         </div>   
         <div class="form-row">
-            <label for="engine_volume">Variklio turis</label>
+            <label for="engine_volume">Variklio tūris</label>
             <input type="number" class="form-control" id="engine_volume" required placeholder="2.5" v-model="order.engine_volume">
         </div>
         <div class="form-group">
@@ -61,7 +61,7 @@
         </div>
         
         <div class="form-group">
-          <label>Pavaru deze</label>
+          <label>Pavarų dėžė</label>
           <select class="form-control" v-model='order.gearbox_id'  required>
             <option value="0">Pasirinkti</option>
             <option v-for='data in gearboxes' :key='data.id' :value='data.id'>{{data.name}}</option>
@@ -69,7 +69,7 @@
         </div>
         
         <div class="form-group">
-          <label>Kebulo tipas</label>
+          <label>Kėbulo tipas</label>
           <select class="form-control" v-model='order.body_type_id' required>
             <option value="0">Pasirinkti</option>
             <option v-for='data in bodyTypes' :key='data.id' :value='data.id'>{{data.name}}</option>
@@ -77,7 +77,7 @@
         </div>
 
         <div class="form-group">
-          <label>Kliamto valdymas</label>
+          <label>Klimato valdymas</label>
           <select class="form-control" v-model='order.climate_control_id' required>
             <option value="0">Pasirinkti</option>
             <option v-for='data in climateControls' :key='data.id' :value='data.id'>{{data.name}}</option>
@@ -85,7 +85,7 @@
         </div>
 
         <div class="form-group">
-          <label>Vairo padetis</label>
+          <label>Vairo padėtis</label>
           <select class="form-control" v-model='order.steering_wheel_id'  required>
             <option value="0">Pasirinkti</option>
             <option v-for='data in steeringWheels' :key='data.id' :value='data.id'>{{data.name}}</option>
@@ -101,7 +101,7 @@
         </div>
 
         <div class="form-group">
-          <label>Duru skaicius</label>
+          <label>Durų skaičius</label>
           <select class="form-control" v-model='order.number_of_doors_id' required>
             <option value="0">Pasirinkti</option>
             <option v-for='data in doors' :key='data.id' :value='data.id'>{{data.name}}</option>
@@ -109,7 +109,7 @@
         </div>
 
         <div class="form-group">
-          <label>Varomieji ratai</label>
+          <label>Varantieji ratai</label>
           <select class="form-control" v-model='order.driven_wheels_id' required>
             <option value="0">Pasirinkti</option>
             <option v-for='data in drivenWheels' :key='data.id' :value='data.id'>{{data.name}}</option>
@@ -125,7 +125,7 @@
         </div>
 
         <div class="form-group">
-          <label>Uzsakymo statusas</label>
+          <label>Užsakymo statusas</label>
           <select class="form-control" v-model='order.status_id'  required>
             <option value="0">Pasirinkti</option>
             <option v-for='data in statuses' :key='data.id' :value='data.id'>{{data.name}}</option>
@@ -133,7 +133,7 @@
         </div>
         
         <div class="form-row">
-            <label for="price">Max kaina</label>
+            <label for="price">Max. kaina</label>
             <input type="number" class="form-control" id="price" placeholder="5000" required v-model="order.price">
         </div>
         <div class="form-row">

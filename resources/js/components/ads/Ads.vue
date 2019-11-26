@@ -314,7 +314,7 @@
             <p>{{ad.fuel}} {{ad.engine_power}} kW</p>
           </div>
         </div>
-        <button  v-if="role == 'admin'" @click="editAd(ad)" class="btn btn-primary">Redaguoti</button>
+        <!--<button  v-if="role == 'admin'" @click="editAd(ad)" class="btn btn-primary">Redaguoti</button>-->
 
         <button v-if="role == 'admin'" @click="deleteAd(ad.id)" class="btn btn-danger">Istrinti</button>
       </div>

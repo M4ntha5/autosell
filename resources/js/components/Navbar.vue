@@ -33,10 +33,10 @@
             <ul  class="navbar-nav ml-auto">
                 <!-- Authentication Links -->
                 <li class="nav-item">
-                  <a class="nav-link" href="/orders">Orders</a>
+                  <a class="nav-link" href="/orders">Užsakymai</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="/users">Users</a>
+                  <a class="nav-link" href="/users">Naudotojai</a>
                 </li>
             </ul>
             </div>
@@ -44,24 +44,24 @@
             <ul  class="navbar-nav ml-auto">
                 <!-- Authentication Links -->
                 <li class="nav-item">
-                  <a class="nav-link" href="/myorders">My orders</a>
+                  <a class="nav-link" href="/myorders">Mano užsakymai</a>
                 </li>
             </ul>
             </div>
             <div v-if="token == null">
             <ul  class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="/signin">Login</a>
+                    <a class="nav-link" href="/signin">Prisijungti</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="signup">Register</a>
+                    <a class="nav-link" href="signup">Registruotis</a>
                 </li>
             </ul >
             </div>
             <div v-else> 
             <ul  class="navbar-nav ml-auto">
                 <li class="nav-item">
-                  <button @click="logout()" class="btn">Logout</button>
+                  <button @click="logout()" class="btn">Atsijungti</button>
                 </li>
             </ul>
             </div>

@@ -17,7 +17,6 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AdsController extends Controller
 {
-    //kazkodel per konstruktoriu neveiki, tad padariau per api routes faila
     public function __construct()
     {
         $this->middleware('auth.role:admin,user')->except(['index', 'show']);
@@ -77,10 +76,10 @@ class AdsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
+    {    
         $ad = Ad::joinEnumsToAd($id);
         $eq = Functions::getAllAdEquipment($id);
-        return (new AdCollection($ad))->additional(['equipment' => $eq]);
+        return (new AdCollection($ad));//->additional(['equipment' => $eq]);
     }
 
     /**
