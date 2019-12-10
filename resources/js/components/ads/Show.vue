@@ -147,7 +147,7 @@
 
 
   <div>
-    <h1>{{ad.brand}} {{ad.model}}, {{ad.engine_volume}} l., {{ad.body_type}}</h1>
+    <h1>{{ad.brand}} {{ad.model}}, {{ad.engine_volume /1000}} l., {{ad.body_type}}</h1>
     <h5>Kaina </h5>
 
     <button v-if="role != null && role != 'undefined' && currUser == ad.user_id" @click="editAd(ad)" 

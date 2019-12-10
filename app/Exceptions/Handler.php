@@ -68,7 +68,7 @@ class Handler extends ExceptionHandler
           }
           else if ($exception instanceof JWTException) {
               return response()->json([
-                  'error' => 'Therei s problem with your token'
+                  'error' => 'There is problem with your token'
               ], 400);
           }
 
