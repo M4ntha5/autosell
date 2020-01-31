@@ -19,6 +19,7 @@ use App\FeaturesModels\SteeringWheel;
 use App\FeaturesModels\StatusType;
 use App\FeaturesModels\City;
 use App\FeaturesModels\Country;
+use App\FeaturesModels\Equipment;
 
 
 class APIController extends Controller
@@ -110,6 +111,11 @@ class APIController extends Controller
     public function getSteeringWheels()
     {
         return SteeringWheel::getAllSteeringWheels();
+    }
+
+    public function getEquipment($ad_id)
+    {
+        return Equipment::getAllEquipment($ad_id);
     }
 
 

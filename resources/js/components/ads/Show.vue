@@ -217,17 +217,20 @@
             </table>
           </div>
         </div>
-        <!--
+
         <H1 clas="pt-5 mb-5">Iranga</H1>
 
-        <table class="table mt-5" >
+
+
+        <table class="table">
           <tbody  >
             <tr v-for="eq in equipment" v-bind:key="eq.id">
-              <td >{{eq.features}}</td>
+              <td >{{eq.name}}</td>
             </tr>
           </tbody>
         </table>
-        -->
+     
+
     </div>
     <hr>
     <h2><b>Aprašymas</b></h2>
@@ -410,6 +413,7 @@ import axios from 'axios';
 
         this.role = localStorage.getItem('role');
         this.currUser = localStorage.getItem('userid');
+        this.getEquipment(segments[2]);
 
         fetch(`/api/ads/${segments[2]}`)
         .then(res => res.json())
@@ -612,7 +616,7 @@ import axios from 'axios';
         this.ad_edit.manufacture_date = ad.manufacture_date;
         this.getDamages();
         this.ad_edit.damage_id = ad.damage_id;
-      
+        
         this.getBodyTypes(); 
         this.getClimateControls();
         this.getColors();
@@ -741,6 +745,13 @@ import axios from 'axios';
         axios.get('/api/steering_wheels')
           .then(function (response) {
             this.steeringWheels = response.data;
+          }.bind(this));
+      },
+      getEquipment(id)
+      {
+        axios.get(`/api/equipment/${id}`)
+          .then(function (response) {
+            this.equipment = response.data;
           }.bind(this));
       }
 

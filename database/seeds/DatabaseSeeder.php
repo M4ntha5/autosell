@@ -27,7 +27,10 @@ class DatabaseSeeder extends Seeder
             ClimateControlTableSeeder::class,
             BodyTypesTableSeeder::class,
             BrandsTableSeeder::class,
-            ModelsTableSeeder::class       
+            ModelsTableSeeder::class,
+            AdsTableSeeder::class,
+            CommentsTableSeeder::class,
+            OrdersTableSeeder::class,     
          ]);
     }
 }
