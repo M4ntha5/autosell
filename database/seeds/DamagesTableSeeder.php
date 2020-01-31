@@ -12,14 +12,14 @@ class DamagesTableSeeder extends Seeder
      */
     public function run()
     {
-        Damage::insert(
-            ['name' => 'Be defektų'],
-            ['name' => 'Daužtas'],
-            ['name' => 'Degęs'],
-            ['name' => 'Pavarų dėžės defektas'],
-            ['name' => 'Pažeistas krušos'],
-            ['name' => 'Skendęs'],
-            ['name' => 'Variklio defektas']
-        );
+        Damage::insert([
+            ['name' => 'Be defektų','created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Daužtas','created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Degęs','created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Pavarų dėžės defektas','created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Pažeistas krušos','created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Skendęs','created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Variklio defektas','created_at' => now(), 'updated_at' => now()]
+        ]);
     }
 }

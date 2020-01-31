@@ -12,13 +12,13 @@ class BodyTypesTableSeeder extends Seeder
      */
     public function run()
     {
-        BodyType::insert(
-            ['name' => 'Sedanas'],
-            ['name' => 'Hačbekas'],
-            ['name' => 'Universalas'],
-            ['name' => 'Vienatūris'],
-            ['name' => 'Kupė (Coupe)'],
-            ['name' => 'Visureigis']
-        );
+        BodyType::insert([
+            ['name' => 'Sedanas', 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Hačbekas','created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Universalas','created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Vienatūris','created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Kupė (Coupe)','created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Visureigis','created_at' => now(), 'updated_at' => now()]
+        ]);
     }
 }

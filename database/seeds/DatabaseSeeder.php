@@ -12,7 +12,9 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
          $this->call([
-            UsersTableSeeder::class,
+            CountrysTableSeeder::class,
+            CitysTableSeeder::class,
+            UsersTableSeeder::class,           
             SteeringWheelTableSeeder::class,
             StatusTypesTableSeeder::class,
             NumberOfDoorsTableSeeder::class,
@@ -21,8 +23,6 @@ class DatabaseSeeder extends Seeder
             EuroStandardTableSeeder::class,
             DrivenWheelsTableSeeder::class,
             DamagesTableSeeder::class,
-            CountrysTableSeeder::class,
-            CitysTableSeeder::class,
             ColorsTableSeeder::class,
             ClimateControlTableSeeder::class,
             BodyTypesTableSeeder::class,

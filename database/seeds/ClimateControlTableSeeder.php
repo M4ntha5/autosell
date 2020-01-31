@@ -11,10 +11,10 @@ class ClimateControlTableSeeder extends Seeder
      */
     public function run()
     {
-        ClimateControl::insert(
-            ['name' => 'Oro kondicionierius'],
-            ['name' => 'Klimato kontrolė'],
-            ['name' => 'Nėra']
-        );
+        ClimateControl::insert([
+            ['name' => 'Oro kondicionierius','created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Klimato kontrolė','created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Nėra','created_at' => now(), 'updated_at' => now()]
+        ]);
     }
 }

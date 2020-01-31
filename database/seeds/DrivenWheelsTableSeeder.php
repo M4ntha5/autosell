@@ -12,10 +12,10 @@ class DrivenWheelsTableSeeder extends Seeder
      */
     public function run()
     {
-        DrivenWheel::insert(
-            ['name' => 'Priekiniai'],
-            ['name' => 'Galiniai'],
-            ['name' => 'Visi varantys (4x4)']
-        );
+        DrivenWheel::insert([
+            ['name' => 'Priekiniai','created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Galiniai','created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Visi varantys (4x4)','created_at' => now(), 'updated_at' => now()]
+        ]);
     }
 }

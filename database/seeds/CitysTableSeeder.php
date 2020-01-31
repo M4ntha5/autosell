@@ -12,23 +12,23 @@ class CitysTableSeeder extends Seeder
      */
     public function run()
     {
-        City::insert(
-            ['name' => 'Vilnius', 'country_id' => 1],
-            ['name' => 'Kaunas', 'country_id' => 1],
-            ['name' => 'Klaipėda', 'country_id' => 1],
-            ['name' => 'Šiauliai', 'country_id' => 1],
-            ['name' => 'Panevėžys', 'country_id' => 1],
-            ['name' => 'Alytus', 'country_id' => 1],
-            ['name' => 'Marijampolė', 'country_id' => 1],
-            ['name' => 'Palanga', 'country_id' => 1],
-            ['name' => 'Druskininkai', 'country_id' => 1],
-            ['name' => 'Riga', 'country_id' => 2],
-            ['name' => 'Jūrmala', 'country_id' => 2],
-            ['name' => 'Madona', 'country_id' => 2],
-            ['name' => 'Jelgava', 'country_id' => 2],
-            ['name' => 'Valmiera', 'country_id' => 2],
-            ['name' => 'Daugavpils', 'country_id' => 2],
-            ['name' => 'Dobele', 'country_id' => 2]
-        );
+        City::insert([
+            ['name' => 'Vilnius', 'country_id' => 1,'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Kaunas', 'country_id' => 1,'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Klaipėda', 'country_id' => 1,'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Šiauliai', 'country_id' => 1,'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Panevėžys', 'country_id' => 1,'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Alytus', 'country_id' => 1,'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Marijampolė', 'country_id' => 1,'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Palanga', 'country_id' => 1,'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Druskininkai', 'country_id' => 1,'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Riga', 'country_id' => 2,'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Jūrmala', 'country_id' => 2,'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Madona', 'country_id' => 2,'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Jelgava', 'country_id' => 2,'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Valmiera', 'country_id' => 2,'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Daugavpils', 'country_id' => 2,'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Dobele', 'country_id' => 2,'created_at' => now(), 'updated_at' => now()]
+        ]);
     }
 }

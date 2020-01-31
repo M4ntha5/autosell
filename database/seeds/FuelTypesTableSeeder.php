@@ -12,13 +12,13 @@ class FuelTypesTableSeeder extends Seeder
      */
     public function run()
     {
-        Fuel::insert(
-            ['name' => 'Benzinas'],
-            ['name' => 'Dyzelinas'],
-            ['name' => 'Benzinas / dujos'],
-            ['name' => 'Benzinas / elektra'],
-            ['name' => 'Elektra'],
-            ['name' => 'Bioetanolis (E85)']
-        );
+        Fuel::insert([
+            ['name' => 'Benzinas','created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Dyzelinas','created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Benzinas / dujos','created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Benzinas / elektra','created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Elektra','created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Bioetanolis (E85)','created_at' => now(), 'updated_at' => now()]
+        ]);
     }
 }

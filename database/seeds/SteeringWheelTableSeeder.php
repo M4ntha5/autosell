@@ -12,9 +12,9 @@ class SteeringWheelTableSeeder extends Seeder
      */
     public function run()
     {
-        SteeringWheel::insert(
-            ['name' => 'Kairėje'],
-            ['name' => 'Dešinėje (bardačioke)']
-        );
+        SteeringWheel::insert([
+            ['name' => 'Kairėje','created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Dešinėje (bardačioke)','created_at' => now(), 'updated_at' => now()]
+        ]);
     }
 }

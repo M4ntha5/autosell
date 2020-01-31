@@ -12,9 +12,9 @@ class GearboxTypesTableSeeder extends Seeder
      */
     public function run()
     {
-        Gearbox::insert(
-            ['name' => 'Automatinė'],
-            ['name' => 'Mechaninė']
-        );
+        Gearbox::insert([
+            ['name' => 'Automatinė','created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Mechaninė','created_at' => now(), 'updated_at' => now()]
+        ]);
     }
 }

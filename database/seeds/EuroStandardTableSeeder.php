@@ -12,13 +12,13 @@ class EuroStandardTableSeeder extends Seeder
      */
     public function run()
     {
-        EuroStandard::insert(
-            ['name' => 'Euro 1'],
-            ['name' => 'Euro 2'],
-            ['name' => 'Euro 3'],
-            ['name' => 'Euro 4'],
-            ['name' => 'Euro 5'],
-            ['name' => 'Euro 6']
-        );
+        EuroStandard::insert([
+            ['name' => 'Euro 1','created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Euro 2','created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Euro 3','created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Euro 4','created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Euro 5','created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Euro 6','created_at' => now(), 'updated_at' => now()]
+        ]);
     }
 }

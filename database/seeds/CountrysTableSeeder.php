@@ -11,9 +11,9 @@ class CountrysTableSeeder extends Seeder
      */
     public function run()
     {
-        Country::insert(
-            ['name' => 'Lietuva'],
-            ['name' => 'Latvia']
-        );
+        Country::insert([
+            ['name' => 'Lietuva','created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Latvia','created_at' => now(), 'updated_at' => now()]
+        ]);
     }
 }

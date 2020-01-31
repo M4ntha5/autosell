@@ -12,14 +12,14 @@ class StatusTypesTableSeeder extends Seeder
      */
     public function run()
     {
-        StatusType::insert(
-            ['name' => 'Nepatvirtintas'],
-            ['name' => 'Patvirtintas'],
-            ['name' => 'Vykdomas'],
-            ['name' => 'Paruoštas'],
-            ['name' => 'Atiduotas'],
-            ['name' => 'Įvykdytas'],
-            ['name' => 'Atšauktas']
-        );
+        StatusType::insert([
+            ['name' => 'Nepatvirtintas','created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Patvirtintas','created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Vykdomas','created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Paruoštas','created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Atiduotas','created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Įvykdytas','created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Atšauktas','created_at' => now(), 'updated_at' => now()]
+        ]);
     }
 }

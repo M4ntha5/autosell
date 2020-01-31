@@ -12,10 +12,10 @@ class NumberOfDoorsTableSeeder extends Seeder
      */
     public function run()
     {
-        Door::insert(
-            ['name' => '2/3'],
-            ['name' => '4/5'],
-            ['name' => 'Kita']
-        );
+        Door::insert([
+            ['name' => '2/3','created_at' => now(), 'updated_at' => now()],
+            ['name' => '4/5','created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Kita','created_at' => now(), 'updated_at' => now()]
+        ]);
     }
 }
