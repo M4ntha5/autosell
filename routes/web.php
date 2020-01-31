@@ -28,7 +28,7 @@ Route::get('/', function () {
 
 Route::get('/home', function () {
     return view('home');
-});
+})->middleware('auth.role');
 
 Route::get('/about', function () {
     return view('pages.about');
