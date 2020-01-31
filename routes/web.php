@@ -28,7 +28,7 @@ Route::get('/', function () {
 
 Route::get('/home', function () {
     return view('home');
-})->middleware('auth.role');
+})->middleware('auth.role:admin,user');
 
 Route::get('/about', function () {
     return view('pages.about');
@@ -43,20 +43,20 @@ Route::get('/ads/{ad}', function () {
 
 Route::get('/orders', function () {
     return view('orders.index');
-});
+})->middleware('auth.role:admin,user');
 
 Route::get('/myorders', function () {
     return view('orders.userOrders');
-});
+})->middleware('auth.role:admin,user');
 
 Route::get('/orders/{order}', function () {
     return view('orders.show');
-});
+})->middleware('auth.role:admin,user');
 
 Route::get('/users', function () {
     return view('users.index');
-});
+})->middleware('auth.role:admin,user');
 
 Route::get('/users/{user}', function () {
     return view('users.show');
-});
+})->middleware('auth.role:admin,user');
