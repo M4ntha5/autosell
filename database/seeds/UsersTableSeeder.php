@@ -16,7 +16,6 @@ class UsersTableSeeder extends Seeder
             'name' => 'Administrator',
             'email' => 'admin@admin.lt',
             'password' => Hash::make('password'),
-            'email_verified_at' => now(),
             'role' => 'admin'
         ]);
     }

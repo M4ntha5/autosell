@@ -77,7 +77,7 @@ export default {
                     });
                     var myTimerPromise = new Promise((resolve, reject) => {
                         setTimeout(() => {
-                            window.location.href = "/ads";   
+                            window.location.href = "/home";   
                             resolve();
                         }, 1000);
                     });
