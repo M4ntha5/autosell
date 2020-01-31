@@ -124,7 +124,7 @@ export default {
 
             if(currentTime > tokenExp)
             {
-              console.log("token expired");
+              //console.log("token expired");
               localStorage.removeItem('token');
               localStorage.removeItem('exp');
               localStorage.removeItem('role');
@@ -139,17 +139,17 @@ export default {
             else
             {
               this.exp = tokenExp;
-              console.log("token not expired");
+              //console.log("token not expired");
               if(role == 'admin')
               {
-                console.log("ifadmin");
+                //console.log("ifadmin");
                 this.token = token;
                 this.role = role;
 
               }
               else if(role == 'user')
               {
-                console.log("if user");
+                //console.log("if user");
                 this.token = token;
                 this.role = role;
               }
@@ -165,7 +165,7 @@ export default {
           localStorage.removeItem('exp');
           localStorage.removeItem('role');
           localStorage.removeItem('userid');
-          console.log("tokenas nullas", token);
+          //console.log("tokenas nullas", token);
         
         }
       }/*,

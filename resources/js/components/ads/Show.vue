@@ -519,7 +519,7 @@ import axios from 'axios';
         if(!this.edit)
         { //add
           const token = localStorage.getItem('token');
-          console.log(token);
+          //console.log(token);
           fetch(`/api/ads/${this.ad.id}/comments`, {
                 method: 'post',
                 body: JSON.stringify(this.comment),
@@ -622,7 +622,7 @@ import axios from 'axios';
         this.getFuelTypes();
         this.getGearboxTypes();     
         this.getSteeringWheelTypes();
-        console.log(ad);
+        //console.log(ad);
         
         this.ad_edit.price = ad.price;
         this.ad_edit.image = ad.image;

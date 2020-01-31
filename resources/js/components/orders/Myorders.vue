@@ -440,7 +440,7 @@ import axios from 'axios';
             this.delete = true;
             this.editOrder(order);
             this.order.status_id = 7;
-            console.log(this.order);
+            //console.log(this.order);
             fetch(`api/orders/${order.id}`, {
               method: 'put',
               body: JSON.stringify(this.order),

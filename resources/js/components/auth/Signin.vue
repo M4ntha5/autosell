@@ -1,6 +1,6 @@
 <template>
 
-    <form @submit="checkForm" @submit.prevent="signup">
+    <form @submit="checkForm" @submit.prevent="signin">
 
         <div class="form-group">
             <label for="email">Email</label>
@@ -34,7 +34,7 @@ export default {
          
         checkForm:function(e) 
         {
-            console.log(this.email);
+            //console.log(this.email);
             if(this.email && this.password)
             {
                 return this.signin();
@@ -56,12 +56,12 @@ export default {
                     const base64 = base64Url.replace('-', '+').replace('_', '/');
                     JSON.parse(window.atob(base64));
                     localStorage.setItem('token', token);
-                    console.log(localStorage.getItem('token'));
+                    //console.log(localStorage.getItem('token'));
 
                     this.getPayload();
                     var myTimerPromise = new Promise((resolve, reject) => {
                         setTimeout(() => {
-                            console.log("login-exp",localStorage.getItem('exp'));
+                            //console.log("login-exp",localStorage.getItem('exp'));
                             resolve();
                         }, 500);
                     });
@@ -71,13 +71,13 @@ export default {
                     this.getAuth();
                     var myTimerPromise = new Promise((resolve, reject) => {
                         setTimeout(() => {
-                            console.log("login-role", localStorage.getItem('role'));
+                            //console.log("login-role", localStorage.getItem('role'));
                             resolve();
                         }, 1000);
                     });
                     var myTimerPromise = new Promise((resolve, reject) => {
                         setTimeout(() => {
-                            window.location.href = "/home";   
+                            window.location.href = "/ads";   
                             resolve();
                         }, 1000);
                     });
@@ -106,7 +106,7 @@ export default {
                     .then(res => res.json())
                     .then(data => {
                         localStorage.setItem('exp', data.exp);
-                        console.log("payload-exp", data.exp);
+                        //console.log("payload-exp", data.exp);
                     })
                     .catch(err => console.log(err));
             }
@@ -126,9 +126,9 @@ export default {
                 .then(res => res.json())
                 .then(data => {
                     localStorage.setItem('role', data.role);
-                    console.log("auth-role", data.role);
+                    //console.log("auth-role", data.role);
                     localStorage.setItem('userid', data.id);
-                    console.log("auth-id", data.id);
+                    //console.log("auth-id", data.id);
                     this.id = data.id;
                 })
                 .catch(err => console.log(err));

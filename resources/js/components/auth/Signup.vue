@@ -35,7 +35,7 @@ export default {
     methods: {
         checkForm:function(e) 
         {
-            if(this.name && this.email && this.password  )
+            if(this.name && this.email && this.password)
             {
                 return this.signup();
             }
